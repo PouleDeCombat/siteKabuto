@@ -1,0 +1,272 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.landing-img {
+    background-image: url(../images/fondkabutoResized.jpg);
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    margin: 0;
+    padding: 0;
+    
+}
+
+.btn-landing {
+    width: 25rem;
+    background-color: yellow;
+    border-radius: 5px;
+    height: 3.5rem;
+}
+
+.blackops-font-landing {
+
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 5.19rem;
+    line-height: 127.8%;
+    text-transform: uppercase;
+}
+
+@media (max-width: 1199px) {
+    .blackops-font-landing {
+        font-size: 3.5rem;
+    }
+}
+
+/* Pour les écrans dont la largeur est inférieure à 992px */
+@media (max-width: 991px) {
+    .blackops-font-landing {
+        font-size: 2.5rem;
+    }
+}
+
+/* Pour les écrans dont la largeur est inférieure à 768px */
+@media (max-width: 767px) {
+    .blackops-font-landing {
+        font-size: 1.75rem;
+    }
+}
+
+.training-center {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.63rem;
+    letter-spacing: 7px;
+    line-height: 127.8%;
+}
+
+
+
+
+.overlay {
+    position: absolute;
+    height: 80vh;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 5; 
+}
+
+
+
+
+/***************************************SECTION COACH***********************************************************/
+.btn-section {
+    width: 15rem;
+    background-color: yellow;
+    border-radius: 5px;
+    height: 3.5rem;
+}
+
+.section-img-coach {
+    width: 20.81rem;
+    height: 28.06rem;
+}
+
+.section-background-black {
+    background-color: black;
+}
+
+.blackops-font-section {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 4rem;
+    line-height: 127.8%;
+    text-transform: uppercase;
+}
+
+
+
+
+
+@media (max-width: 1320px) {
+
+    .section-img-coach {
+        width: 17.81rem;
+        height: 25.06rem;
+    }
+
+    .section-text {
+        min-width: 100%;
+    }
+}
+
+
+
+@media (max-width: 992px) {
+    .center-under-lg {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .section-img-coach {
+        width: 17.81rem;
+        height: 25.06rem;
+    }
+
+    .section-text {
+        min-width: 100%;
+
+    }
+}
+
+
+
+@media (max-width: 550px) {
+
+    .section-img-coach {
+        width: 12.81rem;
+        height: 20.06rem;
+    }
+}
+
+.section-text {
+    max-width: 75%;
+    margin-top: 25px;
+}
+
+/**************************************************************************************************/
+
+
+/**************************************SECTION DISCIPLINES************************************************************/
+.section-background-yellow {
+    background-color: #82730D;
+}
+
+.section-img-discipline {
+    width: 40rem;
+    height: 28.06rem;
+    padding-top: 60px;
+}
+
+.btn {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+}
+
+
+/**************************************************************************************************/
+
+
+/******************************************SECTION COMBATTANT********************************************************/
+
+.section-img-fighter{
+   
+    width: 20.81rem;
+    height: 28.06rem;
+    
+  
+}
+
+@media (min-width: 993px) {
+
+    .section-img-fighter {
+        margin-top: 150px;
+        margin-left: 0px;
+       
+    }
+}
+
+
+@media (min-width: 1300px) {
+
+    .section-img-fighter {
+        
+        margin-left: 0px;
+        margin-top: 0px;
+       
+    }
+}
+
+
+
+.section-img-tarif{
+    width: 40rem;
+    height: 28.06rem;
+    margin-top: 180px;
+}
+
+
+
+@media (min-width: 1500px) {
+
+    .section-img-tarif {
+        
+        margin-left: 0px;
+        margin-top: 0px;
+        padding-top: 0;
+       
+    }
+}
+
+@media (max-width: 991px) {
+
+    .section-img-tarif {
+        
+        
+        margin-top: 0px;
+       
+       
+    }
+}
+
+
+ #myVideo {
+    width: 100%;
+    height: auto;
+    
+}
+
+.video-container{
+    position: relative;
+}
+
+.overlay-img {
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    width: 169px;
+    height: 130px;
+    object-fit: cover; 
+}
+
+@media (max-width: 700px) {
+
+    .overlay-img{
+     
+        position: absolute;
+        top: 2%;
+        left: 2%;
+        width: 85px;
+        height: 65px;
+        object-fit: cover; 
+     
+    }
+}
+ 
+

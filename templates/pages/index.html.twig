@@ -1,0 +1,143 @@
+{% extends 'base.html.twig' %}
+ {% block body %}
+
+
+
+<div class="container-fluid landing-img d-flex flex-column justify-content-center align-items-center">
+    <div class="overlay"></div>
+    <h3 class="training-center text-white" style="z-index: 10">TRAINING CENTER</h3>
+    <h1 class="blackops-font-landing text-white" style="z-index: 10" ><span>MIXED </span><span style="color: #f3ef2a;">MARTIAL </span><span>ARTS</span></h1>
+    <p class="text-white fw-bold text-center fs-5" style="z-index: 10">Jiu Jitsu Brésilien / MMA / Wrestling / Nogi JJB / Boxe / Kickboxing / Muay Thai / Crosstraining / Musculation / K.Programme / Préparation Physique</p>
+    <a href="{{ path('app_register') }}" class="text-decoration-none text-dark"><button class="btn btn-landing fw-bold" style="z-index: 11">INSCRIPTION</a></button>  
+    <img src="{{ asset('images/objects.svg') }}" class="img-fluid position-absolute w-100" style="z-index: 10; height: auto" alt="">
+
+
+</div>
+
+<div class="container-fluid  d-flex flex-column-reverse flex-lg-row section-background-black pt-5 pb-5 center-under-lg">
+    <div class="d-flex justify-content-center col-12 col-lg-6">
+        <img src="{{ asset('images/rectangle-705@2x.png') }}" class="img-fluid section-img-coach" alt="photo du coach">
+        <img src="{{ asset('images/rectangle-706@2x.png') }}" class="img-fluid section-img-coach" alt="photo du coach boxe thai">
+    </div>
+
+    <div class="col-12 col-lg-6 d-flex flex-column justify-content-center center-under-lg ps-5 ">
+        <h2 class="blackops-font-section  text-white">nos <span style="color: #f3ef2a;">coaches</span></h2>
+        <p class="text-white section-text" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, culpa? Error molestiae ut quas iusto quibusdam qui est, quaerat ullam voluptatem facere ex voluptas fugiat aliquid amet at aspernatur delectus sit officia. Voluptatibus dicta fugiat, sit harum vero ea quaerat sunt fugit amet, voluptates tenetur odit perferendis enim quae architecto, iusto rerum porro earum nemo modi doloribus commodi adipisci! Consequatur?</p>
+        <button class="btn btn-section fw-bold">Découvrez nos coachs</button>
+    </div>
+</div>
+
+
+
+<div class="container-fluid d-flex justify-content-center flex-column-reverse flex-lg-row section-background-yellow pt-5 pb-5 center-under-lg">
+    
+
+    <div class="col-12 col-lg-6 d-flex flex-column justify-content-center  center-under-lg ps-5">
+        <h2 class="blackops-font-section  text-white">disciplines</h2>
+        <p class="text-white section-text" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, culpa? Error molestiae ut quas iusto quibusdam qui est, quaerat ullam voluptatem facere ex voluptas fugiat aliquid amet at aspernatur delectus sit officia. Voluptatibus dicta fugiat, sit harum vero ea quaerat sunt fugit amet, voluptates tenetur odit perferendis enim quae architecto, iusto rerum porro earum nemo modi doloribus commodi adipisci! Consequatur?</p>
+        <button class="btn btn-section fw-bold">En savoir plus</button>
+    </div>  
+    
+    <div class="d-flex justify-content-center col-12 col-lg-4">
+        <img src="{{ asset('images/rectangle-7053@2x.png') }}" class="img-fluid section-img-discipline " alt="enfants pratiquant le JJB">
+        
+    </div>
+   
+
+</div>
+
+
+
+<div class="container-fluid d-flex justify-content-center flex-column-reverse flex-lg-row section-background-black pt-5 pb-5 center-under-lg">
+
+
+     <div class="d-flex justify-content-center col-12 col-lg-6">
+        <img src="{{ asset('images/rectangle-7061@2x.png') }}" class="img-fluid section-img-discipline " alt="enfants pratiquant le JJB">
+        
+    </div>
+   
+
+    <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-a center-under-lg ps-5">
+        <h2 class="blackops-font-section  text-white">planning</h2>
+        <p class="text-white section-text" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, culpa? Error molestiae ut quas iusto quibusdam qui est, quaerat ullam voluptatem facere ex voluptas fugiat aliquid amet at aspernatur delectus sit officia. Voluptatibus dicta fugiat, sit harum vero ea quaerat sunt fugit amet, voluptates tenetur odit perferendis enim quae architecto, iusto rerum porro earum nemo modi doloribus commodi adipisci! Consequatur?</p>
+        <button class="btn btn-section fw-bold">Consultez notre Planning</button>
+    </div>  
+    
+   
+
+</div>
+
+
+<div class="container-fluid  d-flex justify-content-center flex-column-reverse flex-lg-row section-background-yellow pt-5 pb-5 center-under-lg">
+
+    <div class="col-12 col-lg-6 d-flex flex-column justify-content-center center-under-lg ps-5">
+        <h2 class="blackops-font-section  text-white">nos <span style="color: #f3ef2a;">athlètes</span></h2>
+        <p class="text-white section-text" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, culpa? Error molestiae ut quas iusto quibusdam qui est, quaerat ullam voluptatem facere ex voluptas fugiat aliquid amet at aspernatur delectus sit officia. Voluptatibus dicta fugiat, sit harum vero ea quaerat sunt fugit amet, voluptates tenetur odit perferendis enim quae architecto, iusto rerum porro earum nemo modi doloribus commodi adipisci! Consequatur?</p>
+        <button class="btn btn-section fw-bold">Découvrez nos combattants</button>
+    </div>
+
+    <div class="d-flex justify-content-center col-12 col-lg-5  ">
+        <img src="{{ asset('images/rectangle-7062@2x.png') }}" class="img-fluid section-img-fighter" style="margin-left: 50px;" alt="photo d'un combattant du club">
+        <img src="{{ asset('images/rectangle-708@2x.png') }}" class="img-fluid section-img-fighter" alt="photo d'un combattant du club">
+    </div>
+
+
+</div>
+
+
+
+
+
+<div class="container-fluid d-flex justify-content-center flex-column-reverse flex-lg-row section-background-black pt-5 pb-5 center-under-lg">
+
+
+    <div class="d-flex justify-content-center col-12 col-lg-6">
+       <img src="{{ asset('images/rectangle-7051@2x.png') }}" class="img-fluid section-img-discipline " alt="enfants pratiquant le JJB">
+       
+   </div>
+  
+
+   <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-a center-under-lg ps-5">
+       <h2 class="blackops-font-section  text-white">Boutique</h2>
+       <p class="text-white section-text" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, culpa? Error molestiae ut quas iusto quibusdam qui est, quaerat ullam voluptatem facere ex voluptas fugiat aliquid amet at aspernatur delectus sit officia. Voluptatibus dicta fugiat, sit harum vero ea quaerat sunt fugit amet, voluptates tenetur odit perferendis enim quae architecto, iusto rerum porro earum nemo modi doloribus commodi adipisci! Consequatur?</p>
+       <button class="btn btn-section fw-bold">Voir les Produits</button>
+   </div>  
+   
+  
+
+</div>
+
+
+<div class="container-fluid d-flex justify-content-center flex-column-reverse flex-lg-row section-background-yellow pt-5 pb-5 center-under-lg">
+    
+
+    <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-a center-under-lg ps-5">
+        <h2 class="blackops-font-section  text-white"><span class="text-nowrap">Tarifs et</span> <span style="color: #f3ef2a;">inscription</span></h2>
+        <p class="text-white section-text" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, culpa? Error molestiae ut quas iusto quibusdam qui est, quaerat ullam voluptatem facere ex voluptas fugiat aliquid amet at aspernatur delectus sit officia. Voluptatibus dicta fugiat, sit harum vero ea quaerat sunt fugit amet, voluptates tenetur odit perferendis enim quae architecto, iusto rerum porro earum nemo modi doloribus commodi adipisci! Consequatur?</p>
+        <button class="btn btn-section fw-bold">S'inscrire</button>
+    </div>  
+    
+    <div class="d-flex justify-content-center col-12 col-lg-4">
+        <img src="{{ asset('images/rectangle-7052@2x.png') }}" class="img-fluid section-img-tarif " alt="formulaire d'inscription">
+        
+    </div>
+   
+
+</div>
+
+<div class="video-container">
+    <video id="myVideo" autoplay muted controls>
+        <source src="{{ asset('images/kongz.mp4') }}" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <img src="{{ asset('images/kongslogo-1@2x.png') }}" class="overlay-img" alt="logo de l'event kongs">
+    
+</div>
+  
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+
+
+   {% endblock %}

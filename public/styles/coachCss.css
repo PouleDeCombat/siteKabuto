@@ -1,0 +1,149 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url(../images/rectangle-1223@2x.png);
+    overflow-x: hidden;
+}
+
+.padding{
+    padding-top: 100px;
+}
+
+
+.title-coach{
+    line-height: 150%;
+  text-transform: capitalize;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4.75rem;
+  text-transform: capitalize;
+}
+
+
+
+.decoration-text{
+    height: 5px;
+    width: 200px;
+    background-color: #82730d;
+    border-radius: 5px;
+}
+
+@media (max-width: 1199px) {
+    .title-coach {
+        font-size: 3.5rem;
+    }
+}
+
+/* Pour les écrans dont la largeur est inférieure à 992px */
+@media (max-width: 991px) {
+    .title-coach {
+        font-size: 2.5rem;
+    }
+}
+
+/* Pour les écrans dont la largeur est inférieure à 768px */
+@media (max-width: 767px) {
+    .title-coach {
+        font-size: 1.75rem;
+    }
+}
+
+
+
+.decoration-text{
+    height: 5px;
+    width: 200px;
+    background-color: #82730d;
+    border-radius: 5px;
+
+}
+
+
+.coach-icon{
+    height: 24px;
+    width: 24px;
+    }
+
+.coach-icon-bg{
+    height: 43px;
+    width: 43px;
+    background-color: #82730D;
+}
+
+.btn-coach{
+    background-color: yellow;
+    color: black;
+    height: 38px;
+    width: 142px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+
+@media (min-width: 992px) {
+    .center-under-lg {
+        justify-content: center;
+        align-items: center;
+    }
+
+   
+}
+
+.roboto-font{
+    font-family: 'Roboto', sans-serif;
+}
+.sss-font{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.padding-lg{
+    padding-left: 0;
+}
+
+
+@media (min-width: 992px) {
+    .padding-lg {
+        padding-left: 1.25rem;
+    }
+
+   
+}
+
+.vector-icon1 {
+    position: absolute;
+    height: 43.33%;
+    width: 32.53%;
+    top: 4%;
+    right: -15%;
+
+    
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+  }
+
+
+.vector-icon2 {
+    position: absolute;
+    height: 43%;
+    width: 32%;
+    top: 80%;
+    left: -15%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+  }
+
+.vector-icon3 {
+    position: absolute;
+    height: 43%;
+    width: 32%;
+    
+    right: -15%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+  } 
+

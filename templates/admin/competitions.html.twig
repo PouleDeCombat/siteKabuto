@@ -1,0 +1,52 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}Gestion des adhérents{% endblock %}
+
+{% block body %}
+
+<div class="table-responsive" >
+
+  <table class="table" id="adherentTableau">
+    <thead>
+      <tr>
+        <th scope="col">Nom</th>
+        <th scope="col">Location</th>
+        <th scope="col">Kimobo </th>
+        <th scope="col">Date de debut</th>
+        <th scope="col">Lieu de fin</th> 
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for competition in competitions %}
+      <tr>
+        <td>{{competition.nom}}</td>
+        <td>{{competition.location}}</td>
+        <td>{{competition.kimono}}</td>
+       
+       <td>{{ competition.startDate|date('d-m-Y') }}</td>
+        <td>{{ competition.endDate|date('d-m-Y') }}</td>
+        <td>
+               <form action="{{ path('app_competition_delete', {'id': competition.id}) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this competition?')">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ competition.id) }}">
+    <button class="btn btn-danger">Delete</button>
+</form>
+
+
+</td>
+
+        
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <a href="{{ path('app_add_competition') }}" class='btn btn-primary'>Ajouter une competition</a>
+</div>
+
+
+
+
+{% endblock %}
+

@@ -1,0 +1,53 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}Gestion des adhérents{% endblock %}
+
+{% block body %}
+
+<div class="table-responsive" >
+
+  <table class="table" id="adherentTableau">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Prenom</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Email</th>
+        <th scope="col">Telephone</th>
+        <th scope="col">Adresse</th>
+        <th scope="col">Ville</th>
+        <th scope="col">Code Postal </th>
+        <th scope="col">Profession</th>
+        <th scope="col">Date de naissance</th>
+        <th scope="col">Lieu de naissance</th>
+        <th scope="col">Abonnement</th>
+        <th scope="col">Modifier</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for adherent in adherents %}
+      <tr>
+        <td>{{adherent.id}}</td>
+        <td>{{adherent.prenom}}</td>
+        <td>{{adherent.nom}}</td>
+        <td>{{adherent.email}}</td>
+        <td>{{adherent.telephone}}</td>
+        <td>{{adherent.adresse}}</td>
+        <td>{{adherent.ville}}</td>
+        <td>{{adherent.zipcode}}</td>
+        <td>{{adherent.Profession}}</td>
+        <td>{{adherent.getDateDeNaissance()|date('d-m-Y') }}</td>
+        <td>{{ adherent.getLieuDeNaissance() }}</td>
+        <td></td>
+        <td><a href="{{ path('app_modifier', {'id': adherent.id}) }}" class="btn btn-primary">Modifier</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
+
+{% endblock %}
+

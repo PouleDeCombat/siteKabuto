@@ -1,0 +1,194 @@
+ {% extends 'base.html.twig' %}
+ {% block body %}
+
+    <div class="container-fluid padding">
+        <div class="d-flex flex-column pb-5 justify-content-center  align-items-center">
+            <h1 class="main-title-tarif text-white">Nos <span style="color: yellow;">tarifs</span></h1>
+            <div class="decoration-text"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class=" h-100 d-flex flex-column text-center info-card">
+                    
+
+                    <h3 class="mb-5 fs-5"><span style="color: yellow;">PAYEZ EN 4 FOIS SANS FRAIS</span></h3>
+                        
+                        
+                    <p class="text-white  text-center">N’hésitez pas à demander l’étalage de vos paiements sur plusieurs dates (4 maximum) sur les formules annuelle. Vous choisissez les dates et le montant que vous êtes en mesure de payer. Ce n’est pas un crédit, ce n’est pas une avance, mais attention CELA VOUS ENGAGE.</p>
+              
+                </div>
+            </div>
+
+
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="h-100 d-flex flex-column text-center info-card">
+                    
+                    <h3 class="mb-5 fs-5"><span style="color: yellow;">2 DISCIPLINES C’EST MIEUX</span></h3>
+                        
+                        
+                    <p class="text-white  text-center">Chez KABUTO FIGHT CLUB lorsque vous vous inscrivez pour 1 discipline ou le "full combat", vous bénéficiez d’un rabais <span style="color: yellow;">de -40% sur l'accés libre musculation et le K.PROG</span> Demandez conseil à un coach pour choisir deux disciplines complémentaires.</p>
+
+                </div>
+            </div>
+
+
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="h-100 d-flex flex-column text-center info-card">
+                    
+                    <h3 class="mb-5 fs-5"><span style="color: yellow;">LE MMA À TOUT ÂGE</span></h3>
+                        
+                        
+                    <p class="text-white text-center">Nous avons créé MMA KIDS pour accueillir les enfants de 6 à 12 ans au sein de notre établissement. De même pour le MMA adulte, nous adaptons les séances pour les plus âgés. Demandez conseil avant de vous inscrire, vous aurez des conseils avisés pour pratiquer le MMA en toute sécurité..</p>
+ 
+                </div>
+            </div>
+
+
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="h-100 d-flex flex-column text-center info-card">
+                    
+                    <h3 class="mb-5 fs-5"><span style="color: yellow;">ESSAYEZ NOTRE NOUVEAU K.PROGRAMME</span></h3>
+                        
+                        
+                    <p class="text-white text-center">Mobilité, endurance, perte de poids ou prise de force, cette année venez REALISER VOS OBJECTIFS .
+                            Au cœur de groupes réduits, un coaching précis vous poussera au meilleur de vous-même.
+                            Le K-PROGRAMME vous suit et s'adapte pour répondre à vos attentes et terminer l'année sur une victoire, LA VOTRE !
+                    </p>
+                 
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<img src="{{ asset('images/vector.svg') }}" class="vector-icon1" alt="vector jaune">
+<img src="{{ asset('images/group-33300.svg') }}" class="vector-icon2" alt="vector jaune">
+
+<div class="d-flex justify-content-center">
+    <div class="table-responsive col-lg-6 ">
+        <table class="table table-bordered border-warning text-white fw-bold border-rounded ">
+            <thead>
+                <tr>
+                    <th scope="col">CATEGORIE</th>
+                    <th scope="col">ABONNEMENT</th>
+                    <th scope="col">ANNEE</th>
+                    <th scope="col">3 MOIS</th>
+                    <th scope="col">1 MOIS</th>
+                </tr>
+            </thead>
+            <tbody >
+                <tr>
+                    <th rowspan="5">ADULTES</th>
+                    <td> K PROGRAM*</td>
+                    <td> 490 €</td>
+                    <td >190 €</td>
+                    <td> 70 €</td>
+                </tr>
+                <tr>
+                    <td> 1 SPORT</td>
+                    <td> 340 €</td>
+                    <td> 120 €</td>
+                    <td> 50 €</td>
+                </tr>
+                <tr>
+                    <td> JJB - GRAPPLING</td>
+                    <td> 395 €</td>
+                    <td> 150 €</td>
+                    <td> 60 €</td>
+                </tr>
+                <tr>
+                    <td> FULL COMBAT</td>
+                    <td> 495 €</td>
+                    <td> 170 €</td>
+                    <td> 70 €</td>
+                </tr>
+                <tr>
+                    <td>LIBRE ACCES*</td>
+                    <td> 220 €</td>
+                    <td> /</td>
+                    <td> /</td>
+                </tr>
+                <tr>
+                    <th rowspan="2">KIDS ( -11 ANS )</th>
+                    <td> 1 SPORT</td>
+                    <td> 295 €</td>
+                    <td> 210 €</td>
+                    <td> 75€</td>
+                </tr>
+                <tr>
+                    <TH>FULL COMBAT</TH>
+                    <td> 300 €</td>
+                    <td> 105 €</td>
+                    <td> 50 €</td>
+                </tr>
+                <tr>
+                    <th rowspan="3">ADOS ( +11 ANS )</th>
+                    <td>1 SPORT</td>
+                    <td> 275 €</td>
+                    <td> 100 €</td>
+                    <td> 50 €</td>
+                </tr>
+                <tr>
+                    <TH>FULL COMBAT</TH>
+                    <td> 395 €</td>
+                    <td> 150 €</td>
+                    <td> 60 €</td>
+                </tr>
+                <tr>
+                    <TH>JJB-GRAPPLING</TH>
+                    <td> 290 €</td>
+                    <td> 105 €</td>
+                    <td> 45 €</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6" class="text-center">-40% SUR LE MONTANT DU SECOND SPORT K-PROGRAM ET:OU LIBRE ACCES</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>  
+
+    
+
+
+<div class="container d-flex flex-column mb-5">
+    <h2 class="text-center text-white mt-5 fs-1 text-uppercase mb-3">Moyens de paiement : carte bleu ( en ligne ) / chèque / espèce</h2>
+    <div class="d-flex justify-content-center">
+        <img src="{{ asset('images/exclamationtriangle.svg') }}" class="triangle" alt="triangle d'exclamation">
+        <p class="text-white fs-4">Frais Administratif : 50 € Première Adhésion <br> 40€ Renouvellement</p>
+    </div>
+    <p class="fs-3" style="color: yellow;">* Le libre accès interdit le sparring entre adhérents</p>
+    <h3 class="text-white mt-2 mb-3 font-neue text-uppercase title-reglement">règlement interieur</h3>
+    <div>
+        <h4 class="under-title-reglement mt-3 mb-2 font-neue fs-2" style="color: yellow;">RÈGLES DE LA VIE ASSOCIATIVE</h4>
+        <p class="text-white fs-4">Le respect mutuel des membres est un fondamental de la vie du club et s’exerce autant au sein qu’en dehors du cadre des activités sportives. Tout membre s’engage à respecter les règles de politesse et de bienséance et à faire preuve de savoir-être au sein du club. Tout adhérent ne respectant pas ces principes comportementaux pourra être déchu de sa qualité de membre pour cette raison.</p>
+    </div>
+    <div>
+        <h4 class="under-title-reglement mt-3 mb-2 font-neue fs-2" style="color: yellow;">RÈGLES DES ACTIVITÉS SPORTIVES</h4>
+        <p class="text-white fs-4">Par mesure de sécurité, il est impératif d’avoir tous ses équipements de protection lors de vos séances afin de préserver votre intégrité physique et celle de vos partenaires. A défaut, vous pourrez être dispensé des exercices en opposition. Par mesure de sécurité, vos ongles de pieds et de mains doivent être taillés courts. Si vous avez les cheveux longs ils doivent être attachés. Par mesure de sécurité, il est formellement interdit de poser à proximité des surfaces de pratique vos bouteilles d’eau, boitiers de protège-dents ou tout autre objet pouvant se briser et/ou occasionner des blessures corporelles. Par mesure d’hygiène, le port des claquettes est obligatoire pour tous vos déplacements en dehors des tapis. Il est vivement conseillé d’avoir une bouteille d’eau lors de vos séances afin de pouvoir vous hydrater régulièrement.</p>
+    </div>
+    <div>
+        <h4 class="under-title-reglement mt-3 mb-2 font-neue fs-2" style="color: yellow;">LISTE DES ÉQUIPEMENTS DE PROTECTION</h4>
+        <p class="text-white fs-4">Protège-dents Coquille / Soutien-gorge de protection Casque (obligatoire pour les sparrings) Bandages sous gants Gants de boxe Coudières / Mitaines MMA / Protège-tibias Genouillères.</p>
+    </div>
+    <div>
+        <h4 class="under-title-reglement mt-3 mb-2 font-neue fs-2" style="color: yellow;">PIECES A FOURNIR AVEC VOTRE FICHE D’INSCRIPTION</h4>
+        <p class="text-white fs-4">Un certificat médical de « non contre-indication » à la pratique des disciplines choisies (indiquées une à une) et précisant la mention « en compétition » pour tout adhérent souhaitant pouvoir participer aux différentes compétitions proposées. Une photocopie de votre pièce d’identité en cours de validité. 2 photos d’identité. Le règlement de votre adhésion dans sa totalité.</p>
+    </div>
+    
+    <div>
+        <h4 class="under-title-reglement mt-3 mb-2 font-neue fs-2" style="color: yellow;">CONDITIONS DE PAIEMENT DE VOTRE ADHÉSION</h4>
+        <p class="text-white fs-4">Le règlement de votre adhésion se fait à l’inscription. Vous ne pourrez commencer vos activités qu’après en avoir régularisé les modalités. Toutes les adhésions finissent avec l’année sportive/scolaire le 30 juin 2023. L’adhésion est un abonnement et ne présage pas de votre assiduité, elle n’est ni remboursable, ni transmissible, y compris en cas de mesure(s) sanitaire(s) entraînant une fermeture de salle. L’intégralité de son montant doit être réglée à l’inscription ; si votre règlement se fait par chèque un paiement en plusieurs fois pourra vous être accordé. S’il se fait par carte bleue ou espèces, il est possible de régler en plusieurs fois avec un chèque de caution de la totalité du montant de l’adhésion. Les adhésions trimestrielles sont réglées le 1er de chaque 1er mois. La régularité du paiement est de la responsabilité de</p>
+    </div>
+</div>
+
+
+
+
+
+ {% endblock %}

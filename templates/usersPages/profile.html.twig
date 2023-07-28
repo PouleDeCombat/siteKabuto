@@ -1,0 +1,83 @@
+{% extends 'usersBase.html.twig' %}
+
+{% block body %}
+
+<div class="container">
+{% for message in app.flashes('message') %}
+<div class="alert alert-success d-flex align-items-center" role="alert">
+  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+  <div>
+    Profil mis à jour
+  </div>
+</div>
+  
+{% endfor %}
+  <div class="row">
+    <div class="col-sm">
+      <h1>Profil de {{app.user.prenom }} {{ app.user.nom}}  </h1>
+      <p>Nom : {{ app.user.nom}} </p>
+      <p>Prénom : {{app.user.prenom }}</p>
+      <p>Email : {{app.user.email }}</p>
+      <p>Adresse : {{app.user.adresse }}</p>
+      <p>Code Postal : {{app.user.zipcode }}</p>
+      <p>Ville : {{app.user.ville }}</p>
+
+      <div>
+      <a href="{{ path('app_edit_profile') }}" class="btn btn-primary">Modifier le profil</a>
+      <a href="{{ path('app_edit_password') }}" class="btn btn-primary">Modifier le mot de passe</a>
+      </div>
+
+    </div>
+
+   <div class="col-sm">
+  <h1>Profil de competiteur  </h1>
+
+  <p>ceinture : </p>
+  <p>Catégorie de poid :  </p>
+
+  <div>
+  <a href="" class="btn btn-primary">Modifier le profil</a>
+  </div>
+</div>
+
+
+ {# <div class="row">
+    <div class="col-sm">
+       <h1>Profil de {{kid.prenom }} {{ kids.nom}}  </h1>
+      <p>Nom : {{ app.user.nom}} </p>
+      <p>Prénom : {{app.user.prenom }}</p>
+      <p>Email : {{app.user.email }}</p>
+      <p>Adresse : {{app.user.adresse }}</p>
+      <p>Code Postal : {{app.user.zipcode }}</p>
+      <p>Ville : {{app.user.ville }}</p> 
+
+      <div>
+      <a href="{{ path('app_edit_profile') }}" class="btn btn-primary">Modifier le profil</a>
+
+      </div>
+
+    </div>
+
+   <div class="col-sm">
+  <h1>Profil de competiteur  </h1>
+
+  <p>ceinture : </p>
+  <p>Catégorie de poid :  </p>
+
+  <div>
+  <a href="" class="btn btn-primary">Modifier le profil</a>
+  </div> #}
+</div> 
+
+<div class="row mt-5">
+<a href="{{path('app_add_kids')}}" class="btn btn-primary">Ajouter un enfant</a>
+</div>
+
+
+
+
+    
+    
+</div>
+
+{% endblock %}

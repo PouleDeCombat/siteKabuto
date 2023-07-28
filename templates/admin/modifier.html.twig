@@ -1,0 +1,12 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}Modifier un adhérent{% endblock %}
+
+{% block body %}
+    <h1>Modifier un adhérent</h1>
+   
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+        <button type="submit" class="btn btn-inscription btn-lg my-3">M'inscrire</button>
+    {{ form_end(form) }}
+{% endblock %}

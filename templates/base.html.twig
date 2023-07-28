@@ -4,13 +4,32 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
-
-        {% block javascripts %}
-        {% endblock %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{asset('styles/formulaire.css') }}" />
+        <link rel="stylesheet" href="{{asset('styles/tarifCss.css') }}" />
+        <link rel="stylesheet" href="{{asset('styles/combattantCss.css') }}" /> 
+        <link rel="stylesheet" href="{{ asset('styles/boutiqueCss.css') }}" />
+        <link rel="stylesheet" href="{{ asset('styles/horaireCss.css') }}" />
+        <link rel="stylesheet" href="{{ asset('styles/disciplinesCss.css') }}" />
+        <link rel="stylesheet" href="{{ asset('styles/coachCss.css') }}" /> 
+        <link rel="stylesheet" href="{{ asset('styles/landingCss.css') }}" /> 
+        <link rel="stylesheet" href="{{ asset('styles/footerCss.css') }}" /> 
+        <link rel="stylesheet" href="{{ asset('styles/headerCss.css') }}" /> 
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One:wght@400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
+          
     </head>
     <body>
+        {% include 'partials/_header.html.twig' %}
         {% block body %}{% endblock %}
+        {% include 'partials/_footer.html.twig' %}
+        
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+
     </body>
 </html>

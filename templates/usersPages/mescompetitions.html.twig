@@ -1,0 +1,47 @@
+{% extends 'usersBase.html.twig' %}
+
+{% block body %}
+
+
+
+
+
+<div class="table-responsive" >
+
+  <table class="table" id="adherentTableau">
+    <thead>
+      <tr>
+        <th scope="col">Nom</th>
+        <th scope="col">Location</th>
+        <th scope="col">Kimono</th>
+        <th scope="col">Debut</th>
+        <th scope="col">Fin</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+    {% for competition in competitions %}
+      <tr>
+        <td>{{competition.nom}}</td>
+        <td>{{competition.location}}</td>
+        <td>{{competition.kimono}}</td>
+        <td>{{competition.startDate|date('d-m-Y') }}</td>
+        <td>{{competition.endDate|date('d-m-Y') }}</td>
+        <td></td>
+        <td><a href="{{ path('app_inscription_competition', {'id': competition.id}) }}" class="btn btn-primary">S'inscrire</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

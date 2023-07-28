@@ -1,0 +1,234 @@
+ {% extends 'base.html.twig' %}
+ {% block body %}
+
+
+ <div class="container-fluid padding">
+        <div class="d-flex flex-column pb-5 justify-content-center  align-items-center">
+            <h1 class="main-title-boutique text-white">Notre <span style="color: yellow;">boutique</span></h1>
+            <div class="decoration-text"></div>
+        </div>
+    </div>
+
+
+
+    <img src="{{ asset('images/vector.svg') }}" class="vector-icon1" alt="vector jaune">
+    <img src="{{ asset('images/group-33300.svg') }}" class="vector-icon2" alt="vector jaune">
+
+
+
+    {# <div class="container ">
+        <div class="row mb-4">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card">
+                    <div class="d-flex flex-column">
+                        <img src="{{ asset('images/rectangle-594@2x.png') }}" class="article-boutique" alt="article protege tibias">
+                        <div class="article-name">
+                            <p class="text-white fw-bold text-center">Protège Tibia </p>
+                            <p class="text-white fw-bold text-center">70€</p>
+                           
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card">
+                    <div class=" d-flex flex-column">
+                        <img src="{{ asset('images/rectangle-5943@2x.png') }}" class="article-boutique" alt="article protege tibias">
+                        <div class="article-name">
+                            <p class="text-white fw-bold text-center">Gants de Boxe </p>
+                            <p class="text-white fw-bold text-center">60€</p>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card">
+                    <div class=" d-flex flex-column">
+                        <img src="{{ asset('images/rectangle-5941@2x.png') }}" class="article-boutique" alt="article protege tibias">
+                        <div class="article-name">
+                            <p class="text-white fw-bold text-center">Gants de MMA Sparring </p>
+                            <p class="text-white fw-bold text-center">60€</p>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card">
+                    <div class=" d-flex flex-column">
+                        <img src="{{ asset('images/rectangle-5942@2x.png') }}" class="article-boutique" alt="article protege tibias">
+                        <div class="article-name">
+                            <p class="text-white fw-bold text-center">Veste </p>
+                            <p class="text-white fw-bold text-center">60€</p>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row mb-4">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card">
+                    <div class=" d-flex flex-column">
+                        <img src="{{ asset('images/rectangle-5946@2x.png') }}" class="article-boutique" alt="article protege tibias">
+                        <div class="article-name">
+                            <p class="text-white fw-bold text-center">Pantalon</p>
+                            <p class="text-white fw-bold text-center">40€</p>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card">
+                    <div class=" d-flex flex-column">
+                        <img src="{{ asset('images/rashguardlong.png') }}" class="article-boutique" alt="article protege tibias">
+                        <div class="article-name">
+                            <p class="text-white fw-bold text-center">Rashguard Manche Longue</p>
+                            <p class="text-white fw-bold text-center">50€</p>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card">
+                    <div class=" d-flex flex-column">
+                        <img src="{{ asset('images/rashguardcourt.png') }}" class="article-boutique" alt="article protege tibias">
+                        <div class="article-name">
+                            <p class="text-white fw-bold text-center">Rashguard Manche Courte</p>
+                            <p class="text-white fw-bold text-center">45€</p>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card">
+                    <div class=" d-flex flex-column">
+                        <img src="{{ asset('images/rectangle-5946@2x.png') }}" class="article-boutique" alt="article protege tibias">
+                        <div class="article-name">
+                            <p class="text-white fw-bold text-center">Legging</p>
+                            <p class="text-white fw-bold text-center">50€</p>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row mb-4">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card">
+                    <div class=" d-flex flex-column">
+                        <img src="{{ asset('images/shortvaletudo.png') }}" class="article-boutique" alt="article protege tibias">
+                        <div class="article-name">
+                            <p class="text-white fw-bold text-center">Short "Valetudo"</p>
+                            <p class="text-white fw-bold text-center">45€</p>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card">
+                    <div class=" d-flex flex-column">
+                        <img src="{{ asset('images/rectangle-5947@2x.png') }}" class="article-boutique" alt="article protege tibias">
+                        <div class="article-name">
+                            <p class="text-white fw-bold text-center">Short MMA </p>
+                            <p class="text-white fw-bold text-center">50€</p>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card">
+                    <div class=" d-flex flex-column">
+                        <img src="{{ asset('images/shortmuy.png') }}" class="article-boutique" alt="article protege tibias">
+                        <div class="article-name">
+                            <p class="text-white fw-bold text-center">Short Muay Thaï </p>
+                            <p class="text-white fw-bold text-center">40€</p>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card">
+                    <div class=" d-flex flex-column">
+                        <img src="{{ asset('images/rectangle-5944@2x.png') }}" class="article-boutique" alt="article protege tibias">
+                        <div class="article-name">
+                            <p class="text-white fw-bold text-center">Casquette</p>
+                            <p class="text-white fw-bold text-center">20€</p>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div> #}
+
+
+<div class="container ">
+
+    {% set counter = 0 %}
+
+    {% for product in product %}
+
+        {% if counter is divisible by(4) %}
+            <div class="row mb-4">
+        {% endif %}
+
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card">
+                <div class="d-flex flex-column">
+                    <img src="{{ asset(product.images) }}" class="article-boutique" alt="{{ product.name }}">
+                    <div class="article-name">
+                        <p class="text-white fw-bold text-center">{{ product.name }}</p>
+                        <p class="text-white fw-bold text-center">{{ product.price }}€</p>
+                        <a href="{{ path('products_details', {"slug": product.slug}) }}" class="btn btn-warning col-12">Voir les détails</a>
+                    </div>       
+                </div>
+            </div>
+        </div>
+
+        {% set counter = counter + 1 %}
+
+        {% if counter is divisible by(4) %}
+            </div>
+        {% endif %}
+
+    {% endfor %}
+
+    {% if counter is not divisible by(4) %}
+        </div>
+    {% endif %}
+    
+</div>
+
+
+
+  {% endblock %}
+ 

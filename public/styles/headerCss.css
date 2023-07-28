@@ -1,0 +1,101 @@
+/* .icon-bg-header{
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    padding-bottom: 3px;
+}
+
+.logo-nav{
+    position: absolute;
+    height: 180px;
+    width: 155px;
+    left: 5%;
+    top: 2%;
+}
+
+
+
+@media (max-width: 1231px) {  
+  .email-nav {
+    color: yellow
+  }
+}
+
+
+  
+  
+  */
+
+  /* @media (max-width: 991px) {
+    .navbar-toggler-icon {
+   
+    background-image: url('../public/images/burger.svg');
+      position: absolute;
+        top: 8%;
+        right: 8%;
+    }
+  }
+
+
+  .btnNav{
+    border: none;
+    position: absolute;
+    top: 8%;
+        right: 8%;
+  } */
+/* 
+  .bg-nav{
+    background-color: yellow;
+  }
+  } */ 
+  
+  .navbar-text{
+    font-family: 'Source Sans Pro', sans-serif;
+    letter-spacing: 0.01em;
+  text-transform: uppercase;
+  }
+
+
+  
+
+
+  .icon-bg-header{
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.logo-nav{
+    position: absolute;
+    height: 180px;
+    width: 155px;
+    left: 5%;
+    top: 2%;
+   
+}
+
+
+
+  @media (max-width: 1231px) {  
+    .email-nav {
+      color: yellow
+    }
+  }
+
+  
+  .padding-header{
+    padding-left: 110px;
+  }
+  
+  .bg-nav{
+    background-color: yellow;
+    
+  }
+
+  .navbarLanding-placement{
+    top: 0%;
+  }
+
+
+
+

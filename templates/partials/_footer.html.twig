@@ -1,0 +1,108 @@
+
+<footer class="sticky-bottom">
+	<div class="container-fluid pt-5 pb-5 footerContainer d-flex">
+		<div class="row d-flex justify-content-center col-lg-12 ">
+			<div class="col-lg-4 col-sm-12 d-flex flex-column  align-items-center ">
+				<img class="logo-footer" style="height: 180px; width: 155px;" src="{{ asset('images/kabuto-logo-fightclub-jpg-1@2x.png') }}" alt="logo du club de mma">
+				<p class="club-name-footer fs-4">KABUTO FIGHT CLUB</p>
+				<p class="joindre-footer  fs-4">NOUS JOINDRE</p>
+				<p class="text-white">356 Avenue Jean Guiton 17000 LA ROCHELLE</p>
+				<p class="text-secondary">
+					<img src="{{ asset('images/telephonefill2.svg') }}" class="me-1" alt="icone telephone jaune">+09 80 83 48 78</p>
+				<p class="text-white">
+					<img src="{{ asset('images/envelopefill1.svg') }}" class="me-1" alt="icone de courrier jaune">Kabutofightclub17@gmail.com</p>
+				<div class="d-flex ">
+					<div class="d-flex  icon-bg-footer justify-content-center align-items-center me-2">
+						<a href="https://www.facebook.com/KabutoFightTeam"><img class="footer-icon" alt="" src="{{ asset('images/frame3.svg') }}"/></a>
+					</div>
+					<div class="d-flex  icon-bg-footer justify-content-center align-items-center me-2">
+						<a href=""><img class="footer-icon" alt="" src="{{ asset('/images/twitter2.svg') }}"/></a>
+					</div>
+					<div class="d-flex  icon-bg-footer justify-content-center align-items-center me-2">
+						<a href="https://www.instagram.com/kabutofightclub/"><img class="footer-icon" alt="" src="{{ asset('images/instagram3.svg') }}"/></a>
+					</div>
+					<div class="d-flex  icon-bg-footer justify-content-center align-items-center me-2">
+						<a href="https://www.youtube.com/@kabutofightteamlarochelle4494"><img class="footer-icon" alt="" src="{{ asset('images/youtube1.svg') }}"/></a>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-lg-3 d-flex flex-lg-column justify-content-sm-center justify-content-evenly col-sm-12  flex-row mt-3 mb-3">
+				<div class="d-flex col-sm-4 flex-column">
+					<h2 class="fs-5 title-footer">Navigation</h2>
+					<ul class="list-unstyled">
+						<li>
+							<a class="text-decoration-underline text-secondary" href="{{ path('app_landing') }}">Accueil</a>
+						</li>
+						<li>
+							<a class="text-decoration-underline text-secondary" href="{{ path('app_coaches') }}">Les Coachs</a>
+						</li>
+						<li>
+							<a class="text-decoration-underline text-secondary" href="{{ path('app_disciplines') }}">Disciplines</a>
+						</li>
+						<li>
+							<a class="text-decoration-underline text-secondary" href="{{ path('app_horaire') }}">Horaires</a>
+						</li>
+						<li>
+							<a class="text-decoration-underline text-secondary" href="{{ path('app_boutique') }}">Boutique</a>
+						</li>
+						<li>
+							<a class="text-decoration-underline text-secondary" href="{{ path('app_register') }}">Inscription</a>
+						</li>
+					</ul>
+				</div>
+				<div class="d-flex flex-column">
+					<h2 class="fs-5 title-footer">Horaires</h2>
+					<ul class="list-unstyled">
+						<li class=" text-secondary">Lundi 10:00-17h30</li>
+						<li class=" text-secondary">Mardi 10:00-17h30</li>
+						<li class=" text-secondary">Mercredi 10:00-17h30</li>
+						<li class=" text-secondary">Jeudi 10:00-17h30</li>
+						<li class=" text-secondary">Vendredi 10:00-17h30</li>
+
+					</div>
+
+				</div>
+
+				<div class="col-lg-3 col-sm-8">
+					<h2 class="title-footer fs-4">Nous contacter</h2>
+					<form>
+						<div class="d-flex align-items-center justify-content-between">
+							<div class="mb-3">
+								<label for="prenom" class="form-label text-white">Prénom</label>
+								<input type="text" class="form-control input-footer" id="prenom">
+							</div>
+							<div class="mb-3">
+								<label for="nom" class="form-label text-nowrap text-white">Nom de Famille</label>
+								<input type="text" class="form-control input-footer" id="nom">
+							</div>
+						</div>
+
+						<div class="d-flex align-items-center justify-content-between">
+							<div class="mb-3">
+								<label for="email" class="form-label text-white">E-mail</label>
+								<input type="email" class="form-control input-footer" id="email">
+							</div>
+							<div class="mb-3">
+								<label for="objet" class="form-label text-white">Objet</label>
+								<input type="text" class="form-control input-footer" id="objet">
+							</div>
+						</div>
+
+						<div class="mb-3 ">
+							<label for="message" class="form-label text-white">Laissez-nous un message...</label>
+							<textarea class="form-control text-white input-footer" id="message" rows="4"></textarea>
+						</div>
+						<button type="submit" class="btn-footer dflex justify-content-center align-items-center fw-bold ">ENVOYER</button>
+					</form>
+				</div>
+
+
+			</div>
+
+		</div>
+		<div class="dashed-border-yellow d-flex justify-content-between text-white align-items-center">
+			<p class="ps-5">© 2023 Kabuto Fight Club. Tous droits réservés.</p>
+		</div>
+	</footer>

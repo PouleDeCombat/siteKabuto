@@ -3,3 +3,11 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+
+
+send_mailjet_email:
+    path: /send-mailjet-email
+    controller: App\Controller\EmailController::sendMailjetEmail
+
+

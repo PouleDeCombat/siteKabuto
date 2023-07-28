@@ -1,0 +1,50 @@
+{% extends 'usersBase.html.twig' %}
+
+{% block body %}
+
+{{ form_start(form) }}
+
+{# Utilisez form_row pour afficher le champ caché userId #}
+{{ form_row(form.userId) }}
+
+{{ form_widget(form.categoriePoid, {'rendered': true}) }}
+
+<div class="row">
+    {% for key, choice in form.categoriePoid.vars.choices %}
+        <div class="col">
+            <div class="form-check">
+                <input class="form-check-input limited-checkbox" type="checkbox" 
+                       value="{{ choice.value }}" id="checkbox{{ key }}"
+                       name="{{ form.categoriePoid.vars.full_name }}[]" 
+                       data-max="2" {{ choice.data ? 'checked' : '' }}>
+                <label class="form-check-label" for="checkbox{{ key }}">
+                    {{ choice.label }}
+                </label>
+            </div>
+        </div>
+        {% if loop.index is divisible by(4) %}
+            </div><div class="row">
+        {% endif %}
+    {% endfor %}
+</div>
+
+{{ form_rest(form) }}
+
+<button type="submit" class="btn btn-primary">Valider</button>
+
+{{ form_end(form) }}
+
+<script>
+document.getElementById('{{ form.categoriePoid.vars.id }}').addEventListener('change', function() {
+    let max = 2;
+    if (this.selectedOptions.length > max) {
+        alert('Vous ne pouvez sélectionner que ' + max + ' options.');
+        for (let i = 0; i < this.options.length; i++) {
+            this.options[i].selected = i < max;
+        }
+    }
+});
+</script>
+
+{% endblock %}
+

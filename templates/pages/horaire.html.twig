@@ -1,0 +1,25 @@
+ {% extends 'base.html.twig' %}
+ {% block body %}
+ 
+ 
+ 
+ <div class="container-fluid padding">
+        <div class="d-flex flex-column pb-5 justify-content-center  align-items-center">
+            <h1 class="main-title-horaire text-white">Les <span style="color: yellow;">horaires</span></h1>
+            <div class="decoration-text"></div>
+        </div>
+    </div>
+
+
+    <img src="{{ asset('images/vector.svg') }}" class="vector-icon1" alt="vector jaune">
+    <img src="{{ asset ('images/group-33300.svg') }}" class="vector-icon2" alt="vector jaune">
+
+
+    <div class="container-fluid d-flex justify-content-center align-items-center">
+        <img src="{{ asset('images/horaire.png') }}" class="img-fluid" alt="horaire des cours">
+    </div>
+
+
+    <img src="{{ asset('images/group-33301.svg') }}" class="vector-icon3" alt="vector jaune">
+
+      {% endblock %}
