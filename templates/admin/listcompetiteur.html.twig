@@ -1,0 +1,55 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+ <h1>Liste des compétiteurs pour {{ competition.nom }}</h1>
+
+
+ 
+
+    <div class="table-responsive" >
+
+  <table class="table" id="adherentTableau">
+    <thead>
+      <tr>
+        
+        <th scope="col">Prenom</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Email</th>
+        <th scope="col">Telephone</th>
+        <th scope="col">Ceinture</th>
+        <th scope="col">Categorie de Poid</th>
+        <th scope="col">Kimono</th>
+
+        
+        
+     
+      
+      
+      </tr>
+    </thead>
+    <tbody>
+    {% for user in competition.users %}
+      <tr>
+       
+        <td>{{user.prenom}}</td>
+        <td>{{user.nom}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.telephone}}</td>
+        <td>{{user.ceinture}}</td>
+        <td>{{user.categoriePoid}}</td>
+        <td>{{user.kimono}}</td>
+        
+        
+       
+    
+      
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+{% endblock %}

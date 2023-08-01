@@ -23,7 +23,7 @@
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0">
+                        <a href="{{ path('app_profile') }}" class="nav-link align-middle px-0">
                             <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Mon profil</span>
                         </a>
                     </li>
@@ -40,6 +40,12 @@
                             <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Inscription annuel</span> </a>
                     </li> 
 
+                    <li class="nav-item">
+                        <a href="{{ path('app_user_competitions') }}" class="nav-link align-middle px-0">
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Mes competitions</span>
+                        </a>
+                    </li>
+
                     <li>
                     
                    {% if 'ROLE_ADMIN' in app.user.roles %}
@@ -51,9 +57,7 @@
                      <a href="{{ path('app_logout') }}" class="btn btn-danger">Deconnexion</a>
                     </li>
 
-                    <li>
-                     <a href="{{ path('app_user_competitions') }}" class="fs-4 bi-people"> <span class="ms-1 d-none d-sm-inline">Mes competitions</span></a>
-                    </li>     
+                     
 
                     
                 </ul>

@@ -1,0 +1,105 @@
+warning: in the working copy of 'config/packages/framework.yaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/Controller/CompetitionController.php', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/Controller/PostController.php', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/Entity/Kids.php', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/Entity/Users.php', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/Repository/CompetitionsRepository.php', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'templates/admin/adherent.html.twig', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'templates/security/login.html.twig', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/config/packages/framework.yaml b/config/packages/framework.yaml[m
+[1mindex 6d85c29..c0483a4 100644[m
+[1m--- a/config/packages/framework.yaml[m
+[1m+++ b/config/packages/framework.yaml[m
+[36m@@ -2,7 +2,7 @@[m
+ framework:[m
+     secret: '%env(APP_SECRET)%'[m
+     #csrf_protection: true[m
+[31m-    http_method_override: false[m
+[32m+[m[32m    http_method_override: true[m
+     handle_all_throwables: true[m
+ [m
+     # Enables session support. Note that the session will ONLY be started if you read or write from it.[m
+[1mdiff --git a/src/Controller/CompetitionController.php b/src/Controller/CompetitionController.php[m
+[1mindex a987b89..fc884ad 100644[m
+[1m--- a/src/Controller/CompetitionController.php[m
+[1m+++ b/src/Controller/CompetitionController.php[m
+[36m@@ -54,14 +54,13 @@[m [mclass CompetitionController extends AbstractController[m
+ [m
+ [m
+     #[Route('/admin/competition/{id}', name:'app_competition_delete', methods:["DELETE"])][m
+[31m-    public function delete(Request $request, Competitions $competition): Response[m
+[31m-    {[m
+[31m-        $em = $this->getDoctrine()->getManager();[m
+[31m-        $em->remove($competition);[m
+[31m-        $em->flush();[m
+[31m-    [m
+[31m-        return $this->redirectToRoute('app_competitions');[m
+[31m-    }[m
+[32m+[m[32mpublic function delete(Request $request, Competitions $competition, EntityManagerInterface $entityManager): Response[m
+[32m+[m[32m{[m
+[32m+[m[32m    $entityManager->remove($competition);[m
+[32m+[m[32m    $entityManager->flush();[m
+[32m+[m
+[32m+[m[32m    return $this->redirectToRoute('app_competitions');[m
+[32m+[m[32m}[m
+ [m
+ [m
+     #[Route('/profil/competitions/{id}', name: 'app_inscription_competition')][m
+[36m@@ -104,9 +103,73 @@[m [mclass CompetitionController extends AbstractController[m
+ [m
+ [m
+ [m
+[32m+[m[32m    #[Route('/admin/competitions/{id}/competiteurs', name: 'app_competition_competiteur')][m
+[32m+[m[32m    public function getCompetitionUsers($id, CompetitionsRepository $competitionsRepository): Response[m
+[32m+[m[32m    {[m
+[32m+[m[32m        $competition = $competitionsRepository->findCompetitionWithUsers($id);[m
+[32m+[m
+[32m+[m[32m        return $this->render('admin/listcompetiteur.html.twig', [[m
+[32m+[m[32m            'competition' => $competition,[m
+[32m+[m[32m        ]);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[41m   [m
+[32m+[m[32m/**[m
+[32m+[m[32m * @Route("/user/panel", name="user_panel")[m
+[32m+[m[32m */[m
+[32m+[m[32mpublic function showUserPanel(): Response[m
+[32m+[m[32m{[m
+[32m+[m[32m    /** @var \App\Entity\Users $user */[m
+[32m+[m[32m    $user = $this->getUser();[m
+[32m+[m
+[32m+[m[32m    // récupère toutes les compétitions auxquelles l'utilisateur est inscrit[m
+[32m+[m[32m    $competitions = $user->getCompetitions();[m
+[32m+[m
+[32m+[m[32m    // renvoie la réponse[m
+[32m+[m[32m    return $this->render('usersPages/mescompetitions.html.twig', [[m
+[32m+[m[32m        'competitions' => $competitions,[m
+[32m+[m[32m    ]);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m #[Route('/profile/competitions/{id}', name: 'app_competition_unsubscribe')][m
+[32m+[m[32m public function unsubscribe(int $id, EntityManagerInterface $em, CompetitionsRepository $competitionRepository)[m
+[32m+[m[32m {[m
+[32m+[m[32m     $user = $this->getUser();[m
+[32m+[m
+[32m+[m[32m    if (!$user instanceof \App\Entity\Users) {[m
+[32m+[m[32m        throw new \LogicException('The User object must be an instance of App\Entity\Users');[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m     $competition = $competitionRepository->find($id);[m
+[32m+[m
+[32m+[m[41m     [m
+[32m+[m
+[32m+[m[32m    if ($competition && $user->getCompetitions()->contains($competition)) {[m
+[32m+[m[41m        [m
+[32m+[m[32m        $user->removeCompetition($competition);[m
+[32m+[m[32m     

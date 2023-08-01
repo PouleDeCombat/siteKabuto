@@ -8,7 +8,9 @@ use App\Form\EditProfileType;
 
 use Doctrine\ORM\EntityManager;
 use App\Repository\PostRepository;
+use App\Repository\UsersRepository;
 use App\Repository\ProductsRepository;
+use App\Form\EditCompetiteurProfileType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CompetiteursRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -82,6 +84,7 @@ class PostController extends AbstractController
     #[Route('/profile', name: 'app_profile')]
     public function renderProfile(): Response
     {
+        
         return $this->render('usersPages/profile.html.twig');
     }
 
@@ -132,14 +135,25 @@ class PostController extends AbstractController
 
     }
 
-    #[Route('/profil', name: 'app_profil')]
-    public function renderProfilCompetiteur(CompetiteursRepository $competiteursRepository): Response
+    #[Route('/profile/competiteur', name: 'app_profile_competiteur')]
+    public function renderEditProfileCompetiteur(Request $request, EntityManagerInterface $em)
     {
         $user = $this->getUser();
-        $competiteur = $competiteursRepository->findOneBy(['user' => $user]);
-    
-        return $this->render('usersPages/profile.html.twig', [
-            'competiteur' => $competiteur,
+        $form = $this->createForm(EditCompetiteurProfileType::class, $user);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+       
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash('message', 'Profil mis à jour');
+            return $this->redirectToRoute('app_profile');
+
+        }
+        return $this->render('usersPages/editcompetiteur.html.twig',[
+            'form' => $form->createView(),
         ]);
     }
     

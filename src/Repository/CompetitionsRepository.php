@@ -39,6 +39,18 @@ class CompetitionsRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function findCompetitionWithUsers($competitionId) {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.users', 'u')
+            ->addSelect('u')
+            ->where('c.id = :competitionId')
+            ->setParameter('competitionId', $competitionId)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+    
+
 //    /**
 //     * @return Competitions[] Returns an array of Competitions objects
 //     */

@@ -32,11 +32,11 @@
    <div class="col-sm">
   <h1>Profil de competiteur  </h1>
 
-  <p>ceinture : </p>
-  <p>Catégorie de poid :  </p>
+  <p>ceinture : {{app.user.ceinture}} </p>
+  <p>Catégorie de poid : {{app.user.categoriePoid}} </p>
 
   <div>
-  <a href="" class="btn btn-primary">Modifier le profil</a>
+  <a href="{{ path('app_profile_competiteur') }}" class="btn btn-primary">Modifier le profil competiteur</a>
   </div>
 </div>
 
@@ -44,12 +44,12 @@
  {# <div class="row">
     <div class="col-sm">
        <h1>Profil de {{kid.prenom }} {{ kids.nom}}  </h1>
-      <p>Nom : {{ app.user.nom}} </p>
-      <p>Prénom : {{app.user.prenom }}</p>
-      <p>Email : {{app.user.email }}</p>
-      <p>Adresse : {{app.user.adresse }}</p>
-      <p>Code Postal : {{app.user.zipcode }}</p>
-      <p>Ville : {{app.user.ville }}</p> 
+      <p>Nom : {{ kid.nom}} </p>
+      <p>Prénom : {{kid.prenom }}</p>
+      <p>Email : {{kid.email }}</p>
+      <p>Adresse : {{kid.adresse }}</p>
+      <p>Code Postal : {{kid.zipcode }}</p>
+      <p>Ville : {{kid.ville }}</p> 
 
       <div>
       <a href="{{ path('app_edit_profile') }}" class="btn btn-primary">Modifier le profil</a>

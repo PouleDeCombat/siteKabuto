@@ -66,10 +66,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $lieu_de_naissance = null;
 
 
-     /**
-     * @ORM\OneToMany(targetEntity=Kids::class, mappedBy="kidsUser")
-     */
-    private $kids;
+    
 
 
 
@@ -92,10 +89,14 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Competitions::class, inversedBy: 'users')]
     private ?Collection $competitions;
 
+    #[ORM\OneToMany(mappedBy: 'parent', targetEntity: Kids::class)]
+    private Collection $kids;
+
     public function __construct(){
         $this->created_at = new \DateTimeImmutable();
         $this->orders = new ArrayCollection();
         $this->competitions = new ArrayCollection();
+        $this->kids = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -374,7 +375,39 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeCompetition(Competitions $competition): static
     {
-        $this->competitions->removeElement($competition);
+        if ($this->competitions->contains($competition)) {
+            $this->competitions->removeElement($competition);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Kids>
+     */
+    public function getKids(): Collection
+    {
+        return $this->kids;
+    }
+
+    public function addKid(Kids $kid): static
+    {
+        if (!$this->kids->contains($kid)) {
+            $this->kids->add($kid);
+            $kid->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeKid(Kids $kid): static
+    {
+        if ($this->kids->removeElement($kid)) {
+            // set the owning side to null (unless already changed)
+            if ($kid->getParent() === $this) {
+                $kid->setParent(null);
+            }
+        }
 
         return $this;
     }

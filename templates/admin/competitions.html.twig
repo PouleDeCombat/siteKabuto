@@ -11,7 +11,7 @@
       <tr>
         <th scope="col">Nom</th>
         <th scope="col">Location</th>
-        <th scope="col">Kimobo </th>
+        <th scope="col">Kimono </th>
         <th scope="col">Date de debut</th>
         <th scope="col">Lieu de fin</th> 
         <th></th>
@@ -30,8 +30,10 @@
                <form action="{{ path('app_competition_delete', {'id': competition.id}) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this competition?')">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ competition.id) }}">
-    <button class="btn btn-danger">Delete</button>
+    <button class="btn btn-danger">Supprimer</button>
 </form>
+      <a href="{{ path('app_competition_competiteur', {'id': competition.id}) }}" class="btn btn-primary">Voir les inscrits</a>
+
 
 
 </td>

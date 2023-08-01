@@ -4,9 +4,8 @@
 
 
 
-
-
 <div class="table-responsive" >
+<h1>Competitions Disponible</h1>
 
   <table class="table" id="adherentTableau">
     <thead>
@@ -16,6 +15,7 @@
         <th scope="col">Kimono</th>
         <th scope="col">Debut</th>
         <th scope="col">Fin</th>
+        <th></th>
         
       </tr>
     </thead>
@@ -27,7 +27,7 @@
         <td>{{competition.kimono}}</td>
         <td>{{competition.startDate|date('d-m-Y') }}</td>
         <td>{{competition.endDate|date('d-m-Y') }}</td>
-        <td></td>
+        
         <td><a href="{{ path('app_inscription_competition', {'id': competition.id}) }}" class="btn btn-primary">S'inscrire</a></td>
       </tr>
     {% endfor %}
@@ -37,9 +37,37 @@
 
 
 
+<h1>Mes compétitions</h1>
 
+ <table class="table" id="adherentTableau">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Location</th>
+      <th>Kimono</th>
+      <th>Debut</th>
+      <th>fin</th>
+      <th></th>
+    </tr>
+ </thead>
 
+ <tbody>
 
+    {% for competition in competitions %}
+    <tr>
+        <td>{{ competition.nom }}</td>
+        <td>{{ competition.location }}</td>
+        <td>{{ competition.kimono }}</td>
+        <td>{{competition.startDate|date('d-m-Y') }}</td>
+        <td>{{competition.endDate|date('d-m-Y') }}</td>
+        <td><a href="{{ path('app_competition_unsubscribe', {'id': competition.id}) }}" class="btn btn-danger">Se désinscrire</a></td>
+      </tr>  
+    {% else %}
+        Vous n'êtes inscrit à aucune compétition pour le moment.
+    {% endfor %}
+    
+</tbody>
+</table>
 
 
 

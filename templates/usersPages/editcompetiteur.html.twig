@@ -4,12 +4,8 @@
 
 {{ form_start(form) }}
 
-{# Utilisez form_row pour afficher le champ caché userId #}
-{{ form_row(form.userId) }}
 
-{{ form_widget(form.categoriePoid, {'rendered': true}) }}
-
-<div class="row">
+{# <div class="row">
     {% for key, choice in form.categoriePoid.vars.choices %}
         <div class="col">
             <div class="form-check">
@@ -26,9 +22,36 @@
             </div><div class="row">
         {% endif %}
     {% endfor %}
+</div> #}
+
+<div class="row">
+    <div class="col">
+        <div class="form-group">
+            {{ form_label(form.ceinture) }}
+            {{ form_widget(form.ceinture) }}
+        </div>
+    </div>
 </div>
 
-{{ form_rest(form) }}
+<div class="row">
+    <div class="col">
+        <div class="form-group">
+            {{ form_label(form.kimono) }}
+            {{ form_widget(form.kimono) }}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="form-group">
+            {{ form_label(form.categoriePoid) }}
+            {{ form_widget(form.categoriePoid) }}
+        </div>
+    </div>
+</div>
+
+
 
 <button type="submit" class="btn btn-primary">Valider</button>
 
@@ -47,4 +70,3 @@ document.getElementById('{{ form.categoriePoid.vars.id }}').addEventListener('ch
 </script>
 
 {% endblock %}
-

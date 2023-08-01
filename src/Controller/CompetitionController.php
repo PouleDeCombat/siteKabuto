@@ -54,14 +54,13 @@ class CompetitionController extends AbstractController
 
 
     #[Route('/admin/competition/{id}', name:'app_competition_delete', methods:["DELETE"])]
-    public function delete(Request $request, Competitions $competition): Response
-    {
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($competition);
-        $em->flush();
-    
-        return $this->redirectToRoute('app_competitions');
-    }
+public function delete(Request $request, Competitions $competition, EntityManagerInterface $entityManager): Response
+{
+    $entityManager->remove($competition);
+    $entityManager->flush();
+
+    return $this->redirectToRoute('app_competitions');
+}
 
 
     #[Route('/profil/competitions/{id}', name: 'app_inscription_competition')]
@@ -104,9 +103,73 @@ class CompetitionController extends AbstractController
 
 
 
+    #[Route('/admin/competitions/{id}/competiteurs', name: 'app_competition_competiteur')]
+    public function getCompetitionUsers($id, CompetitionsRepository $competitionsRepository): Response
+    {
+        $competition = $competitionsRepository->findCompetitionWithUsers($id);
+
+        return $this->render('admin/listcompetiteur.html.twig', [
+            'competition' => $competition,
+        ]);
+    }
 
 
-    
+
+
+   
+/**
+ * @Route("/user/panel", name="user_panel")
+ */
+public function showUserPanel(): Response
+{
+    /** @var \App\Entity\Users $user */
+    $user = $this->getUser();
+
+    // récupère toutes les compétitions auxquelles l'utilisateur est inscrit
+    $competitions = $user->getCompetitions();
+
+    // renvoie la réponse
+    return $this->render('usersPages/mescompetitions.html.twig', [
+        'competitions' => $competitions,
+    ]);
+}
+
+
+
+
+
+
+
+ #[Route('/profile/competitions/{id}', name: 'app_competition_unsubscribe')]
+ public function unsubscribe(int $id, EntityManagerInterface $em, CompetitionsRepository $competitionRepository)
+ {
+     $user = $this->getUser();
+
+    if (!$user instanceof \App\Entity\Users) {
+        throw new \LogicException('The User object must be an instance of App\Entity\Users');
+    }
+
+     $competition = $competitionRepository->find($id);
+
+     
+
+    if ($competition && $user->getCompetitions()->contains($competition)) {
+        
+        $user->removeCompetition($competition);
+        $competition->removeUser($user); 
+        $em->flush();
+    }
+
+    $competitions = $user->getCompetitions();
+
+    // renvoie la réponse
+    return $this->render('usersPages/mescompetitions.html.twig', [
+        'competitions' => $competitions,
+    ]);
+ }
+
+
+
 
 
 

@@ -51,6 +51,9 @@ class Kids
      */
     private $kidsUser;
 
+    #[ORM\ManyToOne(inversedBy: 'kids')]
+    private ?Users $parent = null;
+
 
 
     public function __construct()
@@ -175,6 +178,18 @@ class Kids
     public function setLieuDeNaissance(string $lieu_de_naissance): static
     {
         $this->lieu_de_naissance = $lieu_de_naissance;
+
+        return $this;
+    }
+
+    public function getParent(): ?Users
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?Users $parent): static
+    {
+        $this->parent = $parent;
 
         return $this;
     }
