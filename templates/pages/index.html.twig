@@ -8,43 +8,51 @@
     <h3 class="training-center text-white" style="z-index: 10">TRAINING CENTER</h3>
     <h1 class="blackops-font-landing text-white" style="z-index: 10" ><span>MIXED </span><span style="color: #f3ef2a;">MARTIAL </span><span>ARTS</span></h1>
     <p class="text-white fw-bold text-center fs-5" style="z-index: 10">Jiu Jitsu Brésilien / MMA / Wrestling / Nogi JJB / Boxe / Kickboxing / Muay Thai / Crosstraining / Musculation / K.Programme / Préparation Physique</p>
-    <a href="{{ path('app_register') }}" class="text-decoration-none text-dark"><button class="btn btn-landing fw-bold" style="z-index: 11">INSCRIPTION</a></button>  
+    <a href="{{ path('app_register') }}" class="btn btn-landing fw-bold text-decoration-none text-dark d-flex align-items-center justify-content-center" style="z-index: 11;">
+    INSCRIPTION</a>
+ 
     <img src="{{ asset('images/objects.svg') }}" class="img-fluid position-absolute w-100" style="z-index: 10; height: auto" alt="">
 
 
 </div>
 
-<div class="container-fluid  d-flex flex-column-reverse flex-lg-row section-background-black pt-5 pb-5 center-under-lg">
+
+
+
+<div class="container-fluid d-flex flex-column-reverse flex-lg-row section-background-black pt-5 pb-5 center-under-lg">
     <div class="d-flex justify-content-center col-12 col-lg-6">
         <img src="{{ asset('images/rectangle-705@2x.png') }}" class="img-fluid section-img-coach" alt="photo du coach">
         <img src="{{ asset('images/rectangle-706@2x.png') }}" class="img-fluid section-img-coach" alt="photo du coach boxe thai">
     </div>
 
-    <div class="col-12 col-lg-6 d-flex flex-column justify-content-center center-under-lg ps-5 ">
-        <h2 class="blackops-font-section  text-white">nos <span style="color: #f3ef2a;">coaches</span></h2>
-        <p class="text-white section-text" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, culpa? Error molestiae ut quas iusto quibusdam qui est, quaerat ullam voluptatem facere ex voluptas fugiat aliquid amet at aspernatur delectus sit officia. Voluptatibus dicta fugiat, sit harum vero ea quaerat sunt fugit amet, voluptates tenetur odit perferendis enim quae architecto, iusto rerum porro earum nemo modi doloribus commodi adipisci! Consequatur?</p>
-        <button class="btn btn-section fw-bold">Découvrez nos coachs</button>
+    <div class="col-12 col-lg-6 d-flex flex-column justify-content-center center-under-lg">
+        <h2 class="blackops-font-section main-title-landing text-center text-white">nos <span style="color: #f3ef2a;">coaches</span></h2>
+        <p class="text-white section-text">Découvrez nos coachs experts, dédiés à vous guider sur la voie de la maîtrise des arts martiaux. Qu'il s'agisse de MMA, JJB, boxe, Muay Thai, lutte ou autres, notre équipe diversifiée a l'expérience et la passion nécessaires pour vous aider à atteindre vos objectifs. Que vous soyez débutant ou expérimenté, nous avons le coach qu'il vous faut.</p>
+        <a href="{{ path('app_coaches') }}" class="btn btn-section fw-bold d-flex align-items-center justify-content-center">Découvrez nos coachs</a>
     </div>
 </div>
+
+
+
 
 
 
 <div class="container-fluid d-flex justify-content-center flex-column-reverse flex-lg-row section-background-yellow pt-5 pb-5 center-under-lg">
-    
 
-    <div class="col-12 col-lg-6 d-flex flex-column justify-content-center  center-under-lg ps-5">
-        <h2 class="blackops-font-section  text-white">disciplines</h2>
-        <p class="text-white section-text" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, culpa? Error molestiae ut quas iusto quibusdam qui est, quaerat ullam voluptatem facere ex voluptas fugiat aliquid amet at aspernatur delectus sit officia. Voluptatibus dicta fugiat, sit harum vero ea quaerat sunt fugit amet, voluptates tenetur odit perferendis enim quae architecto, iusto rerum porro earum nemo modi doloribus commodi adipisci! Consequatur?</p>
-        <button class="btn btn-section fw-bold">En savoir plus</button>
+    <div class="col-12 col-lg-6 d-flex flex-column justify-content-center center-under-lg ">
+        <h2 class="blackops-font-section main-title-landing text-center text-white">disciplines</h2>
+        <p class="text-white section-text">Immergez-vous dans l'univers des arts martiaux avec nos nombreuses disciplines. Qu'il s'agisse de maîtriser l'art de la frappe, la précision de la préhension ou une combinaison des deux, nous avons ce qu'il vous faut. Découvrez notre diversité de disciplines, où se mêlent force, stratégie et technique.</p>
+        <a href="{{ path('app_disciplines') }}" class="btn btn-section fw-bold d-flex align-items-center justify-content-center">En savoir plus</a>
     </div>  
     
     <div class="d-flex justify-content-center col-12 col-lg-4">
-        <img src="{{ asset('images/rectangle-7053@2x.png') }}" class="img-fluid section-img-discipline " alt="enfants pratiquant le JJB">
-        
+        <img src="{{ asset('images/rectangle-7053@2x.png') }}" class="img-fluid section-img-discipline" alt="enfants pratiquant le JJB">
     </div>
-   
 
 </div>
+
+
+
 
 
 
@@ -57,10 +65,10 @@
     </div>
    
 
-    <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-a center-under-lg ps-5">
-        <h2 class="blackops-font-section  text-white">planning</h2>
-        <p class="text-white section-text" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, culpa? Error molestiae ut quas iusto quibusdam qui est, quaerat ullam voluptatem facere ex voluptas fugiat aliquid amet at aspernatur delectus sit officia. Voluptatibus dicta fugiat, sit harum vero ea quaerat sunt fugit amet, voluptates tenetur odit perferendis enim quae architecto, iusto rerum porro earum nemo modi doloribus commodi adipisci! Consequatur?</p>
-        <button class="btn btn-section fw-bold">Consultez notre Planning</button>
+    <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-a center-under-lg ">
+        <h2 class="blackops-font-section main-title-landing text-center  text-white">planning</h2>
+        <p class="text-white section-text" >Préparez-vous à entrer dans l'arène avec nos cours adaptés à tous les niveaux. Quels que soient vos objectifs ou votre niveau d'expérience, nous avons un horaire flexible pour vous convenir.</p>
+        <a href="{{ path('app_horaire') }}" class="btn btn-section fw-bold d-flex align-items-center justify-content-center">Consultez notre planning</a>
     </div>  
     
    
@@ -70,10 +78,10 @@
 
 <div class="container-fluid  d-flex justify-content-center flex-column-reverse flex-lg-row section-background-yellow pt-5 pb-5 center-under-lg">
 
-    <div class="col-12 col-lg-6 d-flex flex-column justify-content-center center-under-lg ps-5">
-        <h2 class="blackops-font-section  text-white">nos <span style="color: #f3ef2a;">athlètes</span></h2>
-        <p class="text-white section-text" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, culpa? Error molestiae ut quas iusto quibusdam qui est, quaerat ullam voluptatem facere ex voluptas fugiat aliquid amet at aspernatur delectus sit officia. Voluptatibus dicta fugiat, sit harum vero ea quaerat sunt fugit amet, voluptates tenetur odit perferendis enim quae architecto, iusto rerum porro earum nemo modi doloribus commodi adipisci! Consequatur?</p>
-        <button class="btn btn-section fw-bold">Découvrez nos combattants</button>
+    <div class="col-12 col-lg-6 d-flex flex-column justify-content-center center-under-lg ">
+        <h2 class="blackops-font-section main-title-landing text-center text-white">nos <span style="color: #f3ef2a;">athlètes</span></h2>
+        <p class="text-white section-text" >Venez rencontrer nos combattants dévoués et talentueux. Ces athlètes exceptionnels symbolisent le meilleur de ce que nos disciplines ont à offrir, combinant force, stratégie et technique à un niveau d'excellence. Chaque histoire est unique, chaque parcours une source d'inspiration. Cliquez ci-dessous pour découvrir les profils de nos athlètes et leur passion pour les arts martiaux.</p>
+        <a href="{{ path('app_combattant') }}" class="btn btn-section fw-bold d-flex align-items-center justify-content-center">Découvrez nos combattants</a>
     </div>
 
     <div class="d-flex justify-content-center col-12 col-lg-5  ">
@@ -97,10 +105,10 @@
    </div>
   
 
-   <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-a center-under-lg ps-5">
-       <h2 class="blackops-font-section  text-white">Boutique</h2>
-       <p class="text-white section-text" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, culpa? Error molestiae ut quas iusto quibusdam qui est, quaerat ullam voluptatem facere ex voluptas fugiat aliquid amet at aspernatur delectus sit officia. Voluptatibus dicta fugiat, sit harum vero ea quaerat sunt fugit amet, voluptates tenetur odit perferendis enim quae architecto, iusto rerum porro earum nemo modi doloribus commodi adipisci! Consequatur?</p>
-       <button class="btn btn-section fw-bold">Voir les Produits</button>
+   <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-a center-under-lg">
+       <h2 class="blackops-font-section main-title-landing text-center text-white">Boutique</h2>
+       <p class="text-white section-text" >Découvrez notre boutique en ligne où vous trouverez tout ce dont vous avez besoin pour votre entrainement. Des équipements de qualité aux vêtements à l'effigie de notre club, nous avons de quoi vous satisfaire</p>
+       <a href="{{ path('app_boutique') }}" class="btn btn-section fw-bold d-flex align-items-center justify-content-center">Voir les produits</a>
    </div>  
    
   
@@ -111,10 +119,10 @@
 <div class="container-fluid d-flex justify-content-center flex-column-reverse flex-lg-row section-background-yellow pt-5 pb-5 center-under-lg">
     
 
-    <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-a center-under-lg ps-5">
-        <h2 class="blackops-font-section  text-white"><span class="text-nowrap">Tarifs et</span> <span style="color: #f3ef2a;">inscription</span></h2>
-        <p class="text-white section-text" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, culpa? Error molestiae ut quas iusto quibusdam qui est, quaerat ullam voluptatem facere ex voluptas fugiat aliquid amet at aspernatur delectus sit officia. Voluptatibus dicta fugiat, sit harum vero ea quaerat sunt fugit amet, voluptates tenetur odit perferendis enim quae architecto, iusto rerum porro earum nemo modi doloribus commodi adipisci! Consequatur?</p>
-        <button class="btn btn-section fw-bold">S'inscrire</button>
+    <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-a center-under-lg ">
+        <h2 class="blackops-font-section main-title-landing text-center text-white"><span class="text-nowrap">Tarifs et</span> <span style="color: #f3ef2a;">inscription</span></h2>
+        <p class="text-white section-text" >Prêt à vous joindre à nous ? Consultez nos tarifs compétitifs et nos différentes formules d'abonnement pour trouver celle qui convient le mieux à vos besoins et à votre emploi du temps. L'inscription est simple, rapide et se fait entièrement en ligne.</p>
+        <a href="{{ path('app_tarif') }}" class="btn btn-section fw-bold d-flex align-items-center justify-content-center">Voir nos tarifs</a>
     </div>  
     
     <div class="d-flex justify-content-center col-12 col-lg-4">

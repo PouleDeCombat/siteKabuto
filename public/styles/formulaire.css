@@ -1,8 +1,13 @@
 .custom-cadre{
     background-color: rgb(12, 10, 10);
     border-radius: 10px;
+    border: 1px solid yellow;
+    margin-top: 50px;
     
 }
+
+
+
 
 .main-title-inscription{
     line-height: 150%;
@@ -43,3 +48,83 @@ label{
     width: 30%;
     margin: auto;
 }
+
+
+
+.step-btn {
+    color: white;
+}
+
+.line {
+    height: 5px;
+    width: 50px;
+    background-color: #6c757d; 
+    margin: 0 10px;
+}
+
+.step-btn.active {
+    background-color: yellow;
+    color: black;
+}
+
+.step-btn.active + .line {
+    background-color: yellow;
+}
+
+
+
+
+.label-white {
+    color: #ffffff;
+}
+
+
+
+.kid-form {
+    border: 1px solid #ccc; 
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+/* Cachez l'input radio d'origine */
+.form-check-input {
+    display: none;
+}
+
+/* Créez un style par défaut pour le bouton radio */
+.form-check-label::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid gray;
+    margin-right: 10px;
+    vertical-align: bottom;
+    position: relative;
+    top: -2px;
+    transition: background-color 0.3s ease;
+}
+
+/* Lorsque le bouton radio est sélectionné, changez la couleur de fond */
+.form-check-input:checked + .form-check-label::before {
+    background-color: yellow;
+}
+
+.card-flex {
+    display: flex;
+    flex-direction: row; /* Assurez-vous que la direction est row, qui est la valeur par défaut */
+}
+
+.card-img-container {
+    display: flex;
+    align-items: stretch; /* Stretch content to fill container */
+}
+
+.card-flex img {
+    object-fit: cover; /* Assurez-vous que l'image couvre la zone sans distorsion */
+    height: 100%; /* Force l'image à correspondre à la hauteur du conteneur */
+    width: 100%; /* Assurez-vous que l'image s'étend sur toute la largeur du conteneur */
+}
+
+

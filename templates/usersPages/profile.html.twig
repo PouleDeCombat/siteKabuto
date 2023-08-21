@@ -2,82 +2,123 @@
 
 {% block body %}
 
-<div class="container">
+<div class="container ">
 {% for message in app.flashes('message') %}
-<div class="alert alert-success d-flex align-items-center" role="alert">
-  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-  <div>
-    Profil mis à jour
+  <div class="alert alert-success d-flex align-items-center" role="alert">
+    <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+    <div>
+      Profil mis à jour
+    </div>
   </div>
-</div>
+</div>  
   
 {% endfor %}
-  <div class="row">
-    <div class="col-sm">
-      <h1>Profil de {{app.user.prenom }} {{ app.user.nom}}  </h1>
-      <p>Nom : {{ app.user.nom}} </p>
-      <p>Prénom : {{app.user.prenom }}</p>
-      <p>Email : {{app.user.email }}</p>
-      <p>Adresse : {{app.user.adresse }}</p>
-      <p>Code Postal : {{app.user.zipcode }}</p>
-      <p>Ville : {{app.user.ville }}</p>
-
-      <div>
-      <a href="{{ path('app_edit_profile') }}" class="btn btn-primary">Modifier le profil</a>
-      <a href="{{ path('app_edit_password') }}" class="btn btn-primary">Modifier le mot de passe</a>
-      </div>
-
+<div class="container mt-4 m-0 p-0">
+    <!-- Profil de l'utilisateur principal -->
+    <div class="row mb-4">
+        <div class="col-md-12 ">
+            <div class="card">
+                <div class="card-header bg-warning text-white fs-3">
+                    Profil de {{app.user.prenom }} {{ app.user.nom}}
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Informations du profil principal -->
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-user"></i> Nom : {{ app.user.nom}}</li>
+                                <li><i class="fas fa-user"></i> Prénom : {{app.user.prenom }}</li>
+                                <li><i class="fas fa-envelope"></i> Email : {{app.user.email }}</li>
+                                <li><i class="fas fa-map-marker-alt"></i> Adresse : {{app.user.adresse }}, {{app.user.zipcode }}, {{app.user.ville }}</li>
+                            </ul>
+                            <a href="{{ path('app_edit_profile') }}" class="btn btn-primary mb-2">Modifier le profil</a>
+                        </div>
+                        
+                        <!-- Informations du profil compétiteur -->
+                        <div class="col-md-6">
+                            <h4>Profil de compétiteur</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-ribbon"></i> Ceinture : {{app.user.ceinture}}</li>
+                                <li><i class="fas fa-weight"></i> Catégorie de poids : {{app.user.categoriePoid}}</li>
+                                <li><i class="fas fa-user"></i> Kimono : {{ app.user.kimono}}</li>
+                            </ul>
+                            <a href="{{ path('app_edit_competiteur_profile') }}" class="btn btn-primary">Modifier le profil compétiteur</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-   <div class="col-sm">
-  <h1>Profil de competiteur  </h1>
+    {% if kids is not empty %}
+        {% for kid in kids %}
+            <!-- Profil de chaque enfant -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header bg-secondary text-white fs-3">
+                            Profil de {{kid.prenom }} {{ kid.nom}}
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- Informations du profil de l'enfant -->
+                                <div class="col-md-6">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fas fa-user"></i> Nom : {{ kid.nom}}</li>
+                                        <li><i class="fas fa-user"></i> Prénom : {{kid.prenom }}</li>
+                                        <li><i class="fas fa-map-marker-alt"></i> Adresse : {{kid.adresse }}, {{kid.zipcode }}, {{kid.ville }}</li>
+                                    </ul>
+                                    <a href="{{ path('app_edit_kids_profile') }}" class="btn btn-primary mb-2">Modifier le profil</a>
+                                </div>
+                                
+                                <!-- Informations du profil compétiteur de l'enfant -->
+                                <div class="col-md-6">
+                                    <h4>Profil de compétiteur</h4>
+                                    <ul class="list-unstyled">
+                                        <li><i class="fas fa-ribbon"></i> Ceinture : {{ kid.ceinture }}</li>
+                                        <li><i class="fas fa-weight"></i> Catégorie de poids : {{ kid.categoriePoid }}</li>
+                                        <li><i class="fas fa-birthday-cake"></i> Tranche d'âge : {{ kid.trancheAge }}</li>
+                                    </ul>
+                                    <a href="{{ path('app_profile_kids_competiteur', {'id': kid.id}) }}" class="btn btn-primary">Modifier le profil compétiteur</a>
 
-  <p>ceinture : {{app.user.ceinture}} </p>
-  <p>Catégorie de poid : {{app.user.categoriePoid}} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
 
-  <div>
-  <a href="{{ path('app_profile_competiteur') }}" class="btn btn-primary">Modifier le profil competiteur</a>
-  </div>
-</div>
-
-
- {# <div class="row">
-    <div class="col-sm">
-       <h1>Profil de {{kid.prenom }} {{ kids.nom}}  </h1>
-      <p>Nom : {{ kid.nom}} </p>
-      <p>Prénom : {{kid.prenom }}</p>
-      <p>Email : {{kid.email }}</p>
-      <p>Adresse : {{kid.adresse }}</p>
-      <p>Code Postal : {{kid.zipcode }}</p>
-      <p>Ville : {{kid.ville }}</p> 
-
-      <div>
-      <a href="{{ path('app_edit_profile') }}" class="btn btn-primary">Modifier le profil</a>
-
-      </div>
-
+    <div class="text-center mb-4">
+        <a href="{{path('app_add_kids')}}" class="btn btn-primary">Ajouter un enfant</a>
     </div>
-
-   <div class="col-sm">
-  <h1>Profil de competiteur  </h1>
-
-  <p>ceinture : </p>
-  <p>Catégorie de poid :  </p>
-
-  <div>
-  <a href="" class="btn btn-primary">Modifier le profil</a>
-  </div> #}
-</div> 
-
-<div class="row mt-5">
-<a href="{{path('app_add_kids')}}" class="btn btn-primary">Ajouter un enfant</a>
 </div>
 
-
-
-
+<style>
+    .card-header {
+        background-color: black;
+        color: white;
+    }
+    .btn-primary {
+        background-color: yellow;
+        color: black;
+        border: none;
+    }
+    .btn-primary:hover {
+        background-color: #f0e14a; /* Une teinte de jaune un peu plus foncée */
+    }
     
-    
-</div>
+    a {
+        color: yellow;
+    }
+    a:hover {
+        color: black;
+    }
+</style>
+
+
+
 
 {% endblock %}
+

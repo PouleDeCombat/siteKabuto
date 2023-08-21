@@ -268,5 +268,51 @@ body {
      
     }
 }
+
+
+@media (max-width: 1199px) {
+    .main-title-landing {
+        font-size: 3.5rem;
+    }
+}
+
+
+@media (max-width: 991px) {
+    .main-title-landing {
+        font-size: 3rem;
+    }
+}
+
+
+@media (max-width: 767px) {
+    .main-title-landing {
+        font-size: 2.5rem;
+    }
+}
  
 
+
+
+@media (max-width: 360px) {
+    .section-img-coach {
+        max-width: 100%;
+        margin: 5px 0; /* pour donner un petit espace entre les images */
+    }
+    
+    .center-under-lg {
+        padding: 0 10px; /* réduire le padding à gauche et à droite */
+    }
+
+    .main-title-landing {
+        font-size: 2rem; /* ajuster la taille de la police pour les petits écrans */
+    }
+
+    .section-text {
+        font-size: 0.8rem; /* réduire la taille de la police du paragraphe */
+    }
+
+    .btn-section {
+        font-size: 1.2rem; /* réduire la taille de la police du bouton */
+        padding: 5px 10px; /* ajuster le padding du bouton */
+    }
+}

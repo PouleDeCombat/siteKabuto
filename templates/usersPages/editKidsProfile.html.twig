@@ -1,0 +1,18 @@
+{% extends 'usersBase.html.twig' %}
+
+{% block body %}
+
+<div class="container mt-5"> 
+    <div class="row justify-content-center"> 
+        <div class="col-sm-8"> 
+            
+            <h1 class="text-center mb-4">Modification du profil</h1> 
+            <div class="card p-4 shadow-sm"> 
+                {{ form(form) }}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

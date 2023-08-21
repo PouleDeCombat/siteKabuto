@@ -10,7 +10,7 @@
 
     <div class="container">
         <div class="row mb-4">
-            <div class="col-12 col-sm-6 col-lg-3">
+            <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0">
                 <div class=" h-100 d-flex flex-column text-center info-card">
                     
 
@@ -23,7 +23,7 @@
             </div>
 
 
-            <div class="col-12 col-sm-6 col-lg-3">
+            <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0">
                 <div class="h-100 d-flex flex-column text-center info-card">
                     
                     <h3 class="mb-5 fs-5"><span style="color: yellow;">2 DISCIPLINES C’EST MIEUX</span></h3>
@@ -35,7 +35,7 @@
             </div>
 
 
-            <div class="col-12 col-sm-6 col-lg-3">
+            <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0">
                 <div class="h-100 d-flex flex-column text-center info-card">
                     
                     <h3 class="mb-5 fs-5"><span style="color: yellow;">LE MMA À TOUT ÂGE</span></h3>
@@ -47,7 +47,7 @@
             </div>
 
 
-            <div class="col-12 col-sm-6 col-lg-3">
+            <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0">
                 <div class="h-100 d-flex flex-column text-center info-card">
                     
                     <h3 class="mb-5 fs-5"><span style="color: yellow;">ESSAYEZ NOTRE NOUVEAU K.PROGRAMME</span></h3>
@@ -64,94 +64,141 @@
 
     </div>
 
+
+<div class="container d-flex justify-content-center mt-3 mb-5">
+    <a href="{{ path('app_register') }}" class="btn btn-landing fw-bold text-decoration-none text-dark d-flex align-items-center justify-content-center" style="z-index: 11;">
+    INSCRIPTION</a>
+</div>
+
 <img src="{{ asset('images/vector.svg') }}" class="vector-icon1" alt="vector jaune">
 <img src="{{ asset('images/group-33300.svg') }}" class="vector-icon2" alt="vector jaune">
 
-<div class="d-flex justify-content-center">
-    <div class="table-responsive col-lg-6 ">
-        <table class="table table-bordered border-warning text-white fw-bold border-rounded ">
-            <thead>
-                <tr>
-                    <th scope="col">CATEGORIE</th>
-                    <th scope="col">ABONNEMENT</th>
-                    <th scope="col">ANNEE</th>
-                    <th scope="col">3 MOIS</th>
-                    <th scope="col">1 MOIS</th>
-                </tr>
-            </thead>
-            <tbody >
-                <tr>
-                    <th rowspan="5">ADULTES</th>
-                    <td> K PROGRAM*</td>
-                    <td> 490 €</td>
-                    <td >190 €</td>
-                    <td> 70 €</td>
-                </tr>
-                <tr>
-                    <td> 1 SPORT</td>
-                    <td> 340 €</td>
-                    <td> 120 €</td>
-                    <td> 50 €</td>
-                </tr>
-                <tr>
-                    <td> JJB - GRAPPLING</td>
-                    <td> 395 €</td>
-                    <td> 150 €</td>
-                    <td> 60 €</td>
-                </tr>
-                <tr>
-                    <td> FULL COMBAT</td>
-                    <td> 495 €</td>
-                    <td> 170 €</td>
-                    <td> 70 €</td>
-                </tr>
-                <tr>
-                    <td>LIBRE ACCES*</td>
-                    <td> 220 €</td>
-                    <td> /</td>
-                    <td> /</td>
-                </tr>
-                <tr>
-                    <th rowspan="2">KIDS ( -11 ANS )</th>
-                    <td> 1 SPORT</td>
-                    <td> 295 €</td>
-                    <td> 210 €</td>
-                    <td> 75€</td>
-                </tr>
-                <tr>
-                    <TH>FULL COMBAT</TH>
-                    <td> 300 €</td>
-                    <td> 105 €</td>
-                    <td> 50 €</td>
-                </tr>
-                <tr>
-                    <th rowspan="3">ADOS ( +11 ANS )</th>
-                    <td>1 SPORT</td>
-                    <td> 275 €</td>
-                    <td> 100 €</td>
-                    <td> 50 €</td>
-                </tr>
-                <tr>
-                    <TH>FULL COMBAT</TH>
-                    <td> 395 €</td>
-                    <td> 150 €</td>
-                    <td> 60 €</td>
-                </tr>
-                <tr>
-                    <TH>JJB-GRAPPLING</TH>
-                    <td> 290 €</td>
-                    <td> 105 €</td>
-                    <td> 45 €</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="6" class="text-center">-40% SUR LE MONTANT DU SECOND SPORT K-PROGRAM ET:OU LIBRE ACCES</td>
-                </tr>
-            </tfoot>
-        </table>
+
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+
+            <!-- Tableau pour les ADULTES -->
+            <div class="table-responsive">
+                <table class="table table-bordered fw-bold custom-table">
+                    <thead>
+                        <tr class="text-center">
+                            <th class="col-category" scope="col">CATEGORIE</th>
+                            <th class="col-abonnement" scope="col">ABONNEMENT</th>
+                            <th class="col-annee" scope="col">ANNEE</th>
+                            <th class="col-3mois" scope="col">3 MOIS</th>
+                            <th class="col-1mois" scope="col">1 MOIS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="col-category" rowspan="5">ADULTES</th>
+                            <td class="col-abonnement text-center"> K PROGRAM*</td>
+                            <td class="text-center"> 490 €</td>
+                            <td class="text-center">190 €</td>
+                            <td class="text-center"> 70 €</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="col-abonnement"> 1 SPORT</td>
+                            <td class="text-center"> 340 €</td>
+                            <td class="text-center"> 120 €</td>
+                            <td class="text-center"> 50 €</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="col-abonnement"> JJB - GRAPPLING</td>
+                            <td class="col-annee"> 395 €</td>
+                            <td> 150 €</td>
+                            <td> 60 €</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="col-abonnement"> FULL COMBAT</td>
+                            <td class="col-annee"> 495 €</td>
+                            <td> 170 €</td>
+                            <td> 70 €</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="col-abonnement">LIBRE ACCES*</td>
+                            <td  class="col-annee"> 220 €</td>
+                            <td> /</td>
+                            <td> /</td>
+                        </tr>
+                        <td colspan="6" class="text-center">-40% SUR LE MONTANT DU SECOND SPORT K-PROGRAM ET:OU LIBRE ACCES</td>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tableau pour les KIDS -->
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered fw-bold custom-table">
+                    <thead>
+                        <tr class="text-center">
+                            <th class="col-category" scope="col">CATEGORIE</th>
+                            <th class="col-abonnement" scope="col">ABONNEMENT</th>
+                            <th class="col-annee" scope="col">ANNEE</th>
+                            <th class="col-3mois" scope="col">3 MOIS</th>
+                            <th class="col-1mois" scope="col">1 MOIS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center">
+                            <th class="col-category" rowspan="2">KIDS ( -11 ANS )</th>
+                            <td class="col-abonnement"> 1 SPORT</td>
+                            <td class="col-annee"> 295 €</td>
+                            <td> 210 €</td>
+                            <td> 75€</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="col-abonnement">FULL COMBAT</td>
+                            <td class="col-annee"> 300 €</td>
+                            <td> 105 €</td>
+                            <td> 50 €</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tableau pour les ADOS -->
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered fw-bold custom-table">
+                    <thead>
+                        <tr class="text-center">
+                            <th class="col-category" scope="col">CATEGORIE</th>
+                            <th class="col-abonnement" scope="col">ABONNEMENT</th>
+                            <th class="col-annee" scope="col">ANNEE</th>
+                            <th class="col-3mois" scope="col">3 MOIS</th>
+                            <th class="col-1mois" scope="col">1 MOIS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center">
+                            <th class="col-category" rowspan="3">ADOS ( +11 ANS )</th>
+                            <td class="col-abonnement">1 SPORT</td>
+                            <td class="col-annee"> 275 €</td>
+                            <td> 100 €</td>
+                            <td> 50 €</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="col-abonnement">FULL COMBAT</td>
+                            <td class="col-annee"> 395 €</td>
+                            <td> 150 €</td>
+                            <td> 60 €</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td>JJB-GRAPPLING</td>
+                            <td> 290 €</td>
+                            <td> 105 €</td>
+                            <td> 45 €</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</div>  
+</div>
+
+
+
 
     
 

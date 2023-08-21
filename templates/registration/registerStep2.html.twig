@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choix d'abonnement{% endblock %}
+
+{% block body %}
+<section class="container d-flex flex-column justify-content-center padding" style="height: 90vh;">
+<div class="d-flex align-items-center justify-content-center  ">
+    <button class="btn btn-secondary step-btn active">Étape 1</button>
+    <div class="line"></div>
+    <button class="btn btn-secondary step-btn active">Étape 2</button>
+    <div class="line"></div>
+    <button class="btn btn-secondary step-btn">Étape 3</button>
+    <div class="line"></div>
+    <button class="btn btn-secondary step-btn">Étape 4</button>
+</div>
+
+
+    <div class="row custom-cadre text-white text-center">
+    <h1 class="col-12 main-title-inscription my-3">Choisir un abonnement</h1>
+    <p class="col-12 mb-4">Vous souhaitez prendre un abonnement pour :</p>
+
+    <form action="{{ path('app_step_deux_submit') }}" method="post" class="col-12">
+        <div class="row">
+            <div class="col-12 col-md-6 mb-4">
+                <fieldset class="ms-md-5 d-flex flex-column align-items-center">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="subscriptionType" id="self" value="self">
+                        <label class="form-check-label" for="self">Pour moi</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="subscriptionType" id="kids" value="kids">
+                        <label class="form-check-label" for="kids">Pour mes enfants</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="subscriptionType" id="both" value="both">
+                        <label class="form-check-label" for="both">Pour moi et mes enfants</label>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-12 col-md-6 d-flex justify-content-center">
+                <button type="submit" class="btn btn-inscription btn-lg">Continuer</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+</section>
+
+{% endblock %}

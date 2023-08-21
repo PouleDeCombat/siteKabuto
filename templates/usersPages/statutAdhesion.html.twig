@@ -1,0 +1,52 @@
+{% extends 'usersBase.html.twig' %}
+
+{% block body %}
+<h1 class="mb-4">Status de vos Abonnements</h1>
+<div class="container mt-5" style="height: 70vh;">
+    
+
+    <h2 class="my-3">Votre Abonnement:</h2>
+    {% if subscriptions|length > 0 %}
+        <div class="list-group mb-4">
+            {% for subscription in subscriptions %}
+                <div class="list-group-item">
+                    {% if subscription and subscription.getAbonnement %}
+                        {{ subscription.getAbonnement().someMethod() }}
+                    {% else %}
+                        <span class="text-muted">No abonnement found.</span>
+                    {% endif %}
+                    <ul>
+                        <li><strong>Discipline:</strong> {{ subscription.getAbonnement().getDiscipline() }}</li>
+                        <li><strong>Price:</strong> {{ subscription.getAbonnement().getPrix() }}</li>
+                        <li><strong>Duration:</strong> {{ subscription.getAbonnement().getDurée() }}</li>
+                        <li><strong>Start Date:</strong> {{ subscription.getStartDate()|date('Y-m-d') }}</li>
+                        <li><strong>End Date:</strong> {{ subscription.getEndDate()|date('Y-m-d') }}</li>
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">Vous n'avez aucun abonnement en cours.</p>
+    {% endif %}
+
+    <h2 class="my-3">Les Abonnements de vos enfants:</h2>
+    {% if kidsSubscriptions|length > 0 %}
+        <div class="list-group">
+            {% for kidSubscription in kidsSubscriptions %}
+                <div class="list-group-item">
+                    <h4 class="mb-2">Abonnement de: {{ kidSubscription.kid.getNom() }} {{ kidSubscription.kid.getPrenom() }}</h4>
+                    <ul>
+                        {% for adhesion in kidSubscription.adhesions %}
+                            <li>{{ adhesion.someMethod() }}</li>
+                        {% else %}
+                            <li class="text-muted">Pas d'abonnement pour cet enfant.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">Your kids don't have any subscriptions.</p>
+    {% endif %}
+</div>
+{% endblock %}

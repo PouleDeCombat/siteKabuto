@@ -1,0 +1,86 @@
+.bg-kongs {
+    background-image: url('/images/kongsBG.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
+
+
+#mmaCarousel {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#mmaCarousel .carousel-indicators li {
+    background-color: #333;
+    opacity: 0.7;
+}
+
+#mmaCarousel .carousel-indicators .active {
+    background-color: #ffcc00; /* Une teinte de jaune pour correspondre à vos autres éléments de design */
+}
+
+
+#mmaCarousel .carousel-control-prev-icon,
+#mmaCarousel .carousel-control-next-icon {
+    height: 40px;
+    width: 50px;
+    background-color: rgba(0, 0, 0, 0.5);  /* Fond semi-transparent */
+    border-radius: 50%; /* Rend le fond circulaire */
+}
+
+#mmaCarousel .carousel-control-prev,
+#mmaCarousel .carousel-control-next {
+    align-items: center;  /* Centrer les flèches verticalement */
+    width: 5%;  /* Réduit la largeur de la zone cliquable */
+}
+
+#mmaCarousel .carousel-control-prev:hover,
+#mmaCarousel .carousel-control-next:hover {
+    opacity: 1; /* Assurez-vous que les flèches sont pleinement visibles au survol */
+}
+
+
+
+#mmaCarousel .carousel-indicators li {
+    background-color: #333;
+    width: 15px;  /* Augmenter la largeur */
+    height: 15px; /* Augmenter la hauteur */
+    margin: 0 5px;  /* Espacer les indicateurs */
+    border: 2px solid #fff;  /* Bordure blanche */
+    opacity: 0.7;
+}
+
+#mmaCarousel .carousel-indicators .active {
+    background-color: #ffcc00;
+    border-color: #333;  /* Bordure contrastante pour l'indicateur actif */
+}
+
+
+
+
+.instagram-video {
+    max-width: 400px;  /* Ou la largeur que vous préférez */
+    height: auto;  /* Auto ajustera la hauteur proportionnellement à la largeur */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;  /* Centre la vidéo horizontalement */
+}
+
+.instagram-video video {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+
+
+
+
+
+
+
+

@@ -5,10 +5,11 @@ namespace App\Controller;
 use app\Entity\Competiteurs;
 use App\Entity\Competitions;
 use App\Form\CompetitionFormType;
+use App\Repository\UsersRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CompetitionsRepository;
-use App\Repository\UsersRepository;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\KidsCompetitionsRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -63,41 +64,50 @@ public function delete(Request $request, Competitions $competition, EntityManage
 }
 
 
+ 
+
     #[Route('/profil/competitions/{id}', name: 'app_inscription_competition')]
-    public function listUsersCompetitions(CompetitionsRepository $competitionsRepository, int $id=null, EntityManagerInterface $em): Response
-    {
-        $user = $this->getUser();
-       
-        if ($id !== null){ 
-            
-            $competitions = $competitionsRepository->find($id);
+public function listUsersCompetitions(CompetitionsRepository $competitionsRepository, int $id=null, EntityManagerInterface $em): Response
+{
+    $user = $this->getUser();
 
-            
-            $competitions->addUser($user);
-
-            $em->persist($competitions);
-            $em->flush();
-
-        }
-    $competitions = $competitionsRepository->findAll();
-
-   
-    return $this->render('usersPages/mescompetitions.html.twig', [
-            'controller_name' => 'CompetitionController', 
-            'competitions' => $competitions
-            
-        ]);
+    if ($id !== null){ 
+        $competition = $competitionsRepository->find($id);
+        $competition->addUser($user);
+        $em->persist($competition);
+        $em->flush();
     }
+    
+    $availableCompetitions = $competitionsRepository->findAll();
+    $userCompetitions = $user->getCompetitions();
+
+    return $this->render('usersPages/mescompetitions.html.twig', [
+        'controller_name' => 'CompetitionController', 
+        'availableCompetitions' => $availableCompetitions,
+        'userCompetitions' => $userCompetitions,
+    ]);
+}
+
+
+
+
+
 
 
     #[Route('/profile/competitions', name: 'app_user_competitions')]
     public function renderUserCompetition(CompetitionsRepository $competitionsRepository): Response
     {
-        $competitions=$competitionsRepository->findAll();
+        /** @var \App\Entity\Users $user */
+        $user = $this->getUser();
 
+        $competitions=$competitionsRepository->findAll();
+        $availableCompetitions = $competitions; // assume all competitions are available for this user
+        $userCompetitions = $user->getCompetitions();
 
         return $this->render('usersPages/mescompetitions.html.twig', [
-            'competitions' => $competitions
+            'competitions' => $competitions,
+            'availableCompetitions' => $availableCompetitions,
+            'userCompetitions' => $userCompetitions
         ]);
     }
 
@@ -113,68 +123,75 @@ public function delete(Request $request, Competitions $competition, EntityManage
         ]);
     }
 
+    
+
 
 
 
    
+
+
+
+
 /**
- * @Route("/user/panel", name="user_panel")
- */
-public function showUserPanel(): Response
-{
-    /** @var \App\Entity\Users $user */
-    $user = $this->getUser();
+     * @Route("/user/panel", name="user_panel")
+     */
+    public function showUserPanel(CompetitionsRepository $competitionsRepository): Response
+    {
+        /** @var \App\Entity\Users $user */
+        $user = $this->getUser();
 
-    // récupère toutes les compétitions auxquelles l'utilisateur est inscrit
-    $competitions = $user->getCompetitions();
+        // récupère toutes les compétitions auxquelles l'utilisateur est inscrit
+        $competitions = $user->getCompetitions();
+        $availableCompetitions = $competitionsRepository->findAll(); // get all available competitions
+        $userCompetitions = $user->getCompetitions(); // get user's competitions
 
-    // renvoie la réponse
-    return $this->render('usersPages/mescompetitions.html.twig', [
-        'competitions' => $competitions,
-    ]);
-}
-
-
-
-
-
-
-
- #[Route('/profile/competitions/{id}', name: 'app_competition_unsubscribe')]
- public function unsubscribe(int $id, EntityManagerInterface $em, CompetitionsRepository $competitionRepository)
- {
-     $user = $this->getUser();
-
-    if (!$user instanceof \App\Entity\Users) {
-        throw new \LogicException('The User object must be an instance of App\Entity\Users');
+        // renvoie la réponse
+        return $this->render('usersPages/mescompetitions.html.twig', [
+            'competitions' => $competitions,
+            'availableCompetitions' => $availableCompetitions,
+            'userCompetitions' => $userCompetitions
+        ]);
     }
 
-     $competition = $competitionRepository->find($id);
 
-     
 
-    if ($competition && $user->getCompetitions()->contains($competition)) {
-        
-        $user->removeCompetition($competition);
-        $competition->removeUser($user); 
-        $em->flush();
+
+
+
+
+
+
+
+
+#[Route('/profile/competitions/{id}', name: 'app_competition_unsubscribe')]
+    public function unsubscribe(int $id, EntityManagerInterface $em, CompetitionsRepository $competitionRepository)
+    {
+        $user = $this->getUser();
+
+        if (!$user instanceof \App\Entity\Users) {
+            throw new \LogicException('The User object must be an instance of App\Entity\Users');
+        }
+
+        $competition = $competitionRepository->find($id);
+
+        if ($competition && $user->getCompetitions()->contains($competition)) {
+            $user->removeCompetition($competition);
+            $competition->removeUser($user); 
+            $em->flush();
+        }
+
+        $competitions = $user->getCompetitions();
+        $availableCompetitions = $competitionRepository->findAll(); // get all available competitions
+        $userCompetitions = $user->getCompetitions(); // get user's competitions
+
+        // renvoie la réponse
+        return $this->render('usersPages/mescompetitions.html.twig', [
+            'competitions' => $competitions,
+            'availableCompetitions' => $availableCompetitions,
+            'userCompetitions' => $userCompetitions
+        ]);
     }
-
-    $competitions = $user->getCompetitions();
-
-    // renvoie la réponse
-    return $this->render('usersPages/mescompetitions.html.twig', [
-        'competitions' => $competitions,
-    ]);
- }
-
-
-
-
-
-
-
-
 
 
 

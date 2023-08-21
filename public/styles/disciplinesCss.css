@@ -89,7 +89,7 @@ body{
     background-color: black;
     border: 1px solid white;
     border-radius: 5px;
-    width: 60%;
+    width: 80%;
 }
 
 
@@ -133,4 +133,10 @@ body{
 
 .padding{
     padding-top: 100px;
+}
+
+@media (max-width: 400px) {
+    .padding {
+        padding-top: 150px;
+    }
 }

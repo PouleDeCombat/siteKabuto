@@ -4,8 +4,9 @@
 
 {% block body %}
 
-<div class="table-responsive" >
 
+<div class="table-responsive" >
+<h1 class="mb-5">Competitions adultes :</h1>
   <table class="table" id="adherentTableau">
     <thead>
       <tr>
@@ -15,13 +16,14 @@
         <th scope="col">Date de debut</th>
         <th scope="col">Lieu de fin</th> 
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
     {% for competition in competitions %}
       <tr>
-        <td>{{competition.nom}}</td>
-        <td>{{competition.location}}</td>
+        <td class="text-uppercase">{{competition.nom}}</td>
+        <td class="text-uppercase">{{competition.location}}</td>
         <td>{{competition.kimono}}</td>
        
        <td>{{ competition.startDate|date('d-m-Y') }}</td>
@@ -32,11 +34,10 @@
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ competition.id) }}">
     <button class="btn btn-danger">Supprimer</button>
 </form>
-      <a href="{{ path('app_competition_competiteur', {'id': competition.id}) }}" class="btn btn-primary">Voir les inscrits</a>
-
-
 
 </td>
+
+<td><a href="{{ path('app_competition_competiteur', {'id': competition.id}) }}" class="btn btn-primary">Voir les inscrits</a></td>
 
         
       </tr>

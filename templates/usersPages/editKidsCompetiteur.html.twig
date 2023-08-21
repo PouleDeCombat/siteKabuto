@@ -1,0 +1,42 @@
+{% extends 'usersBase.html.twig' %}
+
+{% block body %}
+
+{{ form_start(form) }}
+
+<h2 class="text-center mb-4">Modifier le profil compétiteur</h2> {# Title for the form #}
+
+<div class="row mb-3"> {# Added margin-bottom for spacing between rows #}
+    <div class="col">
+        <div class="form-group">
+            {{ form_label(form.ceinture, null, {'label_attr': {'class': 'font-weight-bold'}}) }} {# Optional bold font for label #}
+            {{ form_widget(form.ceinture, {'attr': {'class': 'form-control'}}) }} {# Add Bootstrap's form-control class to input #}
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3"> {# Added margin-bottom for spacing between rows #}
+    <div class="col">
+        <div class="form-group">
+            {{ form_label(form.trancheAge, null, {'label_attr': {'class': 'font-weight-bold'}}) }}
+            {{ form_widget(form.trancheAge, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3"> {# Added margin-bottom for spacing between rows #}
+    <div class="col">
+        <div class="form-group">
+            {{ form_label(form.categoriePoid, null, {'label_attr': {'class': 'font-weight-bold'}}) }}
+            {{ form_widget(form.categoriePoid, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+</div>
+
+<div class="text-center mb-3"> {# Center-align the submit button #}
+    <button type="submit" class="btn btn-primary">Valider</button>
+</div>
+
+{{ form_end(form) }}
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<section class="container d-flex flex-column justify-content-center padding mt-5" style="padding-bottom: 350px;">
+ <div class="d-flex align-items-center justify-content-center">
+    <button class="btn btn-secondary step-btn active">Étape 1</button>
+    <div class="line"></div>
+    <button class="btn btn-secondary step-btn active">Étape 2</button>
+    <div class="line"></div>
+    <button class="btn btn-secondary step-btn ">Étape 3</button>
+    <div class="line"></div>
+    <button class="btn btn-secondary step-btn ">Étape 4</button>
+    
+ </div>
+
+    {{ form_start(form) }}
+    <div class="row custom-cadre">
+        <h1 class="text-white text-center main-title-inscription">Inscrire les enfants</h1>
+        {% if kidsAlreadyAdded|length > 0 %}
+        <div class="mt-5">
+         <h3 class="text-white">Enfants déjà enregistrer : </h3>
+    <ul>
+        {% for kid in kidsAlreadyAdded %}
+            <li class="text-white fs-5">{{ kid.nom }} {{ kid.prenom }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+
+        <div id="kids_container" data-prototype="{{ form_widget(form.kids.vars.prototype)|e('html_attr') }}">
+            {% for kidForm in form.kids %}
+                <div class="kid-form col-6 mb-5">
+                    <fieldset class="ms-5  d-flex flex-column ">
+                        {{ form_row(kidForm.nom) }}
+                        {{ form_row(kidForm.prenom) }}
+                        {{ form_row(kidForm.date_de_naissance) }}
+                        {{ form_row(kidForm.adresse) }}
+                        {{ form_row(kidForm.ville) }}
+                        {{ form_row(kidForm.zipcode) }}
+                        {{ form_row(kidForm.telephone) }}
+                        {{ form_row(kidForm.lieu_de_naissance) }}
+                    </fieldset>
+                </div>
+            
+            {% endfor %}
+        </div>
+
+        <div class="col-12 d-flex justify-content-center">
+            <button id="add-kid" type="button" class="btn btn-secondary my-3" style="height: 50px">Ajouter un  enfant</button>
+            <button type="submit" class="btn btn-inscription btn-lg my-3 ">Continuer</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+</section>
+
+{% block javascripts %}
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+    let container = document.getElementById('kids_container');
+
+    document.getElementById('add-kid').addEventListener('click', function() {
+        let index = container.querySelectorAll('.kid-form').length;
+
+        let newForm = container.getAttribute('data-prototype');
+        newForm = newForm.replace(/__name__/g, index);
+
+        let newFormDiv = document.createElement('div');
+        newFormDiv.innerHTML = newForm;
+        newFormDiv.classList.add('kid-form', 'col-6', 'mb-5');
+
+        // Ajout du bouton "Annuler"
+        let cancelButton = document.createElement('button');
+        cancelButton.textContent = "Annuler";
+        cancelButton.type = "button";
+        cancelButton.classList.add('btn', 'btn-danger', 'mt-3');
+        cancelButton.addEventListener('click', function() {
+            container.removeChild(newFormDiv);
+        });
+
+        newFormDiv.appendChild(cancelButton);
+
+        container.appendChild(newFormDiv);
+    });
+});
+
+    </script>
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,252 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid col-12 padding bg-kongs pb-5" style="height: auto;">
+    <div class="d-flex flex-column pb-5 justify-content-center align-items-center">
+        <h1 class="main-title-horaire text-white">Kongs<span style="color: yellow;"> Fighting</span> Championship</h1>
+        <div class="decoration-text"></div>
+    </div>
+
+    <div class="col-lg-7 mx-auto text-white roboto-font mb-5 fs-4 ">
+        Le "Kongs Fighting Championship" n'est pas qu'un simple événement : c'est une véritable consécration pour le monde du MMA à La Rochelle et dans l'ensemble du département de la Charente-Maritime. Organisé par le renommé Kabuto Fight Club de La Rochelle, sous la houlette de son head coach visionnaire, Samuel Judes, cet événement est le premier de cette envergure dans la région. Il symbolise non seulement l'ascension du MMA en localité mais aussi la passion, le dévouement et l'engagement du club à promouvoir et à célébrer ce sport. Pour le Kabuto Fight Club, le "Kongs Fighting Championship" est une affirmation de sa place en tant que pionnier et leader dans le domaine, marquant ainsi un jalon dans l'histoire du MMA local.
+    </div>
+
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center mt-5">
+            
+            <!-- Vidéo à gauche -->
+            <div class="col-md-4 mb-4  instagram-video" style="z-index: 100;">
+                <video controls controls autoplay muted loop>
+                    <source src="{{ asset('images/kongsVideo.mp4') }}" type="video/mp4">
+                    Votre navigateur ne prend pas en charge la balise vidéo.
+                </video>
+            </div>
+
+            <!-- Carousel au centre -->
+            <div class="col-md-4   mb-4">
+                <div id="mmaCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="0" class="active"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="1"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="2"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="3"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="4"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="5"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="6"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="7"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="8"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="9"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="10"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="11"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="12"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="13"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="14"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="15"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="16"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="17"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="18"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="19"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="20"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="21"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="22"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="23"></li>
+                        <li data-bs-target="#mmaCarousel" data-bs-slide-to="24"></li>
+                    </ol>
+
+                             <!-- Slides -->
+                         <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="{{ asset('images/kongsFight1.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight2.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight3.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight4.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight5.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight6.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight7.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight8.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight9.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight10.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight11.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight12.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight13.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight14.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight15.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight16.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight17.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight18.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight19.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight20.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight21.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight22.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight23.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight24.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight25.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('images/kongsFight26.jpg') }}" class="d-block w-100" alt="Combat de mma">
+                            </div>
+                        </div>
+
+                    <!-- Next/Prev controls -->
+                    <a class="carousel-control-prev" href="#mmaCarousel" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#mmaCarousel" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Vidéo à droite -->
+            <div class="col-md-4  mb-4 instagram-video">
+                <video controls autoplay muted loop>
+                    <source src="{{ asset('images/kongsVideo2.mp4') }}" type="video/mp4">
+                    Votre navigateur ne prend pas en charge la balise vidéo.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vector Icons -->
+    <div class="d-flex justify-content-center align-items-center flex-wrap">
+        <img src="{{ asset('images/vector.svg') }}" class="vector-icon1" alt="vector jaune">
+        <img src="{{ asset('images/group-33300.svg') }}" class="vector-icon2" alt="vector jaune">
+        
+    </div>
+
+    <div class="partners-section d-flex flex-column justify-content-center align-items-center">
+        <!-- Carte des combats -->
+        <div class="fight-card my-4">
+            <H3 class="text-white text-center roboto-font">Carte des combats :</H3>
+            <img src="{{ asset('images/FightCardKongs.png') }}" alt="Carte des combats Kongs" class="img-fluid">
+        </div>
+        <img src="{{ asset('images/group-33300.svg') }}" class="vector-icon2" alt="vector jaune">
+<img src="{{ asset('images/group-33301.svg') }}" class="vector-icon3" alt="vector jaune">
+
+
+          <div class="social-container d-flex flex-column align-items-center mt-5">
+        <div class="social-icons ">
+            <a href="https://www.instagram.com/kongs_fc/" target="_blank" title="Instagram">
+                <img class="footer-icon" alt="logo facebook" style="height: 50px; width: 50px;" src="{{ asset('images/frame3.svg') }}"  />
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=100089863021119" target="_blank" title="Facebook">
+                <img class="footer-icon" alt="logo instagram" style="height: 50px; width: 50px;" src="{{ asset('images/instagram1.svg') }}" />
+            </a>
+        </div>
+        <p class="text-white fs-4">Decouvrez l'intégralité de tout les combats :<a href="https://youtu.be/5rcfH1-Ulco?t=874" class="all-fights-link">Voir tous les combats</a></p>
+    </div>
+        
+
+
+
+         <div class="thank-you-message col-8">
+        <h2 class="text-white roboto-font mt-5">Remerciements à nos partenaires</h2>
+        <p class="text-white roboto-font mt-5 fs-4">
+            La réussite d'un événement d'une telle envergure repose sur l'appui de nombreux acteurs dévoués. Nos partenaires, par leur passion, expertise, vision, innovation, dévouement, professionnalisme et attention aux détails, ont été le pilier de cette réalisation. Ils incarnent des qualités telles que l'engagement indéfectible, l'excellence opérationnelle, et le souci du détail.</br>
+
+            Ducati La Rochelle, DGS Metal, Groupe Lenouvellr, Idoneo, AR Importation, OJ Constructions, et Bonin Perrin Rénovation : votre contribution collective a été la clé de voûte de notre événement. Nous vous adressons nos remerciements les plus chaleureux pour votre précieux soutien.
+
+            Le succès que nous avons connu est aussi le reflet de votre engagement. Nous sommes honorés de collaborer avec des partenaires d'une telle excellence. L'avenir nous promet d'autres collaborations fructueuses, et nous attendons ces moments avec impatience.
+
+
+        </p>
+
+
+
+        <div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-2 offset-sm-1 text-center">
+      <img src="{{ asset('images/ducati.png') }}" alt="Logo 1" class="img-fluid">
+    </div>
+    <div class="col-sm-2 text-center">
+      <img src="{{ asset('images/boninPerrinLogo.jpg') }}" alt="Logo 2" class="img-fluid">
+    </div>
+    <div class="col-sm-2 text-center">
+      <img src="{{ asset('images/ojconstructionsLogo.png') }}" alt="Logo 3" class="img-fluid">
+    </div>
+  
+    <div class="col-sm-2 text-center">
+      <img src="{{ asset('images/lenouvellrLogo.jpg') }}" alt="Logo 5" class="img-fluid">
+    </div>
+  </div>
+</div>
+
+       
+    </div>
+
+
+        
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+

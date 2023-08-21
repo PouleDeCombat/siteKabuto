@@ -84,7 +84,7 @@ body{
 
 
   .article-name{
-    background-color: #82730d;
+    background-color: #fbff11;
 
   }
 
@@ -95,4 +95,15 @@ body{
     height: auto;
   }
   
+
+  .card-flex {
+    display: flex;
+    flex-direction: row; /* Make sure the direction is row which is the default */
+}
+
+.card-flex img {
+    object-fit: cover; /* This ensures that the image covers the area without distorting */
+    height: 100%; /* Forces the image to match the height of the container */
+}
+
 

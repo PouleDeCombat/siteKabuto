@@ -7,7 +7,7 @@
 
 
 
-<div class="container  padding-tableau">
+<div class="container  padding-tableau" style="height: 30vh;">
     <section class="row">
         <div class="col-12">
             <h1 class="text-white text-center">Panier</h1>
@@ -15,6 +15,7 @@
                 <thead>
                     <tr>
                          <th>Produit</th>
+                         <th>Taille</th>
                          <th>Prix</th>
                          <th>Quantité</th>
                          <th>Total</th>
@@ -25,11 +26,13 @@
                 {% for element in data %}
                     <tr>
                     <td>{{ element.product.name }}</td>
+                    <td>{{ element.size }}</td>
                     <td>{{ element.product.price}}€</td>
-                    <td>{{ element.product.stock }}</td>
+                    <td>{{ element.quantity }}</td>
                     <td>{{ element.quantity * element.product.price}}€</td>
                     <td>
-                        <a href="{{ path('cart_addtocart', {id: element.product.id}) }}" class="btn btn-success">+</a>
+                        <a href="{{ path('cart_increase_quantity', {id: element.product.id}) }}" class="btn btn-success">+</a>
+
                         <a href="{{ path('cart_remove', {id : element.product.id}) }}" class="btn btn-warning">-</a>
                         <a href="{{ path('cart_delete', {id : element.product.id}) }}" class="btn btn-danger">Supprimer</a>
                     </td>
@@ -42,7 +45,8 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="3">Total</td>
+                    <td colspan="3">Total</td>
+                        <td></td>                 
                         <td>{{ total }}€</td>  
                         <td>
                         <a href="{{ path('cart_empty') }}" class="btn btn-danger">Vider</a>
@@ -50,6 +54,7 @@
                     </tr>
                 </tfoot>
             </table>
+              <a href="{{ path('app_stripe') }}" class="btn btn-success">Payer la commande</a>
         </div>
     </section>
 </div>

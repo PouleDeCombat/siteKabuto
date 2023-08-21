@@ -1,12 +1,32 @@
+
 {% extends 'adminBase.html.twig' %}
 
 {% block title %}Modifier un adhérent{% endblock %}
 
 {% block body %}
-    <h1>Modifier un adhérent</h1>
-   
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-        <button type="submit" class="btn btn-primary btn-inscription btn-lg my-3">Modifier</button>
-    {{ form_end(form) }}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">Modifier un adhérent</h2>
+                </div>
+                <div class="card-body">
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                    
+                    {{ form_widget(form) }}
+
+                    <div class="form-group row">
+                        <div class="col-sm-12 text-center">
+                            <button type="submit" class="btn btn-primary mt-3 btn-lg">Modifier</button>
+                        </div>
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
+

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\KidsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -44,29 +46,38 @@ class Kids
     #[ORM\Column(length: 255)]
     private ?string $lieu_de_naissance = null;
 
-
-     /**
-     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="kids")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $kidsUser;
-
     #[ORM\ManyToOne(inversedBy: 'kids')]
-    private ?Users $parent = null;
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Users $user = null;
+
+    #[ORM\ManyToMany(targetEntity: KidsCompetitions::class, mappedBy: 'kids')]
+    private Collection $kidsCompetitions;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $ceinture = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $categoriePoid = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $trancheAge = null;
+
+    #[ORM\OneToMany(mappedBy: 'kids', targetEntity: Adhesions::class)]
+    private Collection $adhesions;
 
 
+
+
+   
 
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
+        $this->kidsCompetitions = new ArrayCollection();
+        $this->adhesions = new ArrayCollection();
     }
 
-    public function setKidsUser(Users $user): self
-{
-    $this->kidsUser = $user;
-
-    return $this;
-}
+  
 
 
     public function getId(): ?int
@@ -182,15 +193,110 @@ class Kids
         return $this;
     }
 
-    public function getParent(): ?Users
+    public function getUser(): ?Users
     {
-        return $this->parent;
+        return $this->user;
     }
 
-    public function setParent(?Users $parent): static
+    public function setUser(?Users $user): static
     {
-        $this->parent = $parent;
+        $this->user = $user;
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, KidsCompetitions>
+     */
+    public function getKidsCompetitions(): Collection
+    {
+        return $this->kidsCompetitions;
+    }
+
+    public function addKidsCompetition(KidsCompetitions $kidsCompetition): static
+    {
+        if (!$this->kidsCompetitions->contains($kidsCompetition)) {
+            $this->kidsCompetitions->add($kidsCompetition);
+            $kidsCompetition->addKid($this);
+        }
+
+        return $this;
+    }
+
+    public function removeKidsCompetition(KidsCompetitions $kidsCompetition): static
+    {
+        if ($this->kidsCompetitions->removeElement($kidsCompetition)) {
+            $kidsCompetition->removeKid($this);
+        }
+
+        return $this;
+    }
+
+    public function getCeinture(): ?string
+    {
+        return $this->ceinture;
+    }
+
+    public function setCeinture(string $ceinture): static
+    {
+        $this->ceinture = $ceinture;
+
+        return $this;
+    }
+
+    public function getCategoriePoid(): ?string
+    {
+        return $this->categoriePoid;
+    }
+
+    public function setCategoriePoid(string $categoriePoid): static
+    {
+        $this->categoriePoid = $categoriePoid;
+
+        return $this;
+    }
+
+    public function getTrancheAge(): ?string
+    {
+        return $this->trancheAge;
+    }
+
+    public function setTrancheAge(string $trancheAge): static
+    {
+        $this->trancheAge = $trancheAge;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Adhesions>
+     */
+    public function getAdhesions(): Collection
+    {
+        return $this->adhesions;
+    }
+
+    public function addAdhesion(Adhesions $adhesion): static
+    {
+        if (!$this->adhesions->contains($adhesion)) {
+            $this->adhesions->add($adhesion);
+            $adhesion->setKids($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdhesion(Adhesions $adhesion): static
+    {
+        if ($this->adhesions->removeElement($adhesion)) {
+            // set the owning side to null (unless already changed)
+            if ($adhesion->getKids() === $this) {
+                $adhesion->setKids(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
 }

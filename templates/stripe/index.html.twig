@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+    {% block body %}
+    <div class="container padding mt-5" style="height: 60vh;">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="row">
+                        <!-- Payment Form -->
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <form id='checkout-form' method='post' action="{{ path('app_stripe_charge') }}">             
+                                    <input type='hidden' name='stripeToken' id='stripe-token-id'>
+                                    <label for="name" class="form-label">Nom complet</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Entrez votre nom complet">
+                                    <label for="cardNumber" class="form-label mt-3">Numéro de Carte</label>
+                                    <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9101 1121">
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="expiryDate" class="form-label text-nowrap">Date d'Expiration</label>
+                                            <input type="text" class="form-control" id="expiryDate" placeholder="MM/AA">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="cvv" class="form-label">CVV</label>
+                                            <input type="text" class="form-control" id="cvv" placeholder="123">
+                                        </div>
+                                    </div>
+                                    
+                                    <button 
+                                        id='pay-btn'
+                                        class="btn btn-success mt-3"
+                                        type="button"
+                                        style="margin-top: 20px; width: 100%;padding: 7px;"
+                                        onclick="createToken()">Payer {{ total}} €
+                                    </button>
+                                <form>
+                            </div>
+                        </div>
+                        <!-- Cart Summary -->
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <h5 class="mb-3">Récapitulatif du Panier</h5>
+                                <ul>
+                                    {% for item in data %}
+                                        <li> x{{ item.quantity }} {{ item.product.name }}- {{ item.size }} - {{ item.product.price }}€</li>
+                                    {% endfor %}
+                                </ul>
+                                <strong>Total : {{ total }} €</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+    
+   
+{% block javascripts %}
+    <script src="https://js.stripe.com/v3/" ></script>
+    <script>
+        var stripe = Stripe("{{stripe_key}}");
+        var elements = stripe.elements();
+        var cardElement = elements.create('card');
+        cardElement.mount('#card-element');
+
+        function createToken() {
+            document.getElementById("pay-btn").disabled = true;
+            stripe.createToken(cardElement).then(function(result) {
+
+                if(typeof result.error != 'undefined') {
+                    document.getElementById("pay-btn").disabled = false;
+                    alert(result.error.message);
+                }
+
+                // creating token success
+                if(typeof result.token != 'undefined') {
+                    document.getElementById("stripe-token-id").value = result.token.id;
+                    document.getElementById('checkout-form').submit();
+                }
+            });
+        }
+    </script>
+{% endblock %}
+
+

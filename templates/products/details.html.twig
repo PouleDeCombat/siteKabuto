@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}{% endblock %}
 
@@ -7,24 +7,93 @@
 
 
 
- <div class="container mt-5">
-        <div class="row">
-        <h1 class="text-center text-white mt-5 mb-5">Description produit {{ product.name}}</h1>
-            <div class="col-12 col-lg-6">
-                <img src="{{ asset(product.images) }}" class="img-fluid" alt="Nom du produit">
+<h1 class="text-center text-white" style="margin-top: 150px;">Description produit {{ product.name}}</h1>
+
+
+<div class="container-fluid d-flex mt-5 justify-content-center" style="margin-bottom: 100px">
+    <div class="card mb-3 text-bg-warning border-warning card-flex" style="max-width: 1200px;">
+        <div class="row g-0">
+            <div class="col-md-4 card-img-container">
+                <img src="{{ asset(product.images) }}" class="img-fluid rounded-start" alt="...">
             </div>
-            <div class="col-12 col-lg-6">
-                <h2 class="my-3 text-white">{{ product.name }}</h2>
-                <p class="lead text-white">{{ product.description }}</p>
-                <h4 class="text-success my-3">Prix : {{ product.price }}€</h4>
-                {% if product.stock > 0 %}
-                <a href="{{ path('cart_addtocart', {id: product.id}) }}"><button class="btn btn-primary btn-lg"> Ajouter au panier</button></a>
-                {% else %}
-                <p class="text-danger">Temporairement en rupture de stock</p>
-                {% endif %}
+            <div class="col-md-8 bg-dark">
+                <div class="card-body">
+                    <h5 class="card-title fs-2 text-white">{{ product.name}}</h5>
+                    <p class="card-text fs-5 text-white">{{ product.description }}</p>
+                    <div class="select-size mt-2">
+                        <p class="text-white mb-2">Choisissez une taille:</p>
+                        {% for size in product.size %}
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="size{{ size.id }}" name="size" value="{{ size.id }}">
+                                <label class="form-check-label text-white" for="size{{ size.id }}">{{ size.taille }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <h4 class="text-dark my-3 text-white">Prix : {{ product.price }}€</h4>
+                    {% if product.stock > 0 %}
+                    <a href="{{ path('cart_addtocart', {id: product.id}) }}"><button class="btn btn-warning btn-lg"> Ajouter au panier</button></a>
+                    {% else %}
+                    <p class="text-danger">Temporairement en rupture de stock</p>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
+</div>
 
+
+
+
+
+
+
+{% endblock %} #}
+
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Description produit {{ product.name}}{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center text-white" style="margin-top: 150px;">Description produit {{ product.name}}</h1>
+
+<div class="container-fluid d-flex mt-5 justify-content-center" style="margin-bottom: 100px">
+    <div class="card mb-3 text-bg-warning border-warning card-flex" style="max-width: 1200px;">
+        <div class="row g-0">
+            <div class="col-md-4 card-img-container">
+                <img src="{{ asset(product.images) }}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8 bg-dark">
+                <div class="card-body">
+                    <h5 class="card-title fs-2 text-white">{{ product.name}}</h5>
+                    <p class="card-text fs-5 text-white">{{ product.description }}</p>
+                    
+                    <!-- Start of the form -->
+                    <form action="{{ path('cart_addtocart', {id: product.id}) }}" method="post">
+                        <div class="select-size mt-2">
+                            <p class="text-white mb-2">Choisissez une taille:</p>
+                            {% for size in product.size %}
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="size{{ size.id }}" name="size" value="{{ size.id }}" required>
+                                    <label class="form-check-label text-white" for="size{{ size.id }}">{{ size.taille }}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <h4 class="text-dark my-3 text-white">Prix : {{ product.price }}€</h4>
+                        {% if product.stock > 0 %}
+                            <button type="submit" class="btn btn-warning btn-lg">Ajouter au panier</button>
+                        {% else %}
+                            <p class="text-danger">Temporairement en rupture de stock</p>
+                        {% endif %}
+                    </form>
+                    <!-- End of the form -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

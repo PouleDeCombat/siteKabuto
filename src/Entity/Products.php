@@ -40,9 +40,13 @@ class Products
     #[ORM\Column(length: 255, unique: true)]
     private ?string $slug = null;
 
+    #[ORM\ManyToMany(targetEntity: ProductSize::class, inversedBy: 'products')]
+    private Collection $size;
+
     public function __construct()
     {
         $this->ordersDetails = new ArrayCollection();
+        $this->size = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -160,6 +164,30 @@ class Products
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProductSize>
+     */
+    public function getSize(): Collection
+    {
+        return $this->size;
+    }
+
+    public function addSize(ProductSize $size): static
+    {
+        if (!$this->size->contains($size)) {
+            $this->size->add($size);
+        }
+
+        return $this;
+    }
+
+    public function removeSize(ProductSize $size): static
+    {
+        $this->size->removeElement($size);
 
         return $this;
     }

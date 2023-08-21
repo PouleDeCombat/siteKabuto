@@ -28,6 +28,12 @@ class Orders
     #[ORM\OneToMany(mappedBy: 'orders', targetEntity: OrdersDetails::class, orphanRemoval: true)]
     private Collection $ordersDetails;
 
+    #[ORM\Column(type: "float")]
+    private ?float $total = null;
+
+    #[ORM\Column]
+    private ?bool $payer = null;
+
     public function __construct()
     {
         $this->ordersDetails = new ArrayCollection();
@@ -100,6 +106,30 @@ class Orders
                 $ordersDetail->setOrders(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTotal(): ?float
+    {
+        return $this->total;
+    }
+
+    public function setTotal(float $total): static
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+
+    public function isPayer(): ?bool
+    {
+        return $this->payer;
+    }
+
+    public function setPayer(bool $payer): static
+    {
+        $this->payer = $payer;
 
         return $this;
     }

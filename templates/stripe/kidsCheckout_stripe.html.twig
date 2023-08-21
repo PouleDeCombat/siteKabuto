@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement{% endblock %}
+
+
+
+{% block body %}
+<section class="container d-flex flex-column justify-content-center" style="height: 90vh;">
+    <div class="breadcrumb-container">
+        <span>1. Création de votre compte</span>
+        <span>2. Choisir un abonnement</span>
+        <span>3. Sélection de l'offre</span>
+        <span class="active">4. Finalisations</span>
+    </div>
+
+    <div class="row custom-cadre">
+        <h1 class="text-white text-center main-title-inscription">Finaliser votre achat</h1>
+        <div class="col-6 mb-5">
+            <fieldset class="ms-5 text-white d-flex flex-column">
+                <!-- Cart Summary -->
+                <h5 class="mb-3">Récapitulatif du Panier</h5>
+                <ul>
+                {% for abonnement in selectedAbonnements %}
+                    <li> {{ abonnement.categorie }} - {{ abonnement.discipline }} - {{ abonnement.prix }}€ - {{ abonnement.durée }} </li>
+                {% endfor %}
+                </ul>
+                <strong>Total : {{ total }} €</strong>
+            </fieldset>
+        </div>
+
+        <!-- Stripe Payment Form -->
+        <div class="col-6">
+            <form id='checkout-form' method='post' action="{{ path('app_stripe_charge') }}">
+                <input type='hidden' name='stripeToken' id='stripe-token-id'>
+                <label for="name" class="form-label text-white">Nom complet</label>
+                <input type="text" class="form-control" id="name" placeholder="Entrez votre nom complet">
+                <label for="cardNumber" class="form-label text-white mt-3">Numéro de Carte</label>
+                <div id="card-element" class="form-control"></div> <!-- This replaces the previous placeholder input for card details -->
+                <button 
+                    id='pay-btn'
+                    class="btn btn-inscription btn-lg my-3"
+                    type="button"
+                    style="width: 100%;padding: 7px;"
+                    onclick="createToken()">Payer {{ total }}€
+                </button>
+            </form>
+        </div>
+      
+    </div>
+</section>
+{% endblock %}
+
+
+
+{% block javascripts %}
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        var stripe = Stripe("{{stripe_key}}");
+        var elements = stripe.elements();
+        var cardElement = elements.create('card');
+        cardElement.mount('#card-element');
+
+        function createToken() {
+            document.getElementById("pay-btn").disabled = true;
+            stripe.createToken(cardElement).then(function(result) {
+
+                if(typeof result.error != 'undefined') {
+                    document.getElementById("pay-btn").disabled = false;
+                    alert(result.error.message);
+                }
+
+                // creating token success
+                if(typeof result.token != 'undefined') {
+                    document.getElementById("stripe-token-id").value = result.token.id;
+                    document.getElementById('checkout-form').submit();
+                }
+            });
+        }
+    </script>
+{% endblock %}

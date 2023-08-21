@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sélection d'abonnement{% endblock %}
+
+{% block body %}
+<section class="container d-flex flex-column justify-content-center padding mb-5">
+    <div class="d-flex align-items-center justify-content-center mt-5">
+    <button class="btn btn-secondary step-btn active">Étape 1</button>
+    <div class="line"></div>
+    <button class="btn btn-secondary step-btn active">Étape 2</button>
+    <div class="line"></div>
+    <button class="btn btn-secondary step-btn active">Étape 3</button>
+    <div class="line"></div>
+    <button class="btn btn-secondary step-btn ">Étape 4</button>
+    
+ </div>
+
+    {{ form_start(form) }}
+    <div class="row custom-cadre">
+        <h1 class="text-white text-center main-title-inscription">Sélection d'abonnements</h1>
+        <p class="text-white fs-3">Choix de l'abonnement pour {{ app.user.nom }} {{ app.user.prenom }} :</p>
+        <div class="row mb-5">
+            {% for discipline, subscriptions in adulteAbonnements %}
+                <div class="col-md-4">
+                    <fieldset class="ms-5 text-white d-flex flex-column">
+                        <legend>{{ discipline }} :</legend>
+                        {% for abonnement in subscriptions %}
+                            <div class="form-check mb-1">
+                                <input class="form-check-input" type="radio" name="abonnement" id="abonnement-{{ loop.parent.loop.index }}-{{ loop.index }}" value="{{ abonnement.id }}">
+                                <label class="form-check-label" for="abonnement-{{ loop.parent.loop.index }}-{{ loop.index }}">
+                                    {{ abonnement.categorie }} - {{ abonnement.durée }} - {{ abonnement.prix }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </fieldset>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% for kidIndex, kidForm in form.kidsAbonnement %}
+            <div class="col-12">
+                <h3 class="text-white">Choix de l'abonnement pour {{ kids[kidIndex].nom }}  {{ kids[kidIndex].prenom }} :</h3>
+                <div class="row mb-5">
+                    {% for discipline, subscriptions in groupedAbonnements %}
+                        <div class="col-md-4">
+                            <fieldset class="ms-5 text-white d-flex flex-column">
+                                <legend>{{ discipline }} :</legend>
+                                {% for abonnement in subscriptions %}
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="radio" name="abonnement_for_kid_{{ kidIndex }}" id="abonnement-{{ kidIndex }}-{{ discipline }}-{{ loop.index }}" value="{{ abonnement.id }}">
+                                        <label class="form-check-label" for="abonnement-{{ kidIndex }}-{{ discipline }}-{{ loop.index }}">
+                                            {{ abonnement.categorie }} - {{ abonnement.durée }} - {{ abonnement.prix }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </fieldset>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="col-12 text-center">
+            <button type="submit" class="btn btn-inscription btn-lg my-3">Continuer</button>
+        </div>
+    </div>
+    {{ form_errors(form) }}
+</form>
+
+</section>
+{% endblock %}
+
+

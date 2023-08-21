@@ -1,53 +1,4 @@
-/* .icon-bg-header{
-    width: 35px;
-    height: 35px;
-    border-radius: 5px;
-    padding-bottom: 3px;
-}
-
-.logo-nav{
-    position: absolute;
-    height: 180px;
-    width: 155px;
-    left: 5%;
-    top: 2%;
-}
-
-
-
-@media (max-width: 1231px) {  
-  .email-nav {
-    color: yellow
-  }
-}
-
-
-  
-  
-  */
-
-  /* @media (max-width: 991px) {
-    .navbar-toggler-icon {
-   
-    background-image: url('../public/images/burger.svg');
-      position: absolute;
-        top: 8%;
-        right: 8%;
-    }
-  }
-
-
-  .btnNav{
-    border: none;
-    position: absolute;
-    top: 8%;
-        right: 8%;
-  } */
-/* 
-  .bg-nav{
-    background-color: yellow;
-  }
-  } */ 
+ 
   
   .navbar-text{
     font-family: 'Source Sans Pro', sans-serif;
@@ -76,7 +27,7 @@
 
 
 
-  @media (max-width: 1231px) {  
+  @media (max-width: 1400px) {  
     .email-nav {
       color: yellow
     }
@@ -84,8 +35,16 @@
 
   
   .padding-header{
-    padding-left: 110px;
+    padding-left: 20px;
+    padding-right : 20px;
   }
+
+
+  @media (min-width: 992px) and (max-width: 1120px) {
+    .padding-header {
+        padding-left: 200px;
+    }
+}
   
   .bg-nav{
     background-color: yellow;
@@ -95,6 +54,25 @@
   .navbarLanding-placement{
     top: 0%;
   }
+
+
+  @media (max-width: 992px) { 
+    .navbar-collapse {
+      margin-top: 50px; 
+      background-color: black;
+    }
+  }
+  
+
+  .navbar-toggler {
+    z-index: 1000;
+}
+
+.navbar-collapse {
+  z-index: 999;
+}
+
+
 
 
 

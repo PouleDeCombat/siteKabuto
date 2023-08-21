@@ -26,6 +26,10 @@ class OrdersDetails
     #[ORM\JoinColumn(nullable: false)]
     private ?Products $products = null;
 
+    #[ORM\Id]
+    #[ORM\Column(length: 10)]
+    private ?string $size = null;
+
     
 
     public function getQuantity(): ?int
@@ -75,4 +79,19 @@ class OrdersDetails
 
         return $this;
     }
+
+    public function getSize(): ?string
+    {
+        return $this->size;
+    }
+
+    public function setSize(string $size): static
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+
+
 }

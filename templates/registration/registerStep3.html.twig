@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choix d'abonnement{% endblock %}
+
+{% block body %}
+<section class="container d-flex flex-column justify-content-center padding mt-5 mb-5" style="height: auto;">
+<div class="d-flex align-items-center justify-content-center">
+    <button class="btn btn-secondary step-btn active">Étape 1</button>
+    <div class="line"></div>
+    <button class="btn btn-secondary step-btn active">Étape 2</button>
+    <div class="line"></div>
+    <button class="btn btn-secondary step-btn active">Étape 3</button>
+    <div class="line"></div>
+    <button class="btn btn-secondary step-btn">Étape 4</button>
+</div>
+
+
+    <div class="row custom-cadre">
+        <h1 class="text-white text-center main-title-inscription">Choisir un abonnement</h1>
+        <p class="text-white text-center fs-4">Veuillez choisir votre abonnement.</p>
+        <form action="{{ path('app_self_subscriptionForm_submit') }}" method="post">
+            <div class="row mb-5">
+                {% for discipline, subscriptions in abonnements %}
+                    <div class="col-md-4">
+                        <fieldset class="ms-5 text-white d-flex flex-column">
+                            <legend>{{ discipline }} :</legend>
+                            {% for abonnement in subscriptions %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="abonnement" id="abonnement-{{ loop.parent.loop.index }}-{{ loop.index }}" value="{{ abonnement.id }}">
+                                    <label class="form-check-label" for="abonnement-{{ loop.parent.loop.index }}-{{ loop.index }}">
+                                        {{ abonnement.categorie }} - {{ abonnement.durée }} - {{ abonnement.prix }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </fieldset>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-inscription btn-lg my-3">Continuer</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+

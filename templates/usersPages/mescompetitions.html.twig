@@ -20,14 +20,14 @@
       </tr>
     </thead>
     <tbody>
-    {% for competition in competitions %}
+    {% for competition in availableCompetitions %}
       <tr>
         <td>{{competition.nom}}</td>
         <td>{{competition.location}}</td>
         <td>{{competition.kimono}}</td>
         <td>{{competition.startDate|date('d-m-Y') }}</td>
         <td>{{competition.endDate|date('d-m-Y') }}</td>
-        
+ 
         <td><a href="{{ path('app_inscription_competition', {'id': competition.id}) }}" class="btn btn-primary">S'inscrire</a></td>
       </tr>
     {% endfor %}
@@ -53,7 +53,7 @@
 
  <tbody>
 
-    {% for competition in competitions %}
+    {% for competition in userCompetitions %}
     <tr>
         <td>{{ competition.nom }}</td>
         <td>{{ competition.location }}</td>
@@ -68,6 +68,11 @@
     
 </tbody>
 </table>
+
+
+
+
+
 
 
 

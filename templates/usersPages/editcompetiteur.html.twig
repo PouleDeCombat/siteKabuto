@@ -5,24 +5,6 @@
 {{ form_start(form) }}
 
 
-{# <div class="row">
-    {% for key, choice in form.categoriePoid.vars.choices %}
-        <div class="col">
-            <div class="form-check">
-                <input class="form-check-input limited-checkbox" type="checkbox" 
-                       value="{{ choice.value }}" id="checkbox{{ key }}"
-                       name="{{ form.categoriePoid.vars.full_name }}[]" 
-                       data-max="2" {{ choice.data ? 'checked' : '' }}>
-                <label class="form-check-label" for="checkbox{{ key }}">
-                    {{ choice.label }}
-                </label>
-            </div>
-        </div>
-        {% if loop.index is divisible by(4) %}
-            </div><div class="row">
-        {% endif %}
-    {% endfor %}
-</div> #}
 
 <div class="row">
     <div class="col">

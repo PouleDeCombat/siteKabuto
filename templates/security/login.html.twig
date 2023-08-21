@@ -3,7 +3,7 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-<div class="container-fluid d-flex flex-column justify-content-center col-lg-6 mb-5" style="height: 45vh;">
+<div class="container-fluid d-flex flex-column justify-content-center col-lg-6 mb-5 mt-5 padding" style="height: 45vh;">
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -28,7 +28,7 @@
     <button class="btn btn-lg btn-warning mt-2 " type="submit">
         Connexion
     </button>
-    <a href="{{path('app_register')}}" class="btn btn-lg btn-primary mt-2">
+    <a href="{{path('app_register')}}" class="btn btn-lg btn-secondary mt-2">
    Crée un compte
 </a>
 

@@ -1,0 +1,34 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+ <h1>Liste des compétiteurs pour {{ kidsCompetition.nom }}</h1>
+
+    <div class="table-responsive" >
+        <table class="table" id="adherentTableau">
+            <thead>
+                <tr>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Date de Naissance</th>
+                    <th scope="col">Ceinture</th>
+                    <th scope="col">Categorie de Poid</th>
+                    <th scope="col">Tranche d'Age</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for kid in kidsCompetition.kids %}
+                    <tr>
+                        <td>{{ kid.getPrenom() }}</td>
+                        <td>{{ kid.getNom() }}</td>
+                        <td>{{ kid.getDateDeNaissance()|date('d-m-Y') }}</td>
+                        <td>{{ kid.getCeinture() }}</td>
+                        <td>{{ kid.getCategoriePoid() }}</td>
+                        <td>{{ kid.getTrancheAge() }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

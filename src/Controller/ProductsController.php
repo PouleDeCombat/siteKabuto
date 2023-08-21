@@ -31,8 +31,16 @@ class ProductsController extends AbstractController
     #[Route('/{slug}', name: 'details')]
     public function details(Products $product): Response 
     {
-        return $this->render('products/details.html.twig', ['product' => $product]);
+    $sizes = $product->getSize();
+    
+
+    return $this->render('products/details.html.twig', [
+        'product' => $product,
+        'sizes' => $sizes
+    ]);
     }
+
+
 
     #[Route('', name: 'liste_produit')]
     public function productList(ProductsRepository $productsRepository )

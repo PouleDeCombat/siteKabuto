@@ -89,14 +89,29 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Competitions::class, inversedBy: 'users')]
     private ?Collection $competitions;
 
-    #[ORM\OneToMany(mappedBy: 'parent', targetEntity: Kids::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Kids::class)]
     private Collection $kids;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Adhesions::class)]
+    private Collection $abonnement;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $statutAbonnement = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $debutAbonnement = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $finAbonnement = null;
+
+  
 
     public function __construct(){
         $this->created_at = new \DateTimeImmutable();
         $this->orders = new ArrayCollection();
         $this->competitions = new ArrayCollection();
         $this->kids = new ArrayCollection();
+        $this->abonnement = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -382,6 +397,8 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    
+
     /**
      * @return Collection<int, Kids>
      */
@@ -394,7 +411,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->kids->contains($kid)) {
             $this->kids->add($kid);
-            $kid->setParent($this);
+            $kid->setUser($this);
         }
 
         return $this;
@@ -404,10 +421,76 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->kids->removeElement($kid)) {
             // set the owning side to null (unless already changed)
-            if ($kid->getParent() === $this) {
-                $kid->setParent(null);
+            if ($kid->getUser() === $this) {
+                $kid->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Adhesions>
+     */
+    public function getAbonnement(): Collection
+    {
+        return $this->abonnement;
+    }
+
+    public function addAbonnement(Adhesions $abonnement): static
+    {
+        if (!$this->abonnement->contains($abonnement)) {
+            $this->abonnement->add($abonnement);
+            $abonnement->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAbonnement(Adhesions $abonnement): static
+    {
+        if ($this->abonnement->removeElement($abonnement)) {
+            // set the owning side to null (unless already changed)
+            if ($abonnement->getUser() === $this) {
+                $abonnement->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getStatutAbonnement(): ?string
+    {
+        return $this->statutAbonnement;
+    }
+
+    public function setStatutAbonnement(?string $statutAbonnement): static
+    {
+        $this->statutAbonnement = $statutAbonnement;
+
+        return $this;
+    }
+
+    public function getDebutAbonnement(): ?\DateTimeInterface
+    {
+        return $this->debutAbonnement;
+    }
+
+    public function setDebutAbonnement(?\DateTimeInterface $debutAbonnement): static
+    {
+        $this->debutAbonnement = $debutAbonnement;
+
+        return $this;
+    }
+
+    public function getFinAbonnement(): ?\DateTimeInterface
+    {
+        return $this->finAbonnement;
+    }
+
+    public function setFinAbonnement(?\DateTimeInterface $finAbonnement): static
+    {
+        $this->finAbonnement = $finAbonnement;
 
         return $this;
     }
