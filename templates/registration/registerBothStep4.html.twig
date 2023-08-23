@@ -15,10 +15,11 @@
     
  </div>
 
-    {{ form_start(form) }}
+
     <div class="row custom-cadre">
         <h1 class="text-white text-center main-title-inscription">Sélection d'abonnements</h1>
         <p class="text-white fs-3">Choix de l'abonnement pour {{ app.user.nom }} {{ app.user.prenom }} :</p>
+        <form action="{{ path('register_kids_step_quatre') }}" method="post">
         <div class="row mb-5">
             {% for discipline, subscriptions in adulteAbonnements %}
                 <div class="col-md-4">
@@ -64,7 +65,7 @@
             <button type="submit" class="btn btn-inscription btn-lg my-3">Continuer</button>
         </div>
     </div>
-    {{ form_errors(form) }}
+
 </form>
 
 </section>

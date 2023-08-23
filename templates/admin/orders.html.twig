@@ -1,0 +1,40 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}Liste des commandes{% endblock %}
+
+{% block body %}
+<h1>Commandes</h1>
+
+<table class="table" id="adherentTableau">
+    <thead>
+        <tr>
+            <th>Référence</th>
+            <th>Date de création</th>
+            <th>Utilisateur</th>
+            <th>Total</th>
+            <th>Payé?</th>
+            <th>Traitement</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.getReference() }}</td>
+            <td>{{ order.getCreatedAt()|date('d/m/Y H:i') }}</td>
+            <td>{{ order.getUsers().getNom() }}</td> 
+            <td>{{ order.getTotal() }}</td>
+            <td>{{ order.isPayer() ? 'Oui' : 'Non' }}</td>
+            <td>{% if order.isProcessed() %}
+                    <span class="text-success fw-bold">Traitée</span>
+                {% else %}
+                    <span class="text-warning fw-bold">En attente de traitement</span>
+                {% endif %}
+            </td>
+            <td><a href="{{ path('admin_order_detail', {'id': order.getId()}) }}" class="btn btn-secondary">Détails</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+

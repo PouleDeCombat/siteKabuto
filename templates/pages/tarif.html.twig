@@ -67,7 +67,11 @@
 
 <div class="container d-flex justify-content-center mt-3 mb-5">
     <a href="{{ path('app_register') }}" class="btn btn-landing fw-bold text-decoration-none text-dark d-flex align-items-center justify-content-center" style="z-index: 11;">
-    INSCRIPTION</a>
+    {% if app.user %}
+        S'abonner
+    {% else %}
+        INSCRIPTION
+    {% endif %}</a>
 </div>
 
 <img src="{{ asset('images/vector.svg') }}" class="vector-icon1" alt="vector jaune">

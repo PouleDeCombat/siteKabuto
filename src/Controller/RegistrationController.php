@@ -127,6 +127,7 @@ public function chooseSubscription(Request $request): Response
 #[Route('/register/etapes-trois', name: 'app_self_subscriptionForm', methods: ["GET"])]
 public function showSelfSubscriptionForm(EntityManagerInterface $entityManager): Response
 {
+   
     // Récupérer la liste des abonnements pour la catégorie adulte
     $abonnements = $entityManager->getRepository(Abonnements::class)->findBy(['categorie' => 'adultes']);
 
@@ -244,8 +245,9 @@ public function registerKidsStep3(Request $request, EntityManagerInterface $em, 
 
 
     #[Route('/register/kids/step4', name: 'register_kids_step_quatre')]
-    public function showKidsForm(Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response
+    public function showKidsForm(Request $request, EntityManagerInterface $entityManager, SessionInterface $session, AbonnementsRepository $abonnementsRepository): Response
     {
+        
         // Récupération des enfants associés à l'utilisateur
         $kidsData = [];
         foreach ($this->getUser()->getKids() as $kid) {
@@ -254,55 +256,48 @@ public function registerKidsStep3(Request $request, EntityManagerInterface $em, 
     
         // Création du formulaire avec les données
         $form = $this->createForm(KidsAdhesionCollectionFormType::class, ['kidsAbonnement' => $kidsData]);
-        
-        // Gestion de la soumission du formulaire
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $formData = $form->getData();
-            $selectedAbonnements = $formData['kidsAbonnement'];
-
-
-            $ids = [];
-            foreach ($selectedAbonnements as $kidAbonnement) {
-                $ids[] = $kidAbonnement['abonnement']; // supposant que 'abonnement' est l'ID de l'abonnement sélectionné
+        if ($request->isMethod('POST')) {
+            $abonnements = [];
+            $totalPrice = 0;
+    
+            foreach ($request->request->all() as $key => $value) {
+                if (strpos($key, 'abonnement_for_kid_') === 0 || $key === 'abonnement') {
+                    $abonnementId = $value;
+    
+                    $abonnements[] = $abonnementId;
+                    $abonnement = $abonnementsRepository->find($abonnementId);
+    
+                    if ($abonnement) {
+                        $totalPrice += (float) $abonnement->getPrix();
+                    }
+                }
             }
 
-            // Récupération des abonnements réels en fonction des IDs et stockage dans la session.
-            $selectedSubscriptions = [];
-            foreach ($selectedAbonnements as $kidAbonnement) {
-                $selectedSubscriptions[] = $entityManager->getRepository(Abonnements::class)->find($kidAbonnement['abonnement']);
-            }
-            $session->set('selected_subscriptions', $selectedSubscriptions);
+            $session->set('abos', $abonnements);
+            $session->set('totalPriceBoth', $totalPrice);
 
-            $session->set('selected_abonnements_ids', $ids);
-            
-            // Après avoir sauvegardé, redirigez vers la page de paiement
-            $this->addFlash('success', 'Abonnement sélectionné avec succès!');
-            return $this->redirectToRoute('app_stripe'); // Assurez-vous d'avoir la route correcte ici
-        } else {
-            dump($form->getErrors(true));
+            return $this->redirectToRoute('app_kids_step_cinq');
         }
-    
-        // Récupérer les abonnements pour les catégories "enfants" et "ados"
+
         $abonnements = $entityManager->getRepository(Abonnements::class)->createQueryBuilder('a')
-            ->where('a.categorie = :kids OR a.categorie = :ados')
-            ->setParameters([
-                'kids' => 'kids',
-                'ados' => 'ados'
-            ])
-            ->getQuery()
-            ->getResult();
-    
+        ->where('a.categorie = :kids OR a.categorie = :ados')
+        ->setParameters([
+            'kids' => 'kids',
+            'ados' => 'ados'
+        ])
+        ->getQuery()
+        ->getResult();
+
         $groupedAbonnements = [];
         foreach ($abonnements as $abonnement) {
             $groupedAbonnements[$abonnement->getDiscipline()][] = $abonnement;
         }
-    
         // Affichage de la vue
         return $this->render('registration/registerKidsStep4.html.twig', [
             'form' => $form->createView(),
             'kids' => $this->getUser()->getKids(),
-            'groupedAbonnements' => $groupedAbonnements
+             'groupedAbonnements' => $groupedAbonnements,
+           
         ]);
     }
     
@@ -310,22 +305,23 @@ public function registerKidsStep3(Request $request, EntityManagerInterface $em, 
     #[Route('/register/etapes-cinq', name: 'app_kids_step_cinq', methods: ["GET"])]
     public function checkoutStripeKids(SessionInterface $session, AbonnementsRepository $abonnementsRepository): Response
     {
-        // Récupérer la liste des IDs d'abonnements sélectionnés (à partir de la session ou d'une autre méthode)
-        $selectedAbonnementsIds = $session->get('selected_abonnements_ids', []);
+         // Récupérer la liste des IDs d'abonnements sélectionnés (à partir de la session ou d'une autre méthode)
+    $selectedAboIds = $session->get('abos');
+    $totalPrice = $session->get('totalPriceBoth');
 
-        // Récupérer les détails de tous les abonnements de la base de données
-        $selectedAbonnements = $abonnementsRepository->findBy(['id' => $selectedAbonnementsIds]);
-
-        // Calculer le total
-        $total = 0;
-        foreach ($selectedAbonnements as $abonnement) {
-            $total += $abonnement->getPrix();
+    // Récupérer les objets Abonnements à partir des IDs
+    $selectedAbonnements = [];
+    foreach ($selectedAboIds as $kidIndex => $abonnementId) {
+        $abonnement = $abonnementsRepository->find($abonnementId);
+        if ($abonnement) {
+            $selectedAbonnements[$kidIndex] = $abonnement;
         }
+    }
 
         // Transmettre les données à la vue
         return $this->render('stripe/kidsCheckout_stripe.html.twig', [
             'selectedAbonnements' => $selectedAbonnements,
-            'total' => $total,
+            'total' => $totalPrice,
             'stripe_key' => $_ENV["STRIPE_KEY"] // Clé publiable Stripe
         ]);
     }
@@ -335,8 +331,10 @@ public function registerKidsStep3(Request $request, EntityManagerInterface $em, 
 
     #[Route('/inscription/etape-trois-bis', name: 'app_both_subscriptionForm', methods: ["GET", "POST"])]
 
-public function registerBothStep3(Request $request, EntityManagerInterface $em)
+public function registerBothStep3(Request $request, EntityManagerInterface $em, KidsRepository $kidsRepo)
 {
+    $user = $this->getUser();
+    $kidsAlreadyAdded = $kidsRepo->findBy(['user' => $user]);
     $kidsCollection = new KidsCollection();
     $form = $this->createForm(KidsCollectionTypeForm::class, $kidsCollection);
 
@@ -354,6 +352,7 @@ public function registerBothStep3(Request $request, EntityManagerInterface $em)
 
     return $this->render('registration/registerBothStep3.html.twig', [
         'form' => $form->createView(),
+        'kidsAlreadyAdded' => $kidsAlreadyAdded
     ]);
 }
 

@@ -1,4 +1,3 @@
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Sélection d'abonnement{% endblock %}
@@ -16,13 +15,14 @@
    
  </div>
 
-    {{ form_start(form) }}
+
     <div class="row custom-cadre mb-5">
         <h1 class="text-white text-center main-title-inscription">Sélection d'abonnement pour les enfants</h1>
 
     {% for kidIndex, kidForm in form.kidsAbonnement %}
     <div class="col-12">
         <h3 class="text-white">Choix de l'abonnement pour {{ kids[kidIndex].nom }}  {{ kids[kidIndex].prenom }} : </h3>
+        <form action="{{ path('register_kids_step_quatre') }}" method="post">
         <div class="row mb-5">
             {% for discipline, subscriptions in groupedAbonnements %}
                 <div class="col-md-4">
@@ -53,7 +53,7 @@
     </div>
    
 
-    {{ form_errors(form) }}
+  
 </form>
 
 </section>

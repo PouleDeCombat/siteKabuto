@@ -1,0 +1,37 @@
+{% extends 'usersBase.html.twig' %}
+
+{% block title %}Détails du Cours{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+    <h1>Détails du Cours</h1>
+
+    <div class="card mt-4">
+        <div class="card-header">
+           Cours de {{ cours.discipline }} 
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Discipline : {{ cours.discipline }}</h5>
+            <p class="card-text">Niveau : {{ cours.niveau }}</p>
+            <p class="card-text">Date de début : {{ cours.start|date('d/m/Y H:i') }}</p>
+            <p class="card-text">Date de fin : {{ cours.end|date('d/m/Y H:i') }}</p>
+
+            {% if not existingReservation %}
+                <form action="{{ path('reservation_create') }}" method="POST">
+                    <input type="hidden" name="cours_id" value="{{ cours.id }}" />
+                    <button type="submit" class="btn btn-primary">S'inscrire</button>
+                </form>
+            {% else %}
+                <p class="alert alert-info">Vous êtes déjà inscrit à ce cours.</p>
+                <form action="{{ path('reservation_delete') }}" method="POST">
+                    <input type="hidden" name="cours_id" value="{{ cours.id }}" />
+                    <button type="submit" class="btn btn-danger">Se désinscrire</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

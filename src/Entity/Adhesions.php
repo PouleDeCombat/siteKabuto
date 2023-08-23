@@ -32,8 +32,7 @@ class Adhesions
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $statut = null;
 
-    #[ORM\Column(length: 100, nullable: true)]
-    private ?string $prix = null;
+   
 
     public function getId(): ?int
     {
@@ -112,15 +111,5 @@ class Adhesions
         return $this;
     }
 
-    public function getPrix(): ?string
-    {
-        return $this->prix;
-    }
-
-    public function setPrix(?string $prix): static
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
+    
 }

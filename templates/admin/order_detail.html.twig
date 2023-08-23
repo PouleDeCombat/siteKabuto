@@ -1,0 +1,103 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}Détails de la commande{% endblock %}
+
+{% block body %}
+<h1>Détails de la commande {{ order.getReference() }} pour {{ order.getUsers().getNom() }} {{ order.getUsers().getPrenom() }}</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Produit</th>
+            <th>Quantité</th>
+            <th>Taille</th>
+            <th>Paiement</th>
+            <th>Traitement</th> {# Added a new column header for the processing status #}
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in order.getOrdersDetails() %} 
+        <tr>
+            <td>{{ item.getProducts().getName() }}</td>
+            <td>{{ item.getQuantity() }}</td>
+            <td>{{ item.getSize() }}</td>
+            <td>
+                {% if loop.first %}
+                    {% if order.isPayer() %}
+                       <span class="text-success fw-bold">Payé</span>
+                    {% else %}
+                        <span class="text-danger fw-bold">Non payé</span>
+                    {% endif %}
+                {% endif %}
+            </td>
+            <td>
+                {% if loop.first %}
+                    {% if order.isIsProcessed() %}
+                        <span class="text-success fw-bold">Traitée</span>
+                    {% else %}
+                        <span class="text-danger fw-bold">Non Traitée</span>
+                    {% endif %}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2 class="mb-4">Mise à jour de la commande</h2>
+{{ form_start(form, {'attr': {'class': 'mb-4'}}) }}
+
+<div class="mb-3">
+    <label class="form-label">{{ form_label(form.isPayer) }}</label>
+    <div class="d-flex">
+        <div class="form-check me-3">
+            {{ form_widget(form.isPayer[0], {'attr': {'class': 'form-check-input'}}) }}
+            {{ form_label(form.isPayer[0], 'Oui', {'label_attr': {'class': 'form-check-label'}}) }}
+        </div>
+        <div class="form-check">
+            {{ form_widget(form.isPayer[1], {'attr': {'class': 'form-check-input'}}) }}
+            {{ form_label(form.isPayer[1], 'Non', {'label_attr': {'class': 'form-check-label'}}) }}
+        </div>
+    </div>
+    {{ form_errors(form.isPayer) }}
+</div>
+
+<div class="mb-3">
+    <label class="form-label">{{ form_label(form.paymentMethod) }}</label>
+    <div class="d-flex">
+        <div class="form-check me-3">
+            {{ form_widget(form.paymentMethod[0], {'attr': {'class': 'form-check-input'}}) }}
+            {{ form_label(form.paymentMethod[0], 'Espèces', {'label_attr': {'class': 'form-check-label'}}) }}
+        </div>
+        <div class="form-check">
+            {{ form_widget(form.paymentMethod[1], {'attr': {'class': 'form-check-input'}}) }}
+            {{ form_label(form.paymentMethod[1], 'Chèque', {'label_attr': {'class': 'form-check-label'}}) }}
+        </div>
+    </div>
+    {{ form_errors(form.paymentMethod) }}
+</div>
+
+<div class="mb-3">
+    <label class="form-label">{{ form_label(form.isProcessed) }}</label>
+    <div class="d-flex">
+        <div class="form-check me-3">
+            {{ form_widget(form.isProcessed[0], {'attr': {'class': 'form-check-input'}}) }}
+            {{ form_label(form.isProcessed[0], 'Traitée', {'label_attr': {'class': 'form-check-label'}}) }}
+        </div>
+        <div class="form-check">
+            {{ form_widget(form.isProcessed[1], {'attr': {'class': 'form-check-input'}}) }}
+            {{ form_label(form.isProcessed[1], 'Non traitée', {'label_attr': {'class': 'form-check-label'}}) }}
+        </div>
+    </div>
+    {{ form_errors(form.isProcessed) }}
+</div>
+
+<div class="mb-3">
+    {{ form_widget(form.save, {'attr': {'class': 'btn btn-success'}}) }}
+</div>
+
+{{ form_end(form) }}
+
+{% endblock %}
+
+

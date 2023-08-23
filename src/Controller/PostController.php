@@ -11,7 +11,9 @@ use Doctrine\ORM\EntityManager;
 use App\Form\EditKidsProfileType;
 use App\Repository\KidsRepository;
 use App\Repository\PostRepository;
+use App\Repository\CoursRepository;
 use App\Repository\UsersRepository;
+use App\Repository\OrdersRepository;
 use App\Repository\ProductsRepository;
 use App\Form\EditCompetiteurProfileType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -258,6 +260,42 @@ public function renderEditProfileCompetiteur(Request $request, EntityManagerInte
         return $this->render('usersPages/editKidsProfile.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    
+     #[Route("/profile/commandes", name:"profile_orders")]
+     
+    public function viewOrders(UserInterface $user, OrdersRepository $ordersRepository)
+    {
+        $orders = $ordersRepository->findBy(['Users' => $user]);
+        
+        return $this->render('usersPages/orders.html.twig', [
+            'orders' => $orders,
+        ]);
+    }
+
+
+
+    #[Route('/calendar', name: 'app_calendar')]
+    public function index(CoursRepository $cours): Response
+    {
+        $events = $cours->findAll();
+
+        $leçon = [];
+
+        foreach($events as $event){
+            $leçon[] = [
+                'id' => $event->getId(),
+                'start' => $event->getStart()->format('Y-m-d H:i:s'),
+                'end' => $event->getEnd()->format('Y-m-d H:i:s'),
+                'discipline' => $event->getDiscipline(),
+                'niveau' => $event->getNiveau(),
+                'backgroundColor' => $event->getBackgroundColor(),
+                
+            ];
+        }
+            $data = json_encode($leçon);
+            return $this->render('calendar/index.html.twig', compact('data'));
     }
 
   

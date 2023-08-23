@@ -14,11 +14,21 @@
     <button class="btn btn-secondary step-btn ">Étape 4</button>
    
  </div>
-
+   
     {{ form_start(form) }}
     <div class="row custom-cadre">
         <h1 class="text-white text-center main-title-inscription">Inscrire les enfants</h1>
-
+    {% if kidsAlreadyAdded|length > 0 %}
+        <div class="mt-5">
+         <h3 class="text-white">Enfants déjà enregistrer : </h3>
+            <ul>
+                {% for kid in kidsAlreadyAdded %}
+                    <li class="text-white fs-5">{{ kid.nom }} {{ kid.prenom }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+{% endif %}
+        
         <div id="kids_container" data-prototype="{{ form_widget(form.kids.vars.prototype)|e('html_attr') }}">
             {% for kidForm in form.kids %}
                 <div class="kid-form col-6 mb-5">
@@ -43,6 +53,7 @@
         </div>
     </div>
     {{ form_end(form) }}
+    
 </section>
 
 {% block javascripts %}
@@ -58,11 +69,23 @@
 
                 let newFormDiv = document.createElement('div');
                 newFormDiv.innerHTML = newForm;
-                newFormDiv.classList.add('kid-form');
+                newFormDiv.classList.add('kid-form', 'col-6', 'mb-5');
+
+                // Ajout du bouton "Annuler"
+                let cancelButton = document.createElement('button');
+                cancelButton.textContent = "Annuler";
+                cancelButton.type = "button";
+                cancelButton.classList.add('btn', 'btn-danger', 'mt-3');
+                cancelButton.addEventListener('click', function() {
+                    container.removeChild(newFormDiv);
+                });
+
+                newFormDiv.appendChild(cancelButton);
 
                 container.appendChild(newFormDiv);
             });
         });
     </script>
 {% endblock %}
+
 {% endblock %}

@@ -2,6 +2,7 @@ body{
     margin: 0;
     padding: 0;
     background-image: url(../images/rectangle-1223@2x.png);
+    background-size: cover;
     overflow-x: hidden;
 }
 

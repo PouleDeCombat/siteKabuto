@@ -28,16 +28,31 @@
     </div>
 
     <!-- Fin -->
-    <div class="col text-end ">
-        <ul class="list-unstyled list-inline text-dark mb-0 ">
-            {% if app.user %}
-          <li class="nav-item list-inline-item"><a class="nav-link text-dark fw-bold" href="{{ path('app_profile') }}"><img src="{{ asset('images/login-icon.png') }}" alt=""></a></li>
-            {% else %}
-          <li class="nav-item list-inline-item"><a class="nav-link text-dark fw-bold" href="{{ path('app_login') }}"><img src="{{ asset('images/login-icon.png') }}" alt=""></a></li>
+   <div class="col text-end ">
+    <ul class="list-unstyled list-inline text-dark mb-0 ">
+        {% if app.user %}
+            <li class="nav-item list-inline-item">
+                <span class="nav-link text-dark fw-bold">
+                    Bonjour, {{ app.user.prenom }}
+                </span>
+            </li>
+            <li class="nav-item list-inline-item">
+                <a class="nav-link text-dark" href="{{ path('app_profile') }}" title="Accéder à mon profil">
+                    <i class="fas fa-user"></i> <!-- Ici j'utilise l'icône "user" de Font Awesome -->
+                </a>
+            </li>
+        {% else %}
+            <li class="nav-item list-inline-item">
+                <a class="nav-link text-dark fw-bold" href="{{ path('app_login') }}">
+                    <img src="{{ asset('images/login-icon.png') }}" alt="Login Icon">
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</div>
 
-            {% endif %}
-        </ul>
-    </div>
+
+
 </div>
 
 

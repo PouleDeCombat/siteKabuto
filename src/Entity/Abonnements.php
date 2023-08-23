@@ -22,7 +22,7 @@ class Abonnements
     private ?string $discipline = null;
 
     #[ORM\Column(length: 100)]
-    private ?string $prix = null;
+    private ?float $prix = null;
 
     #[ORM\Column(length: 100)]
     private ?string $durée = null;
@@ -64,12 +64,12 @@ class Abonnements
         return $this;
     }
 
-    public function getPrix(): ?string
+    public function getPrix(): ?float
     {
         return $this->prix;
     }
 
-    public function setPrix(string $prix): static
+    public function setPrix(float $prix): static
     {
         $this->prix = $prix;
 

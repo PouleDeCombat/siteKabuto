@@ -31,8 +31,16 @@ class Orders
     #[ORM\Column(type: "float")]
     private ?float $total = null;
 
+
     #[ORM\Column]
-    private ?bool $payer = null;
+    private ?bool $isProcessed = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $paymentMethod = null;
+
+    #[ORM\Column]
+    private bool $isPayer = false;
+
 
     public function __construct()
     {
@@ -122,14 +130,39 @@ class Orders
         return $this;
     }
 
-    public function isPayer(): ?bool
+    public function getIsPayer(): ?bool
+{
+    return $this->isPayer;
+}
+
+public function setIsPayer(?bool $isPayer): self
+{
+    $this->isPayer = $isPayer ?? false;
+    return $this;
+}
+
+    
+
+    public function isIsProcessed(): ?bool
     {
-        return $this->payer;
+        return $this->isProcessed;
     }
 
-    public function setPayer(bool $payer): static
+    public function setIsProcessed(bool $isProcessed): static
     {
-        $this->payer = $payer;
+        $this->isProcessed = $isProcessed;
+
+        return $this;
+    }
+
+    public function getPaymentMethod(): ?string
+    {
+        return $this->paymentMethod;
+    }
+
+    public function setPaymentMethod(?string $paymentMethod): static
+    {
+        $this->paymentMethod = $paymentMethod;
 
         return $this;
     }

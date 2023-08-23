@@ -104,6 +104,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $finAbonnement = null;
 
+    #[ORM\ManyToMany(targetEntity: Reservations::class, mappedBy: 'user')]
+    private Collection $reservations;
+
   
 
     public function __construct(){
@@ -112,6 +115,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         $this->competitions = new ArrayCollection();
         $this->kids = new ArrayCollection();
         $this->abonnement = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -491,6 +495,33 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFinAbonnement(?\DateTimeInterface $finAbonnement): static
     {
         $this->finAbonnement = $finAbonnement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservations>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservations $reservation): static
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $reservation->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservations $reservation): static
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            $reservation->removeUser($this);
+        }
 
         return $this;
     }
