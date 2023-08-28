@@ -65,6 +65,9 @@ class Kids
     #[ORM\OneToMany(mappedBy: 'kids', targetEntity: Adhesions::class)]
     private Collection $adhesions;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $certificatMedical = null;
+
 
 
 
@@ -294,6 +297,18 @@ class Kids
                 $adhesion->setKids(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCertificatMedical(): ?string
+    {
+        return $this->certificatMedical;
+    }
+
+    public function setCertificatMedical(?string $certificatMedical): static
+    {
+        $this->certificatMedical = $certificatMedical;
 
         return $this;
     }

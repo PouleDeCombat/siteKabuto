@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement des abonnements{% endblock %}
+
+{% block body %}
+<section class="container d-flex flex-column justify-content-center padding mt-5 mb-5" style="height: 60vh;">
+<div class="d-flex align-items-center justify-content-center">
+    <button class="btn btn-secondary step-btn active">Étape 1</button>
+    <div class="line"></div>
+    <button class="btn btn-secondary step-btn active">Étape 2</button>
+    <div class="line"></div>
+    <button class="btn btn-secondary step-btn active">Étape 3</button>
+    <div class="line"></div>
+    <button class="btn btn-secondary step-btn active">Étape 4</button>
+</div>
+
+    <div class="row custom-cadre">
+    <h1 class="text-white text-center main-title-inscription w-100">Finaliser l'achat des abonnements</h1>
+
+    <!-- Stripe Payment Form -->
+    <div class="col-6">
+        <form id='checkout-form-both' method='post' action="{{ path('payment_stripe_both', {'orderId':order_id}) }}">
+            <button 
+                class="btn btn-inscription btn-lg my-3"
+                type="submit"
+                style="width: 100%; padding: 7px;">Payer par carte bancaire {{ total }} € 
+            </button>
+        </form>
+    </div>
+
+    <!-- Cart Summary -->
+    <div class="col-6 mb-5">
+        <fieldset class="ms-5 text-white d-flex flex-column">
+            <h5 class="mb-3">Récapitulatif du Panier</h5>
+            <ul>
+                <li> {{ userName }} : {{ userAbonnement.categorie }} - {{ userAbonnement.discipline }} - {{ userAbonnement.prix }} € - {{ userAbonnement.durée }} </li>
+                {% for kidIndex, abonnement in kidsAbonnements %}
+                <li> {{ kidsNames[kidIndex] }} : {{ abonnement.categorie }} - {{ abonnement.discipline }} - {{ abonnement.prix }} € - {{ abonnement.durée }} </li>
+                {% endfor %}
+            </ul>
+            <strong>Total : {{ total }} €</strong>
+        </fieldset>
+    </div>
+
+</div>
+
+</section>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        var stripe = Stripe("{{stripe_key}}");
+        var elements = stripe.elements();
+        var cardElement = elements.create('card');
+        cardElement.mount('#card-element-both');
+
+        function createToken() {
+            document.getElementById("pay-btn-both").disabled = true;
+            stripe.createToken(cardElement).then(function(result) {
+                if(typeof result.error != 'undefined') {
+                    document.getElementById("pay-btn-both").disabled = false;
+                    alert(result.error.message);
+                }
+
+                // creating token success
+                if(typeof result.token != 'undefined') {
+                    document.getElementById("stripe-token-id-both").value = result.token.id;
+                    document.getElementById('checkout-form-both').submit();
+                }
+            });
+        }
+    </script>
+{% endblock %}

@@ -42,6 +42,7 @@ class CartController extends AbstractController
             ];
             $total += $product->getPrice() * $quantity;
         }
+        
     
         return $this->render('panier/index.html.twig', compact('data', 'total'));
     }
@@ -89,14 +90,15 @@ public function add(Products $product, Request $request, SessionInterface $sessi
         return $this->redirectToRoute('app_login');
     }
 
-    $orderExist = $em->getRepository(Orders::class)->findOneBy(['Users' => $user, 'payer' => false]);
+    $orderExist = $em->getRepository(Orders::class)->findOneBy(['Users' => $user, 'isPayer' => false]);
 
     if (!$orderExist) {
         $order = new Orders();
         $order->setTotal($totalPrice);
         $order->setUsers($user);
         $order->setCreatedAt(new \DateTimeImmutable('now'));
-        $order->setPayer(false);
+        $order->setIsPayer(false);
+        $order->setIsProcessed(false);
         $reference = 'ORD-' . $user->getId() . '-' . time();
         $order->setReference($reference);
 
@@ -177,7 +179,7 @@ public function increaseQuantity(Products $product, EntityManagerInterface $em, 
         return $this->redirectToRoute('app_login');
     }
     
-    $orderExist = $em->getRepository(Orders::class)->findOneBy(['Users' => $user, 'payer' => false]);
+    $orderExist = $em->getRepository(Orders::class)->findOneBy(['Users' => $user, 'isPayer' => false]);
     if (!$orderExist) {
         // Si l'utilisateur n'a pas de commande en cours, redirigez-le vers la page d'accueil du panier.
         return $this->redirectToRoute('cart_index');
@@ -266,7 +268,7 @@ public function addOrderDetailWithDifferentSize(EntityManagerInterface $em, $cur
         $session->set('panier', $panier);
     
         $user = $this->getUser();
-        $order = $em->getRepository(Orders::class)->findOneBy(['Users' => $user, 'payer' => false]);
+        $order = $em->getRepository(Orders::class)->findOneBy(['Users' => $user, 'isPayer' => false]);
     
         if($order){
             $orderDetails = $em->getRepository(OrdersDetails::class)->findOneBy(['orders' => $order, 'products' => $product]);
@@ -300,7 +302,7 @@ public function addOrderDetailWithDifferentSize(EntityManagerInterface $em, $cur
         $session->set('panier', $panier);
     
         $user = $this->getUser();
-        $order = $em->getRepository(Orders::class)->findOneBy(['Users' => $user, 'payer' => false]);
+        $order = $em->getRepository(Orders::class)->findOneBy(['Users' => $user, 'isPayer' => false]);
     
         if($order){
             $orderDetails = $em->getRepository(OrdersDetails::class)->findBy(['orders' => $order, 'products' => $product]);
@@ -347,7 +349,7 @@ public function empty(SessionInterface $session, EntityManagerInterface $em)
     $user = $this->getUser();
 
     if($user){
-        $order = $em->getRepository(Orders::class)->findOneBy(['Users' => $user, 'payer' => false]);
+        $order = $em->getRepository(Orders::class)->findOneBy(['Users' => $user, 'isPayer' => false]);
 
         if($order){
             $orderDetails = $em->getRepository(OrdersDetails::class)->findBy(['orders' => $order]);

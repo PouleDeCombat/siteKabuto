@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Controller;
+use App\Entity\Kids;
 use App\Entity\Post;
 use App\Entity\Users;
 use App\Entity\Products;
-use app\Entity\Competiteurs;
 
+use app\Entity\Competiteurs;
 use App\Form\EditProfileType;
 use Doctrine\ORM\EntityManager;
 use App\Form\EditKidsProfileType;
@@ -15,15 +16,18 @@ use App\Repository\CoursRepository;
 use App\Repository\UsersRepository;
 use App\Repository\OrdersRepository;
 use App\Repository\ProductsRepository;
+use App\Form\CertificatMedicalFormType;
 use App\Form\EditCompetiteurProfileType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CompetiteursRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use App\Form\EditKidsCompetiteurProfileType;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -101,13 +105,21 @@ class PostController extends AbstractController
 public function renderProfile(UserInterface $user, KidsRepository $kidsRepository): Response
 {
     $kids = $kidsRepository->findBy(['user' => $user]);
+    
+    // Create the form for the main user
+    $forms['user'] = $this->createForm(CertificatMedicalFormType::class)->createView();
+    
+    // Create a form for each kid
+    foreach ($kids as $kid) {
+        $forms['kid_' . $kid->getId()] = $this->createForm(CertificatMedicalFormType::class)->createView();
+    }
 
-    // if (!$kids) {
-    //     throw $this->createNotFoundException('No kids found for this user');
-    // }
-
-    return $this->render('usersPages/profile.html.twig', ['kids' => $kids]);
+    return $this->render('usersPages/profile.html.twig', [
+        'kids' => $kids,
+        'forms' => $forms
+    ]);
 }
+
 
 
 
@@ -297,6 +309,83 @@ public function renderEditProfileCompetiteur(Request $request, EntityManagerInte
             $data = json_encode($leçon);
             return $this->render('calendar/index.html.twig', compact('data'));
     }
+
+
+
+    #[Route('/upload-certificat/{type}/{id}', name: 'app_upload_certificat')]
+public function uploadCertificat(Request $request, $type, $id, EntityManagerInterface $em): Response
+{
+    $form = $this->createForm(CertificatMedicalFormType::class);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        
+        /** @var UploadedFile $certificatFile */
+        $certificatFile = $form->get('certificatMedical')->getData();
+
+        $filesystem = new Filesystem();
+
+        // Generate a new filename (you can change this logic if you want)
+        $newFilename = uniqid() . '.' . $certificatFile->guessExtension();
+
+        // Your directory to upload to
+        $destination = $this->getParameter('kernel.project_dir') . '/public/uploads/certificatsMedical';
+
+        // Move the file to the directory
+        $certificatFile->move(
+            $destination,
+            $newFilename
+        );
+
+        // Depending on type ('user' or 'kid'), fetch the corresponding entity and update the field
+        if ($type === 'user') {
+            $entity = $em->getRepository(Users::class)->find($id);
+        } else if ($type === 'kid') {
+            $entity = $em->getRepository(Kids::class)->find($id);
+        }
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Entity not found');
+        }
+
+        $entity->setCertificatMedical('uploads/certificatsMedical/' . $newFilename);
+        $em->flush();
+
+        return $this->redirectToRoute('app_profile');
+    }
+
+    // If something went wrong or form wasn't submitted
+    return $this->redirectToRoute('app_profile');
+}
+
+
+
+#[Route('/delete-certificat/{type}/{id}', name: 'app_delete_certificat')]
+public function deleteCertificat($type, $id, EntityManagerInterface $em): Response
+{
+    // Récupérez l'entité selon le type
+    $entity = null;
+    if ($type === 'user') {
+        $entity = $em->getRepository(Users::class)->find($id);
+    } else if ($type === 'kid') {
+        $entity = $em->getRepository(Kids::class)->find($id);
+    }
+
+    if (!$entity) {
+        throw $this->createNotFoundException('Entity not found');
+    }
+
+    // Supprimez le fichier du serveur
+    $filesystem = new Filesystem();
+    if ($entity->getCertificatMedical()) {
+        $filesystem->remove($this->getParameter('kernel.project_dir') . '/public/' . $entity->getCertificatMedical());
+        $entity->setCertificatMedical(null);
+        $em->flush();
+    }
+
+    return $this->redirectToRoute('app_profile');
+}
+
 
   
     

@@ -2,53 +2,64 @@
 
 {% block body %}
 
-{{ form_start(form) }}
+<div class="container mt-4">
+    <h2 class="mb-4">Mettre à jour le profil de compétition</h2>
 
+    {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': ''}}) }}
 
-
-<div class="row">
-    <div class="col">
-        <div class="form-group">
-            {{ form_label(form.ceinture) }}
-            {{ form_widget(form.ceinture) }}
+    <div class="form-row mb-3">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.ceinture, null, {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.ceinture, {'attr': {'class': 'form-control'}}) }}
+            </div>
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col">
-        <div class="form-group">
-            {{ form_label(form.kimono) }}
-            {{ form_widget(form.kimono) }}
+    <div class="form-row mb-3">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.kimono, null, {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.kimono, {'attr': {'class': 'form-control'}}) }}
+            </div>
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col">
-        <div class="form-group">
-            {{ form_label(form.categoriePoid) }}
-            {{ form_widget(form.categoriePoid) }}
+    <div class="form-row mb-3">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.categoriePoid, null, {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.categoriePoid, {'attr': {'class': 'form-control'}}) }}
+            </div>
         </div>
     </div>
+
+
+
+      <div class="form-row mb-3">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.categoriePoidGI, null, {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.categoriePoidGI, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    <div class="form-row mb-4">
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary">Valider</button>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+
 </div>
 
 
-
-<button type="submit" class="btn btn-primary">Valider</button>
-
-{{ form_end(form) }}
-
-<script>
-document.getElementById('{{ form.categoriePoid.vars.id }}').addEventListener('change', function() {
-    let max = 2;
-    if (this.selectedOptions.length > max) {
-        alert('Vous ne pouvez sélectionner que ' + max + ' options.');
-        for (let i = 0; i < this.options.length; i++) {
-            this.options[i].selected = i < max;
-        }
-    }
-});
-</script>
 
 {% endblock %}
+

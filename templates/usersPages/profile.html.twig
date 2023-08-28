@@ -32,6 +32,36 @@
                                 <li><i class="fas fa-map-marker-alt"></i> Adresse : {{app.user.adresse }}, {{app.user.zipcode }}, {{app.user.ville }}</li>
                             </ul>
                             <a href="{{ path('app_edit_profile') }}" class="btn btn-primary mb-2">Modifier le profil</a>
+
+
+                            {% if app.user.certificatMedical %}
+    
+                                <div class="dropdown mt-5">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Gérer le certificat médical
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="contactDropdown">
+                                        <a href="{{ path('app_delete_certificat', {'type': 'user', 'id': app.user.id}) }}" class="dropdown-item btn btn-warning">Supprimer le certificat</a>
+                                        
+                                        
+                                    </div>
+                                </div>
+                            {% else %}
+
+                            <div class="dropdown mt-5">
+                                <button class="btn btn-warning  dropdown-toggle" type="button" id="contactDropdown" data-toggle="dropdown" aria-haspopup="alse" aria-expanded="false">Fournir un certificat médical</button>
+                                <div class="dropdown-menu" aria-labelledby="contactDropdown">
+                                    <form action="{{ path('app_upload_certificat', {'type': 'user', 'id': app.user.id}) }}"          method="post" enctype="multipart/form-data">
+                                        {{ form(forms['user']) }}
+                                    </form>
+
+                                    </div>
+                            </div>
+                            
+
+{% endif %}
+
+
                         </div>
                         
                         <!-- Informations du profil compétiteur -->
@@ -39,10 +69,12 @@
                             <h4>Profil de compétiteur</h4>
                             <ul class="list-unstyled">
                                 <li><i class="fas fa-ribbon"></i> Ceinture : {{app.user.ceinture}}</li>
-                                <li><i class="fas fa-weight"></i> Catégorie de poids : {{app.user.categoriePoid}}</li>
+                                <li><i class="fas fa-weight"></i> Catégorie de poids No-Gi : {{app.user.categoriePoid}}</li>
+                                <li><i class="fas fa-weight"></i> Catégorie de poids Gi : {{app.user.categoriePoidGi}}</li>
                                 <li><i class="fas fa-user"></i> Kimono : {{ app.user.kimono}}</li>
                             </ul>
                             <a href="{{ path('app_edit_competiteur_profile') }}" class="btn btn-primary">Modifier le profil compétiteur</a>
+                           
                         </div>
                     </div>
                 </div>
@@ -69,6 +101,32 @@
                                         <li><i class="fas fa-map-marker-alt"></i> Adresse : {{kid.adresse }}, {{kid.zipcode }}, {{kid.ville }}</li>
                                     </ul>
                                     <a href="{{ path('app_edit_kids_profile') }}" class="btn btn-primary mb-2">Modifier le profil</a>
+
+                                   {% if kid.certificatMedical %}
+                                    {# S'il a déjà un certificat, proposez-lui de le remplacer ou de le supprimer #}
+                                    <div class="dropdown mt-5">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Gérer le certificat médical
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="contactDropdown">
+                                            <a href="{{ path('app_delete_certificat', {'type': 'kid', 'id': kid.id}) }}" class="dropdown-item btn btn-danger">Supprimer le certificat</a>
+                                            
+                                           
+                                        </div>
+                                    </div>
+                                {% else %}
+                                            <div class="dropdown mt-5">
+                                <button class="btn btn-warning  dropdown-toggle" type="button" id="contactDropdown" data-toggle="dropdown" aria-haspopup="alse" aria-expanded="false">Fournir un certificat médical</button>
+                                <div class="dropdown-menu" aria-labelledby="contactDropdown">
+                                    <form action="{{ path('app_upload_certificat', {'type': 'kid', 'id': kid.id}) }}"          method="post" enctype="multipart/form-data">
+                                        {{ form(forms['kid_' ~ kid.id]) }}
+
+                                    </form>
+
+                                    </div>
+                            </div>
+                                {% endif %}            
+
                                 </div>
                                 
                                 <!-- Informations du profil compétiteur de l'enfant -->

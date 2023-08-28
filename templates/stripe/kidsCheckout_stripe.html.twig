@@ -1,93 +1,71 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Paiement{% endblock %}
-
-
+{% block title %}Paiement des abonnements enfants{% endblock %}
 
 {% block body %}
-<section class="container d-flex flex-column justify-content-center" style="height: 90vh;">
-    <div class="breadcrumb-container">
-        <span>1. Création de votre compte</span>
-        <span>2. Choisir un abonnement</span>
-        <span>3. Sélection de l'offre</span>
-        <span class="active">4. Finalisations</span>
-    </div>
+<section class="container d-flex flex-column justify-content-center padding mt-5 mb-5" style="height: 60vh;">
+<div class="d-flex align-items-center justify-content-center">
+    <button class="btn btn-secondary step-btn active">Étape 1</button>
+    <div class="line"></div>
+    <button class="btn btn-secondary step-btn active">Étape 2</button>
+    <div class="line"></div>
+    <button class="btn btn-secondary step-btn active">Étape 3</button>
+    <div class="line"></div>
+    <button class="btn btn-secondary step-btn active">Étape 4</button>
+</div>
 
     <div class="row custom-cadre">
-        <h1 class="text-white text-center main-title-inscription">Finaliser votre achat</h1>
-        <div class="col-6 mb-5">
-            <fieldset class="ms-5 text-white d-flex flex-column">
-                <!-- Cart Summary -->
-                <h5 class="mb-3">Récapitulatif du Panier</h5>
-                <ul>
-                {% for abonnement in selectedAbonnements %}
-                    <li> {{ abonnement.categorie }} - {{ abonnement.discipline }} - {{ abonnement.prix }}€ - {{ abonnement.durée }} </li>
-                {% endfor %}
-                </ul>
-                <strong>Total : {{ total }} €</strong>
-            </fieldset>
-        </div>
+    <h1 class="text-white text-center main-title-inscription w-100">Finaliser l'achat des abonnements enfants</h1>
 
-        <!-- Stripe Payment Form -->
-        <div class="col-6">
-        <form id='checkout-form' method='post' action="{{ path('app_stripe_charge') }}">
-            <input type='hidden' name='stripeToken' id='stripe-token-id'>
-            <label for="name" class="form-label text-white">Nom complet</label>
-            <input type="text" class="form-control" id="name" placeholder="Entrez votre nom complet">
-            
-            <label for="cardNumber" class="form-label text-white mt-3">Numéro de Carte</label>
-            <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9101 1121">
-
-            <div class="row mt-3">
-                <div class="col-md-6 mt-3">
-                    <label for="expiryDate" class="form-label text-white">Date d'Expiration</label>
-                    <input type="text" class="form-control" id="expiryDate" placeholder="MM/AA">
-                </div>
-                <div class="col-md-6 mt-3">
-                    <label for="cvv" class="form-label text-white">CVV</label>
-                    <input type="text" class="form-control" id="cvv" placeholder="123">
-                </div>
-            </div>
-            
+    <!-- Stripe Payment Form -->
+    <div class="col-6">
+        <form id='checkout-form-kids' method='post' action="{{ path('payment_stripe_kids', {'orderId':order_id}) }}">
             <button 
-                id='pay-btn'
                 class="btn btn-inscription btn-lg my-3"
-                type="button"
-                style="width: 100%; padding: 7px;"
-                onclick="createToken()">Payer {{ total }} 
+                type="submit"
+                style="width: 100%; padding: 7px;">Payer par carte bancaire {{ total }} € 
             </button>
         </form>
     </div>
-      
+
+    <!-- Cart Summary -->
+    <div class="col-6 mb-5">
+        <fieldset class="ms-5 text-white d-flex flex-column">
+            <h5 class="mb-3">Récapitulatif du Panier</h5>
+            <ul>
+                {% for kidIndex, abonnement in selectedAbonnements %}
+                <li> {{ kids[kidIndex].nom }} {{ kids[kidIndex].prenom }} : {{ abonnement.categorie }} - {{ abonnement.discipline }} - {{ abonnement.prix }} € - {{ abonnement.durée }} </li>
+                {% endfor %}
+            </ul>
+            <strong>Total : {{ total }} €</strong>
+        </fieldset>
     </div>
+
+</div>
+
 </section>
-{% endblock %}
-
-
-
-{% block javascripts %}
     <script src="https://js.stripe.com/v3/"></script>
     <script>
         var stripe = Stripe("{{stripe_key}}");
         var elements = stripe.elements();
         var cardElement = elements.create('card');
-        cardElement.mount('#card-element');
+        cardElement.mount('#card-element-kids');
 
         function createToken() {
-            document.getElementById("pay-btn").disabled = true;
+            document.getElementById("pay-btn-kids").disabled = true;
             stripe.createToken(cardElement).then(function(result) {
-
                 if(typeof result.error != 'undefined') {
-                    document.getElementById("pay-btn").disabled = false;
+                    document.getElementById("pay-btn-kids").disabled = false;
                     alert(result.error.message);
                 }
 
                 // creating token success
                 if(typeof result.token != 'undefined') {
-                    document.getElementById("stripe-token-id").value = result.token.id;
-                    document.getElementById('checkout-form').submit();
+                    document.getElementById("stripe-token-id-kids").value = result.token.id;
+                    document.getElementById('checkout-form-kids').submit();
                 }
             });
         }
     </script>
 {% endblock %}
+

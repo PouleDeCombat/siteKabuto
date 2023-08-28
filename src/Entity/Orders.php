@@ -41,10 +41,14 @@ class Orders
     #[ORM\Column]
     private bool $isPayer = false;
 
+    #[ORM\ManyToMany(targetEntity: Abonnements::class, inversedBy: 'orders')]
+    private Collection $abonnement;
+
 
     public function __construct()
     {
         $this->ordersDetails = new ArrayCollection();
+        $this->abonnement = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -163,6 +167,30 @@ public function setIsPayer(?bool $isPayer): self
     public function setPaymentMethod(?string $paymentMethod): static
     {
         $this->paymentMethod = $paymentMethod;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Abonnements>
+     */
+    public function getAbonnement(): Collection
+    {
+        return $this->abonnement;
+    }
+
+    public function addAbonnement(Abonnements $abonnement): static
+    {
+        if (!$this->abonnement->contains($abonnement)) {
+            $this->abonnement->add($abonnement);
+        }
+
+        return $this;
+    }
+
+    public function removeAbonnement(Abonnements $abonnement): static
+    {
+        $this->abonnement->removeElement($abonnement);
 
         return $this;
     }

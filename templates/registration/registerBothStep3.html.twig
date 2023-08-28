@@ -20,19 +20,19 @@
         <h1 class="text-white text-center main-title-inscription">Inscrire les enfants</h1>
     {% if kidsAlreadyAdded|length > 0 %}
         <div class="mt-5">
-         <h3 class="text-white">Enfants déjà enregistrer : </h3>
-            <ul>
+         <h3 class="text-white">Enfants déjà inscrit : </h3>
+            <ul class="d-flex">
                 {% for kid in kidsAlreadyAdded %}
-                    <li class="text-white fs-5">{{ kid.nom }} {{ kid.prenom }}</li>
+                    <li class="text-white fs-5 me-5">{{ kid.nom }} {{ kid.prenom }}</li>
                 {% endfor %}
             </ul>
         </div>
 {% endif %}
-        
-        <div id="kids_container" data-prototype="{{ form_widget(form.kids.vars.prototype)|e('html_attr') }}">
+       
+        <div class="d-flex flex-column align-items-center" id="kids_container" data-prototype="{{ form_widget(form.kids.vars.prototype)|e('html_attr') }}">
             {% for kidForm in form.kids %}
-                <div class="kid-form col-6 mb-5">
-                    <fieldset class="ms-5  d-flex flex-column ">
+                <div class="kid-form col-6  mb-5 ">
+                    <fieldset class="ms-5  ">
                         {{ form_row(kidForm.nom) }}
                         {{ form_row(kidForm.prenom) }}
                         {{ form_row(kidForm.date_de_naissance) }}
@@ -51,9 +51,9 @@
             <button id="add-kid" type="button" class="btn btn-secondary my-3" style="height: 50px">Ajouter un  enfant</button>
             <button type="submit" class="btn btn-inscription btn-lg my-3 ">Continuer</button>
         </div>
-    </div>
-    {{ form_end(form) }}
     
+    {{ form_end(form) }}
+    </div> 
 </section>
 
 {% block javascripts %}
@@ -62,6 +62,7 @@
             let container = document.getElementById('kids_container');
 
             document.getElementById('add-kid').addEventListener('click', function() {
+                
                 let index = container.querySelectorAll('.kid-form').length;
 
                 let newForm = container.getAttribute('data-prototype');

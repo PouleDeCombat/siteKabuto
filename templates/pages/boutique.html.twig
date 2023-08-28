@@ -6,6 +6,7 @@
         <div class="d-flex flex-column pb-5 justify-content-center  align-items-center">
             <h1 class="main-title-boutique text-white">Notre <span style="color: yellow;">boutique</span></h1>
             <div class="decoration-text"></div>
+            <a href="{{ path('cart_index')}}"><img src="{{ asset('images/cartLogo.png') }}" class="cartLogo mt-5" alt="logo d'un charriot"></a>
         </div>
     </div>
 
@@ -54,6 +55,8 @@
     {% if counter is not divisible by(4) %}
         </div>
     {% endif %}
+
+    
     
 </div>
 

@@ -30,9 +30,13 @@ class Abonnements
     #[ORM\OneToMany(mappedBy: 'abonnement', targetEntity: Adhesions::class)]
     private Collection $adhesions;
 
+    #[ORM\ManyToMany(targetEntity: Orders::class, mappedBy: 'abonnement')]
+    private Collection $orders;
+
     public function __construct()
     {
         $this->adhesions = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -113,6 +117,33 @@ class Abonnements
             if ($adhesion->getAbonnement() === $this) {
                 $adhesion->setAbonnement(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Orders>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Orders $order): static
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders->add($order);
+            $order->addAbonnement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Orders $order): static
+    {
+        if ($this->orders->removeElement($order)) {
+            $order->removeAbonnement($this);
         }
 
         return $this;

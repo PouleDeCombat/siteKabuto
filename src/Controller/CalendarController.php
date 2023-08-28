@@ -32,6 +32,31 @@ class CalendarController extends AbstractController
             return $this->render('calendar/index.html.twig', compact('data'));
     }
 
+    #[Route('/calendarAdmin', name: 'app_calendar_admin')]
+    public function indexAdmin(CoursRepository $cours): Response
+    {
+        $events = $cours->findAll();
+
+        $leçon = [];
+
+        foreach($events as $event){
+            $leçon[] = [
+                'id' => $event->getId(),
+                'start' => $event->getStart()->format('c'),
+                'end' => $event->getEnd()->format('c'),
+
+                'discipline' => $event->getDiscipline(),
+                'niveau' => $event->getNiveau(),
+                'backgroundColor' => $event->getBackgroundColor(),
+                     'rrule' => 'FREQ=WEEKLY;BYDAY=WE',
+                
+            ];
+        }
+            $data = json_encode($leçon);
+            return $this->render('calendar/indexAdmin.html.twig', compact('data'));
+            
+    }
+
     // public function index(CoursRepository $coursRepository): Response
     // {
     //     $coursList = $coursRepository->getCoursesForSeason();  // Hypothèse: cela renvoie une liste de cours

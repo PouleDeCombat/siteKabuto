@@ -37,7 +37,7 @@ class EditProfileType extends AbstractType
             ])
             ->add('Valider', SubmitType::class,  [
                 'attr' => [
-                   'class' => 'form-control']
+                   'class' => 'btn btn-primary']
             ])
             
         ;

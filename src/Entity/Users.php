@@ -107,6 +107,12 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Reservations::class, mappedBy: 'user')]
     private Collection $reservations;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $certificatMedical = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $categoriePoidGi = null;
+
   
 
     public function __construct(){
@@ -522,6 +528,30 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->reservations->removeElement($reservation)) {
             $reservation->removeUser($this);
         }
+
+        return $this;
+    }
+
+    public function getCertificatMedical(): ?string
+    {
+        return $this->certificatMedical;
+    }
+
+    public function setCertificatMedical(?string $certificatMedical): static
+    {
+        $this->certificatMedical = $certificatMedical;
+
+        return $this;
+    }
+
+    public function getCategoriePoidGi(): ?string
+    {
+        return $this->categoriePoidGi;
+    }
+
+    public function setCategoriePoidGi(?string $categoriePoidGi): static
+    {
+        $this->categoriePoidGi = $categoriePoidGi;
 
         return $this;
     }

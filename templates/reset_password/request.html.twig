@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réinitialiser le mot de passe{% endblock %}
+
+{% block body %}
+<div class="container mt-5 mb-5" style="height: 50vh; display: flex; align-items: center;">
+    <div class="row justify-content-center w-100">
+        <div class="col-md-6">
+            <div class="card border-warning shadow">
+                <div class="card-header bg-warning text-dark text-center">
+                    <h5 class="mb-0">Réinitialiser le mot de passe</h5>
+                </div>
+                <div class="card-body bg-secondary text-white">
+                    {% for flash_error in app.flashes('reset_password_error') %}
+                        <div class="alert alert-dark" role="alert">{{ flash_error }}</div>
+                    {% endfor %}
+                    
+                    {{ form_start(requestForm, {'attr': {'class': 'needs-validation', 'novalidate': true}}) }}
+                        <div class="mb-3">
+                            {{ form_label(requestForm.email, null, {'label_attr': {'class': 'form-label text-white'}}) }}
+                            {{ form_widget(requestForm.email, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(requestForm.email) }}
+                        </div>
+                        <div class="mb-3">
+                            <small class="text-light">
+                                Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.
+                            </small>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-warning">Envoyer l'e-mail de réinitialisation du mot de passe</button>
+                        </div>
+                    {{ form_end(requestForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
