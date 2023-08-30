@@ -9,7 +9,7 @@
   <table class="table" id="adherentTableau">
     <thead>
       <tr>
-        <th scope="col">ID</th>
+        
         <th scope="col">Prenom</th>
         <th scope="col">Nom</th>
         <th scope="col">Email</th>
@@ -27,7 +27,7 @@
     <tbody>
     {% for adherent in adherents %}
       <tr>
-        <td>{{adherent.id}}</td>
+        
         <td>{{adherent.prenom}}</td>
         <td>{{adherent.nom}}</td>
         <td>{{adherent.email}}</td>
@@ -39,7 +39,10 @@
         <td>{{adherent.getDateDeNaissance()|date('d-m-Y') }}</td>
         <td>{{ adherent.getLieuDeNaissance() }}</td>
         <td></td>
-        <td><a href="{{ path('app_modifier', {'id': adherent.id}) }}" class="btn btn-primary">Modifier</a></td>
+        <td>
+            <a href="{{ path('app_modifier', {'id': adherent.id}) }}" class="btn btn-primary">Modifier</a>
+            <a href="{{ path('app_user_details', {'id':adherent.id}) }}" class="btn btn-secondary">Détails</a>
+        </td>
       </tr>
     {% endfor %}
     </tbody>

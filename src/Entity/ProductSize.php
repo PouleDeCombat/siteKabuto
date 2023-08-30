@@ -19,11 +19,11 @@ class ProductSize
     private ?string $taille = null;
 
     #[ORM\ManyToMany(targetEntity: Products::class, mappedBy: 'size')]
-    private Collection $size;
+    private Collection $products;
 
     public function __construct()
     {
-        $this->size = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -46,25 +46,25 @@ class ProductSize
     /**
      * @return Collection<int, Products>
      */
-    public function getSize(): Collection
+    public function getProducts(): Collection
     {
-        return $this->size;
+        return $this->products;
     }
 
-    public function addSize(Products $size): static
+    public function addProduct(Products $product): static
     {
-        if (!$this->size->contains($size)) {
-            $this->size->add($size);
-            $size->addSize($this);
+        if (!$this->products->contains($product)) {
+            $this->products->add($product);
+            $product->addSize($this);
         }
 
         return $this;
     }
 
-    public function removeSize(Products $size): static
+    public function removeProduct(Products $product): static
     {
-        if ($this->size->removeElement($size)) {
-            $size->removeSize($this);
+        if ($this->products->removeElement($product)) {
+            $product->removeSize($this);
         }
 
         return $this;

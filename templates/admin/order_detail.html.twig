@@ -1,8 +1,9 @@
-{% extends 'adminBase.html.twig' %}
+{% extends 'usersBase.html.twig' %}
 
-{% block title %}Détails de la commande{% endblock %}
+{% block title %}Mise à jour de la commande{% endblock %}
 
 {% block body %}
+
 <h1>Détails de la commande {{ order.getReference() }} pour {{ order.getUsers().getNom() }} {{ order.getUsers().getPrenom() }}</h1>
 
 <table class="table">
@@ -20,7 +21,7 @@
         <tr>
             <td>{{ item.getProducts().getName() }}</td>
             <td>{{ item.getQuantity() }}</td>
-            <td>{{ item.getSize() }}</td>
+            <td>{{ sizes[item.getSize()] }}</td>
             <td>
                 {% if loop.first %}
                     {% if order.isPayer() %}
@@ -44,60 +45,94 @@
     </tbody>
 </table>
 
+
+
 <h2 class="mb-4">Mise à jour de la commande</h2>
-{{ form_start(form, {'attr': {'class': 'mb-4'}}) }}
 
-<div class="mb-3">
-    <label class="form-label">{{ form_label(form.isPayer) }}</label>
-    <div class="d-flex">
-        <div class="form-check me-3">
-            {{ form_widget(form.isPayer[0], {'attr': {'class': 'form-check-input'}}) }}
-            {{ form_label(form.isPayer[0], 'Oui', {'label_attr': {'class': 'form-check-label'}}) }}
+<button id="updateOrderButton" class="btn btn-warning mb-4">Modifier la commande</button>
+
+<div id="updateOrderForm" style="display: none;">
+    {{ form_start(form, {'attr': {'class': 'mb-4'}}) }}
+
+    <div class="mb-3">
+        <label class="form-label">{{ form_label(form.isPayer) }}</label>
+        <div class="d-flex">
+            <div class="form-check me-3">
+                {{ form_widget(form.isPayer[0], {'attr': {'class': 'form-check-input'}}) }}
+                {{ form_label(form.isPayer[0], 'Oui', {'label_attr': {'class': 'form-check-label'}}) }}
+            </div>
+            <div class="form-check">
+                {{ form_widget(form.isPayer[1], {'attr': {'class': 'form-check-input'}}) }}
+                {{ form_label(form.isPayer[1], 'Non', {'label_attr': {'class': 'form-check-label'}}) }}
+            </div>
         </div>
-        <div class="form-check">
-            {{ form_widget(form.isPayer[1], {'attr': {'class': 'form-check-input'}}) }}
-            {{ form_label(form.isPayer[1], 'Non', {'label_attr': {'class': 'form-check-label'}}) }}
-        </div>
+        {{ form_errors(form.isPayer) }}
     </div>
-    {{ form_errors(form.isPayer) }}
-</div>
 
-<div class="mb-3">
-    <label class="form-label">{{ form_label(form.paymentMethod) }}</label>
-    <div class="d-flex">
-        <div class="form-check me-3">
-            {{ form_widget(form.paymentMethod[0], {'attr': {'class': 'form-check-input'}}) }}
-            {{ form_label(form.paymentMethod[0], 'Espèces', {'label_attr': {'class': 'form-check-label'}}) }}
+    <div class="mb-3">
+        <label class="form-label">{{ form_label(form.paymentMethod) }}</label>
+        <div class="d-flex">
+            <div class="form-check me-3">
+                {{ form_widget(form.paymentMethod[0], {'attr': {'class': 'form-check-input'}}) }}
+                {{ form_label(form.paymentMethod[0], 'Espèces', {'label_attr': {'class': 'form-check-label'}}) }}
+            </div>
+            <div class="form-check">
+                {{ form_widget(form.paymentMethod[1], {'attr': {'class': 'form-check-input'}}) }}
+                {{ form_label(form.paymentMethod[1], 'Chèque', {'label_attr': {'class': 'form-check-label'}}) }}
+            </div>
         </div>
-        <div class="form-check">
-            {{ form_widget(form.paymentMethod[1], {'attr': {'class': 'form-check-input'}}) }}
-            {{ form_label(form.paymentMethod[1], 'Chèque', {'label_attr': {'class': 'form-check-label'}}) }}
-        </div>
+        {{ form_errors(form.paymentMethod) }}
     </div>
-    {{ form_errors(form.paymentMethod) }}
-</div>
 
-<div class="mb-3">
-    <label class="form-label">{{ form_label(form.isProcessed) }}</label>
-    <div class="d-flex">
-        <div class="form-check me-3">
-            {{ form_widget(form.isProcessed[0], {'attr': {'class': 'form-check-input'}}) }}
-            {{ form_label(form.isProcessed[0], 'Traitée', {'label_attr': {'class': 'form-check-label'}}) }}
+    <div class="mb-3">
+        <label class="form-label">{{ form_label(form.isProcessed) }}</label>
+        <div class="d-flex">
+            <div class="form-check me-3">
+                {{ form_widget(form.isProcessed[0], {'attr': {'class': 'form-check-input'}}) }}
+                {{ form_label(form.isProcessed[0], 'Traitée', {'label_attr': {'class': 'form-check-label'}}) }}
+            </div>
+            <div class="form-check">
+                {{ form_widget(form.isProcessed[1], {'attr': {'class': 'form-check-input'}}) }}
+                {{ form_label(form.isProcessed[1], 'Non traitée', {'label_attr': {'class': 'form-check-label'}}) }}
+            </div>
         </div>
-        <div class="form-check">
-            {{ form_widget(form.isProcessed[1], {'attr': {'class': 'form-check-input'}}) }}
-            {{ form_label(form.isProcessed[1], 'Non traitée', {'label_attr': {'class': 'form-check-label'}}) }}
-        </div>
+        {{ form_errors(form.isProcessed) }}
     </div>
-    {{ form_errors(form.isProcessed) }}
+
+    <div class="mb-3">
+        {{ form_widget(form.save, {'attr': {'class': 'btn btn-success'}}) }}
+    </div>
+
+    {{ form_end(form) }}
 </div>
 
-<div class="mb-3">
-    {{ form_widget(form.save, {'attr': {'class': 'btn btn-success'}}) }}
-</div>
+{% if order.isPayer == 'Yes' and order.isProcessed == 'Traitée' %}
+    <script>
+        document.getElementById("updateOrderButton").style.display = "block";
+        document.getElementById("updateOrderForm").style.display = "none";
+    </script>
+{% else %}
+    <script>
+        document.getElementById("updateOrderButton").style.display = "none";
+        document.getElementById("updateOrderForm").style.display = "block";
+    </script>
+{% endif %}
 
-{{ form_end(form) }}
+<script>
+    document.getElementById("updateOrderButton").addEventListener("click", function() {
+        this.style.display = "none"; // masquer le bouton
+        document.getElementById("updateOrderForm").style.display = "block"; // afficher le formulaire
+    });
+</script>
 
 {% endblock %}
+
+
+
+
+
+
+
+
 
 

@@ -3,50 +3,64 @@
 {% block body %}
 <h1 class="mb-4">Status de vos Abonnements</h1>
 <div class="container mt-5" style="height: 70vh;">
-    
 
     <h2 class="my-3">Votre Abonnement:</h2>
-    {% if subscriptions|length > 0 %}
-        <div class="list-group mb-4">
-            {% for subscription in subscriptions %}
-                <div class="list-group-item">
-                    {% if subscription and subscription.getAbonnement %}
-                        {{ subscription.getAbonnement().someMethod() }}
-                    {% else %}
-                        <span class="text-muted">No abonnement found.</span>
-                    {% endif %}
+{% if subscriptions|length > 0 %}
+    <div class="list-group mb-4">
+        {% for subscription in subscriptions %}
+            <div class="list-group-item">
+                {% if subscription.getKids() is null %}
                     <ul>
-                        <li><strong>Discipline:</strong> {{ subscription.getAbonnement().getDiscipline() }}</li>
-                        <li><strong>Price:</strong> {{ subscription.getAbonnement().getPrix() }}</li>
-                        <li><strong>Duration:</strong> {{ subscription.getAbonnement().getDurée() }}</li>
-                        <li><strong>Start Date:</strong> {{ subscription.getStartDate()|date('Y-m-d') }}</li>
-                        <li><strong>End Date:</strong> {{ subscription.getEndDate()|date('Y-m-d') }}</li>
+                        <li><strong>Discipline:</strong> {{ subscription.getAbonnements()[0].getDiscipline() }}</li>
+                        <li><strong>Prix:</strong> {{ subscription.getAbonnements()[0].getPrix() }}€</li>
+                        <li><strong>Durée:</strong> {{ subscription.getAbonnements()[0].getDurée() }}</li>
+                        <li><strong>Date de début:</strong> {{ subscription.getDateDebut()|date('Y-m-d') }}</li>
+                        <li><strong>Date de fin:</strong> {{ subscription.getDateFin()|date('Y-m-d') }}</li>
                     </ul>
-                </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <p class="text-muted">Vous n'avez aucun abonnement en cours.</p>
-    {% endif %}
+                {% else %}
+                      <span class="text-muted">Vous n'avez aucun abonnement en cours.</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
 
     <h2 class="my-3">Les Abonnements de vos enfants:</h2>
-    {% if kidsSubscriptions|length > 0 %}
-        <div class="list-group">
-            {% for kidSubscription in kidsSubscriptions %}
-                <div class="list-group-item">
-                    <h4 class="mb-2">Abonnement de: {{ kidSubscription.kid.getNom() }} {{ kidSubscription.kid.getPrenom() }}</h4>
-                    <ul>
-                        {% for adhesion in kidSubscription.adhesions %}
-                            <li>{{ adhesion.someMethod() }}</li>
-                        {% else %}
-                            <li class="text-muted">Pas d'abonnement pour cet enfant.</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <p class="text-muted">Your kids don't have any subscriptions.</p>
-    {% endif %}
+{% if kidsSubscriptions|length > 0 %}
+    <div class="list-group">
+        {% for kidSubscription in kidsSubscriptions %}
+            <div class="list-group-item">
+                <h4 class="mb-2">Abonnement de: {{ kidSubscription.kid.getNom() }} {{ kidSubscription.kid.getPrenom() }}</h4>
+                <ul>
+                    {% set hasValidAdhesion = false %}
+                    {% for adhesion in kidSubscription.adhesions %}
+                        {% if adhesion.getKids() is not null and adhesion.getAbonnements()|length > 0 %}
+                            <li>
+                                <strong>Discipline:</strong> {{ adhesion.getAbonnements()[0].getDiscipline() }}
+                                <br>
+                                <strong>Prix:</strong> {{ adhesion.getAbonnements()[0].getPrix() }}€
+                                <br>
+                                <strong>Durée:</strong> {{ adhesion.getAbonnements()[0].getDurée() }}
+                                <br>
+                                <strong>Date de début:</strong> {{ adhesion.getDateDebut()|date('Y-m-d') }}
+                                <br>
+                                <strong>Date de fin:</strong> {{ adhesion.getDateFin()|date('Y-m-d') }}
+                            </li>
+                            {% set hasValidAdhesion = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if not hasValidAdhesion %}
+                        <li class="text-muted">Pas d'abonnement pour cet enfant.</li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p class="text-muted">Vos enfants n'ont aucun abonnement.</p>
+{% endif %}
+
 </div>
 {% endblock %}
+
+

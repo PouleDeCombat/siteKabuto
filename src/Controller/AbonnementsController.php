@@ -36,7 +36,8 @@ class AbonnementsController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        $adhesionsRepo = $this->entityManager->getRepository(Adhesions::class);
+        $adhesionsRepo = $em->getRepository(Adhesions::class);
+
         $kidsRepo = $this->entityManager->getRepository(Kids::class);
 
         $subscriptions = $em->getRepository(Adhesions::class)->findBy(['user' => $user]);

@@ -31,16 +31,27 @@
                 type="submit"
                 style="width: 100%; padding: 7px;">Payer par carte bancaire {{ total }} € 
             </button>
-        </form>
+            <div class="col-6 mt-4">
+                <button 
+                    class="btn btn-warning btn-lg my-3"
+                    type="button"
+                    style="width: 100%; padding: 7px;"
+                    id="payByCashOrCheck"
+                    >Payer en espèces/chèques</button>
+            </div>
+         </form>
     </div>
 
     <!-- Cart Summary -->
     <div class="col-6 mb-5">
         <fieldset class="ms-5 text-white d-flex flex-column">
             <h5 class="mb-3">Récapitulatif du Panier</h5>
-            <ul>
-                <li> {{ user.nom }} {{user.prenom}} - {{ abonnement.categorie }} - {{ abonnement.discipline }} - {{ abonnement.prix }}€ - {{ abonnement.durée }} </li>
-            </ul>
+           <ul>
+    {% for abo in abonnements %}
+        <li>{{ user.nom }} {{ user.prenom }} - {{ abo.categorie }} - {{ abo.discipline }} - {{ abo.prix }}€ - {{ abo.durée }}</li>
+    {% endfor %}
+</ul>
+
             <strong>Total : {{ total }} €</strong>
         </fieldset>
     </div>
@@ -73,6 +84,11 @@
             });
         }
     </script>
+    <script>
+    document.getElementById('payByCashOrCheck').addEventListener('click', function() {
+    window.location.href = "{{ path('payment_by_cash_or_check', {'orderId':order_id}) }}"; 
+});
+</script>
 {% endblock %}
 
 

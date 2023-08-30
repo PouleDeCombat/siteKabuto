@@ -27,16 +27,24 @@ class Abonnements
     #[ORM\Column(length: 100)]
     private ?string $durée = null;
 
-    #[ORM\OneToMany(mappedBy: 'abonnement', targetEntity: Adhesions::class)]
+    // #[ORM\OneToMany(mappedBy: 'abonnement', targetEntity: Adhesions::class)]
+    // private Collection $adhesions;
+
+    #[ORM\ManyToMany(targetEntity: Adhesions::class, mappedBy: "abonnements")]
     private Collection $adhesions;
+
 
     #[ORM\ManyToMany(targetEntity: Orders::class, mappedBy: 'abonnement')]
     private Collection $orders;
+
+    #[ORM\ManyToMany(targetEntity: Kids::class, mappedBy: 'abonnement')]
+    private Collection $kids;
 
     public function __construct()
     {
         $this->adhesions = new ArrayCollection();
         $this->orders = new ArrayCollection();
+        $this->kids = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -102,25 +110,21 @@ class Abonnements
 
     public function addAdhesion(Adhesions $adhesion): static
     {
-        if (!$this->adhesions->contains($adhesion)) {
-            $this->adhesions->add($adhesion);
-            $adhesion->setAbonnement($this);
-        }
-
-        return $this;
+    if (!$this->adhesions->contains($adhesion)) {
+        $this->adhesions->add($adhesion);
+        $adhesion->addAbonnement($this);  // ensure bidirectionality
+    }
+    return $this;
     }
 
-    public function removeAdhesion(Adhesions $adhesion): static
+public function removeAdhesion(Adhesions $adhesion): static
     {
-        if ($this->adhesions->removeElement($adhesion)) {
-            // set the owning side to null (unless already changed)
-            if ($adhesion->getAbonnement() === $this) {
-                $adhesion->setAbonnement(null);
-            }
-        }
-
-        return $this;
+    if ($this->adhesions->removeElement($adhesion)) {
+        $adhesion->removeAbonnement($this);  // ensure bidirectionality
     }
+    return $this;
+    }
+
 
     /**
      * @return Collection<int, Orders>
@@ -144,6 +148,33 @@ class Abonnements
     {
         if ($this->orders->removeElement($order)) {
             $order->removeAbonnement($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Kids>
+     */
+    public function getKids(): Collection
+    {
+        return $this->kids;
+    }
+
+    public function addKid(Kids $kid): static
+    {
+        if (!$this->kids->contains($kid)) {
+            $this->kids->add($kid);
+            $kid->addAbonnement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeKid(Kids $kid): static
+    {
+        if ($this->kids->removeElement($kid)) {
+            $kid->removeAbonnement($this);
         }
 
         return $this;

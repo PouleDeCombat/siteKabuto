@@ -1,0 +1,73 @@
+{# templates/product/create.html.twig #}
+
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}Creation de produit{% endblock %}
+
+{% block stylesheets %}
+   
+    <style>
+        .custom-checkbox {
+            margin-bottom: 10px; /* Espace entre les cases à cocher */
+        }
+
+        .custom-checkbox .custom-control-label::before,
+        .custom-checkbox .custom-control-label::after {
+            top: .25rem;
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+            background-color: #0a58ca; /* À adapter à votre couleur si nécessaire */
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Crée un nouveau produit </h2>
+                </div>
+                <div class="card-body">
+                    {{ form_start(form) }}
+                        <div class="mb-3">
+                            {{ form_row(form.name, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(form.description, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(form.price, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(form.stock, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(form.images, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(form.slug, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div>
+                            {% for choice in form.size %}
+                            <div class="custom-control custom-checkbox mb-2">
+                                {{ form_widget(choice, {'attr': {'class': 'custom-control-input'}}) }}
+                                {{ form_label(choice, null, {'label_attr': {'class': 'custom-control-label'}}) }}
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">Create Product</button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

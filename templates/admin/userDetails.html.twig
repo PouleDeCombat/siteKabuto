@@ -1,0 +1,98 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}Détails de l'utilisateur{% endblock %}
+
+{% block body %}
+<h1>Détails de l'utilisateur :</h1>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h2>Informations Personnelles</h2>
+    </div>
+    <div class="card-body">
+        <p><strong>Nom:</strong> {{ user.nom }}</p>
+        <p><strong>Prénom:</strong> {{ user.prenom }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Telephone:</strong> {{ user.telephone }}</p>
+        <p><strong>Adresse:</strong> {{ user.adresse }}</p>
+        <p><strong>Code Postal:</strong> {{ user.zipcode }}</p>
+        <p><strong>Ville:</strong> {{ user.ville }}</p>
+        <p><strong>Profession:</strong> {{ user.profession }}</p>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h2>Enfants</h2>
+    </div>
+    <div class="card-body">
+        <ul>
+            {% for kid in user.kids %}
+                <li>{{ kid.prenom }} {{ kid.nom }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h2>Abonnements</h2>
+    </div>
+    <div class="card-body">
+        {% if subscriptions|length > 0 %}
+            <div class="list-group">
+                {% for subscription in subscriptions %}
+                    <div class="list-group-item">
+                        {% if subscription.abonnements|length > 0 %}
+                            {% for abonnement in subscription.abonnements %}
+                                <ul>
+                                    <li><strong>Discipline:</strong> {{ abonnement.getDiscipline() }}</li>
+                                    <li><strong>Prix:</strong> {{ abonnement.getPrix() }}€</li>
+                                    <li><strong>Durée:</strong> {{ abonnement.getDurée() }}</li>
+                                    <li><strong>Date de début:</strong> {{ subscription.getDateDebut()|date('Y-m-d') }}</li>
+                                    <li><strong>Date de fin:</strong> {{ subscription.getDateFin()|date('Y-m-d') }}</li>
+                                </ul>
+                            {% endfor %}
+                        {% else %}
+                            <span class="text-muted">This subscription has no associated abonnement.</span>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <span class="text-muted">L'utilisateur n'a aucun abonnement en cours.</span>
+        {% endif %}
+    </div>
+</div>
+
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h2>Commandes</h2>
+    </div>
+    <div class="card-body">
+        <ul>
+            {% for order in user.orders %}
+                <li>Commande #{{ order.id }} <a href="{{ path('admin_order_detail', {id: order.id}) }}">Voir les détails</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h2>Certificat médical</h2>
+    </div>
+    <div class="card-body">
+    {% if user.certificatMedical %}
+        <a href="{{ asset(user.certificatMedical) }}" target="_blank" class="btn btn-primary">Consulter le certificat médical</a>
+    {% else %}
+        <p>Aucun certificat médical n'est associé à cet utilisateur.</p>
+    {% endif %}
+</div>
+
+</div>
+
+{% endblock %}
+
+

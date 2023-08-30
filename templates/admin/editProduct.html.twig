@@ -1,0 +1,91 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}Création de produit{% endblock %}
+
+
+{% block stylesheets %}
+   
+    <style>
+        .custom-checkbox {
+            margin-bottom: 10px; /* Espace entre les cases à cocher */
+        }
+
+        .custom-checkbox .custom-control-label::before,
+        .custom-checkbox .custom-control-label::after {
+            top: .25rem;
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+            background-color: #0a58ca; /* À adapter à votre couleur si nécessaire */
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h2>Création de produit</h2>
+    <hr>
+
+    {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+    
+    <div class="mb-3">
+        {{ form_label(form.name, 'Nom', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.name) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.description, 'Description', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.description) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.price, 'Prix', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.price) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.stock, 'Stock', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.stock, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.stock) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.images, 'Images', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.images, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.images) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.slug, 'Slug', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.slug, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.slug) }}
+    </div>
+
+    <div class="mb-3">
+    {{ form_label(form.size, 'Taille', {'label_attr': {'class': 'form-label'}}) }}
+
+    <div>
+        {% for choice in form.size %}
+        <div class="custom-control custom-checkbox mb-2">
+            {{ form_widget(choice, {'attr': {'class': 'custom-control-input'}}) }}
+            {{ form_label(choice, null, {'label_attr': {'class': 'custom-control-label'}}) }}
+        </div>
+        {% endfor %}
+    </div>
+
+    {{ form_errors(form.size) }}
+</div>
+
+
+    <button type="submit" class="btn btn-primary">Modifier</button>
+    
+    {{ form_end(form) }}
+</div>
+{% endblock %}
+
+

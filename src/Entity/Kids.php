@@ -68,6 +68,12 @@ class Kids
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $certificatMedical = null;
 
+    #[ORM\OneToMany(mappedBy: 'kid', targetEntity: Orders::class)]
+    private Collection $orders;
+
+    #[ORM\ManyToMany(targetEntity: Abonnements::class, inversedBy: 'kids')]
+    private Collection $abonnement;
+
 
 
 
@@ -78,6 +84,8 @@ class Kids
         $this->created_at = new \DateTimeImmutable();
         $this->kidsCompetitions = new ArrayCollection();
         $this->adhesions = new ArrayCollection();
+        $this->orders = new ArrayCollection();
+        $this->abonnement = new ArrayCollection();
     }
 
   
@@ -309,6 +317,60 @@ class Kids
     public function setCertificatMedical(?string $certificatMedical): static
     {
         $this->certificatMedical = $certificatMedical;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Orders>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Orders $order): static
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders->add($order);
+            $order->setKid($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Orders $order): static
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getKid() === $this) {
+                $order->setKid(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Abonnements>
+     */
+    public function getAbonnement(): Collection
+    {
+        return $this->abonnement;
+    }
+
+    public function addAbonnement(Abonnements $abonnement): static
+    {
+        if (!$this->abonnement->contains($abonnement)) {
+            $this->abonnement->add($abonnement);
+        }
+
+        return $this;
+    }
+
+    public function removeAbonnement(Abonnements $abonnement): static
+    {
+        $this->abonnement->removeElement($abonnement);
 
         return $this;
     }

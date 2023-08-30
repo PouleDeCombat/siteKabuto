@@ -280,9 +280,22 @@ public function renderEditProfileCompetiteur(Request $request, EntityManagerInte
     public function viewOrders(UserInterface $user, OrdersRepository $ordersRepository)
     {
         $orders = $ordersRepository->findBy(['Users' => $user]);
+
+        $sizes = [
+            '1' => 'S',
+            '2' => 'M',
+            '5' => 'L',
+            '6' => 'XL',
+            '7' => '12 Oz',
+            '8' => '14 Oz',
+            '9' => 'S/M',
+            '10' => 'L/XL',
+            '11' => 'Taille Unique',
+        ];
         
         return $this->render('usersPages/orders.html.twig', [
             'orders' => $orders,
+            'size' => $sizes,
         ]);
     }
 

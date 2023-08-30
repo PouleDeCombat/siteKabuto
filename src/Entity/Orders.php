@@ -44,6 +44,9 @@ class Orders
     #[ORM\ManyToMany(targetEntity: Abonnements::class, inversedBy: 'orders')]
     private Collection $abonnement;
 
+    #[ORM\ManyToOne(inversedBy: 'orders')]
+    private ?Kids $kid = null;
+
 
     public function __construct()
     {
@@ -194,4 +197,21 @@ public function setIsPayer(?bool $isPayer): self
 
         return $this;
     }
+
+    public function getKid(): ?Kids
+    {
+        return $this->kid;
+    }
+
+    public function setKid(?Kids $kid): static
+    {
+        $this->kid = $kid;
+
+        return $this;
+    }
+
+   
+
+   
+
 }

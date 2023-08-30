@@ -3,32 +3,48 @@
 {% block title %}Mes Commandes{% endblock %}
 
 {% block body %}
-<h2>Mes Commandes</h2>
+<h2 class="my-3">Mes Commandes :</h2>
 
 {% if orders|length > 0 %}
-    <ul>
-    {% for order in orders %}
-        <li>
-            <strong>Reference:</strong> {{ order.getReference() }}
-            <strong>Date:</strong> {{ order.getCreatedAt()|date('d-m-Y') }}
-            <strong>Total:</strong> ${{ order.getTotal() }}
-            <strong>Payer:</strong> {{ order.isPayer() ? 'Yes' : 'No' }}
-            
-            <ul>
-                {% for detail in order.getOrdersDetails() %}
-                <li>
-                    <strong>Produit:</strong> {{ detail.getProducts().getName() }}
-                    <strong>Quantité:</strong> {{ detail.getQuantity() }}
-                    <strong>Prix:</strong> ${{ detail.getPrice() }}
-                    <strong>Taille:</strong> {{ detail.getSize() }}
-                </li>
-                {% endfor %}
-            </ul>
-        </li>
-    {% endfor %}
-    </ul>
+    <div class="container">
+        {% for order in orders %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    Commande #{{ order.getReference() }} - {{ order.getCreatedAt()|date('d-m-Y') }}
+                </div>
+                <div class="card-body">
+                    <p><strong>Total:</strong> {{ order.getTotal() }}€</p>
+                    <p><strong>Payer:</strong> {{ order.isPayer() ? 'Yes' : 'No' }}</p>
+
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Produit</th>
+                                <th>Quantité</th>
+                                <th>Taille</th>
+                                <th>Prix</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for detail in order.getOrdersDetails() %}
+                            <tr>
+                                <td>{{ detail.getProducts().getName() }}</td>
+                                <td>{{ detail.getQuantity() }}</td>
+                                <td>{{ size[detail.getSize()]|default(detail.getSize()) }}</td>
+                                <td>{{ detail.getPrice() }}€</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% else %}
-    <p>You have no orders yet.</p>
+    <div class="alert alert-info" role="alert">
+        You have no orders yet.
+    </div>
 {% endif %}
 
 {% endblock %}
+

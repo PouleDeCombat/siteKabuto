@@ -2,9 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\AdhesionsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\AdhesionsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 
 #[ORM\Entity(repositoryClass: AdhesionsRepository::class)]
 class Adhesions
@@ -20,8 +23,12 @@ class Adhesions
     #[ORM\ManyToOne(inversedBy: 'adhesions')]
     private ?Kids $kids = null;
 
-    #[ORM\ManyToOne(inversedBy: 'adhesions')]
-    private ?Abonnements $abonnement = null;
+    // #[ORM\ManyToOne(inversedBy: 'adhesions')]
+    // private ?Abonnements $abonnement = null;
+
+    #[ORM\ManyToMany(targetEntity: Abonnements::class, inversedBy: "adhesions")]
+    private Collection $abonnements;
+
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date_debut = null;
@@ -31,6 +38,12 @@ class Adhesions
 
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $statut = null;
+
+    public function __construct()
+    {
+    $this->abonnements = new ArrayCollection();
+    }
+
 
    
 
@@ -63,17 +76,27 @@ class Adhesions
         return $this;
     }
 
-    public function getAbonnement(): ?Abonnements
+    public function getAbonnements(): Collection
     {
-        return $this->abonnement;
+    return $this->abonnements;
     }
 
-    public function setAbonnement(?Abonnements $abonnement): static
+     function addAbonnement(Abonnements $abonnement): static
     {
-        $this->abonnement = $abonnement;
-
-        return $this;
+    if (!$this->abonnements->contains($abonnement)) {
+        $this->abonnements->add($abonnement);
+        $abonnement->addAdhesion($this);
     }
+    return $this;
+    }
+
+public function removeAbonnement(Abonnements $abonnement): static
+{
+    if ($this->abonnements->removeElement($abonnement)) {
+        $abonnement->removeAdhesion($this);
+    }
+    return $this;
+}
 
     public function getDateDebut(): ?\DateTimeInterface
     {

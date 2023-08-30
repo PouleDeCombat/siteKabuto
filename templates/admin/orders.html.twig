@@ -22,9 +22,14 @@
         <tr>
             <td>{{ order.getReference() }}</td>
             <td>{{ order.getCreatedAt()|date('d/m/Y H:i') }}</td>
-            <td>{{ order.getUsers().getNom() }}</td> 
+            <td>{{ order.getUsers().getNom() }} {{ order.getUsers().getPrenom() }}</td> 
             <td>{{ order.getTotal() }}</td>
-            <td>{{ order.isPayer() ? 'Oui' : 'Non' }}</td>
+            {% if order.isPayer() %}
+                <td class="text-success fw-bold">Oui</td>
+            {% else %}
+                <td class="text-danger fw-bold">Non</td>
+            {% endif %}
+            
             <td>{% if order.isProcessed() %}
                     <span class="text-success fw-bold">Traitée</span>
                 {% else %}

@@ -14,6 +14,12 @@
     <button class="btn btn-secondary step-btn active">Étape 4</button>
 </div>
 
+
+ 
+ 
+
+
+
     <div class="row custom-cadre">
     <h1 class="text-white text-center main-title-inscription w-100">Finaliser l'achat des abonnements enfants</h1>
 
@@ -25,6 +31,14 @@
                 type="submit"
                 style="width: 100%; padding: 7px;">Payer par carte bancaire {{ total }} € 
             </button>
+            <div class="col-6 mt-4">
+                <button 
+                    class="btn btn-warning btn-lg my-3"
+                    type="button"
+                    style="width: 100%; padding: 7px;"
+                    id="payByCashOrCheck"
+                    >Payer en espèces/chèques</button>
+            </div>
         </form>
     </div>
 
@@ -34,7 +48,8 @@
             <h5 class="mb-3">Récapitulatif du Panier</h5>
             <ul>
                 {% for kidIndex, abonnement in selectedAbonnements %}
-                <li> {{ kids[kidIndex].nom }} {{ kids[kidIndex].prenom }} : {{ abonnement.categorie }} - {{ abonnement.discipline }} - {{ abonnement.prix }} € - {{ abonnement.durée }} </li>
+                 <li> {{ kids[kidIndex].nom }} {{ kids[kidIndex].prenom }} : {{ abonnement.categorie }} - {{ abonnement.discipline }}
+                 </li>
                 {% endfor %}
             </ul>
             <strong>Total : {{ total }} €</strong>

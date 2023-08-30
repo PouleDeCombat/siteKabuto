@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
     {% block body %}
+    
+
     <div class="container padding mt-5" style="height: 60vh;">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -41,7 +43,8 @@
                                 <h5 class="mb-3">Récapitulatif du Panier</h5>
                                 <ul>
                                     {% for item in data %}
-                                        <li> x{{ item.quantity }} {{ item.product.name }}- {{ item.size }} - {{ item.product.price }}€</li>
+                                        <li> x{{ item.quantity }} {{ item.product.name }}- {{ size[item.size]|default(item.size) }} - {{ item.product.price }}€</li>
+
                                     {% endfor %}
                                 </ul>
                                 <strong>Total : {{ total }} €</strong>

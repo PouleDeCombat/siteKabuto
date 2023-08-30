@@ -7,7 +7,7 @@
 
 
 
-<div class="container  padding-tableau" style="height: 30vh;">
+<div class="container  padding-tableau" style="height: auto; min-height: 30vh;">
     <section class="row">
         <div class="col-12">
             <h1 class="text-white text-center">Panier</h1>
@@ -24,17 +24,24 @@
                 </thead>
                 <tbody>
                 {% for element in data %}
+                
+
                     <tr>
                     <td>{{ element.product.name }}</td>
-                    <td>{{ element.size }}</td>
+                    {% for size in element.product.size %}
+    {% if size.id == element.size %}
+        <td>{{ size.taille }}</td>
+    {% endif %}
+{% endfor %}
+
                     <td>{{ element.product.price}}€</td>
                     <td>{{ element.quantity }}</td>
                     <td>{{ element.quantity * element.product.price}}€</td>
                     <td>
-                        <a href="{{ path('cart_increase_quantity', {id: element.product.id}) }}" class="btn btn-success">+</a>
+                        <a href="{{ path('cart_increase_quantity', {'id': element.product.id, 'size':element.size}) }}" class="btn btn-success">+</a>
 
-                        <a href="{{ path('cart_remove', {id : element.product.id}) }}" class="btn btn-warning">-</a>
-                        <a href="{{ path('cart_delete', {id : element.product.id}) }}" class="btn btn-danger">Supprimer</a>
+                        <a href="{{ path('cart_remove', {'id' : element.product.id, 'size':element.size}) }}" class="btn btn-warning">-</a>
+                        <a href="{{ path('cart_delete', {'id' : element.product.id, 'size':element.size}) }}" class="btn btn-danger">Supprimer</a>
                     </td>
                     </tr>
                     {% else %}
