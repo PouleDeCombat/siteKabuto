@@ -20,23 +20,24 @@
         <h1 class="text-white text-center main-title-inscription">Sélection d'abonnements</h1>
         <p class="text-white fs-3">Choix de l'abonnement pour {{ app.user.nom }} {{ app.user.prenom }} :</p>
         <form action="{{ path('app_register_both_step_quatre') }}" method="post">
-        <div class="row mb-5">
-            {% for discipline, subscriptions in groupedAdultAbonnements %}
-                <div class="col-md-4">
-                    <fieldset class="ms-5 text-white d-flex flex-column">
-                        <legend>{{ discipline }} :</legend>
-                        {% for abonnement in subscriptions %}
-                            <div class="form-check mb-1">
-                                <input class="form-check-input" type="checkbox" name="adult_abonnement[]" id="abonnement-{{ loop.parent.loop.index }}-{{ loop.index }}" value="{{ abonnement.id }}">
-                                <label class="form-check-label" for="abonnement-{{ loop.parent.loop.index }}-{{ loop.index }}">
-                                    {{ abonnement.categorie }} - {{ abonnement.durée }} - {{ abonnement.prix }}
-                                </label>
-                            </div>
-                        {% endfor %}
-                    </fieldset>
-                </div>
-            {% endfor %}
+   <div class="row mb-5">
+    {% for discipline, subscriptions in groupedAdultAbonnements %}
+        <div class="col-md-4">
+            <fieldset class="ms-5 text-white d-flex flex-column">
+                <legend>{{ discipline }} :</legend>
+                {% for abonnement in subscriptions %}
+                    <div class="form-check mb-1">
+                        <input class="form-check-input" type="checkbox" name="adult_abonnement[]" id="abonnement-{{ loop.parent.loop.index }}-{{ loop.index }}" value="{{ abonnement.id }}">
+                        <label class="form-check-label" for="abonnement-{{ loop.parent.loop.index }}-{{ loop.index }}">
+                            {{ abonnement.categorie }} - {{ abonnement.durée }} - {{ abonnement.prix }}€
+                        </label>
+                    </div>
+                {% endfor %}
+            </fieldset>
         </div>
+    {% endfor %}
+</div>
+
 
         {% for kidIndex, kidForm in form.kidsAbonnement %}
             <div class="col-12">
@@ -70,5 +71,4 @@
 
 </section>
 {% endblock %}
-
 

@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Users;
 use App\Entity\Orders;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Orders>
@@ -39,6 +40,16 @@ class OrdersRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function findNullKidOrders(Users $user): array
+{
+    return $this->createQueryBuilder('o')
+        ->where('o.Users = :user')
+        ->andWhere('o.kid IS NULL')
+        ->setParameter('user', $user)
+        ->getQuery()
+        ->getResult();
+}
 //    /**
 //     * @return Orders[] Returns an array of Orders objects
 //     */

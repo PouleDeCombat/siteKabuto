@@ -81,7 +81,7 @@ class AdminController extends AbstractController
 
 
     #[Route("/admin/commandes/{id}/detail", name: "admin_order_detail")]
-public function detail(Orders $order, Request $request, EntityManagerInterface $em)
+public function detail($id, Orders $order, OrdersRepository $ordersRepository, Request $request, EntityManagerInterface $em)
 {
     $form = $this->createForm(OrderPaymentType::class, $order);
 
@@ -93,6 +93,16 @@ public function detail(Orders $order, Request $request, EntityManagerInterface $
         $this->addFlash('success', 'Méthode de paiement mise à jour avec succès!');
         return $this->redirectToRoute('admin_order_detail', ['id' => $order->getId()]);
     }
+
+    $order = $ordersRepository->createQueryBuilder('o')
+        ->leftJoin('o.ordersDetails', 'od')
+        ->addSelect('od')
+        ->leftJoin('o.abonnement', 'a')
+        ->addSelect('a')
+        ->where('o.id = :id')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getSingleResult();
 
 
     $sizes = [
@@ -109,7 +119,7 @@ public function detail(Orders $order, Request $request, EntityManagerInterface $
         
     ];
     
-
+    dump($order);
     return $this->render('admin/order_detail.html.twig', [
         'order' => $order,
         'form' => $form->createView(),

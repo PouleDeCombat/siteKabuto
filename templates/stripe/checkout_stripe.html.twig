@@ -31,14 +31,18 @@
                 type="submit"
                 style="width: 100%; padding: 7px;">Payer par carte bancaire {{ total }} € 
             </button>
-            <div class="col-6 mt-4">
+            
                 <button 
                     class="btn btn-warning btn-lg my-3"
                     type="button"
                     style="width: 100%; padding: 7px;"
                     id="payByCashOrCheck"
-                    >Payer en espèces/chèques</button>
-            </div>
+                    >Payer en espèces/chèques
+                </button>
+                 <!-- Button to empty the cart -->
+    <a href="{{ path('empty_cart') }}" class="btn btn-danger btn-lg my-3" style="width: 100%; padding: 7px;">Vider le panier</a>
+
+            
          </form>
     </div>
 
@@ -93,20 +97,3 @@
 
 
 
-{# <form id='alternative-payment-form' method='post' action="{{ path('app_alternative_payment') }}">
-    <div class="payment-methods-section mt-5">
-        <p class="text-white fs-4">Je souhaite utiliser une autre methode de paiement afin de regler mes frais directement au club.</p>
-        <h4 class="text-white">Méthodes de paiement :</h4>
-      
-        <div class="d-flex ">
-            <input type="radio" id="cashPayment" name="paymentMethod" value="cash" class="me-1">
-            <label for="cashPayment" class="text-white">Espèces</label>
-        </div>
-        <div class="d-flex">
-            <input type="radio" id="checkPayment" name="paymentMethod" value="check" class="me-1">
-            <label for="checkPayment" class="text-white">Chèque</label>
-        </div>
-
-        <button class="btn btn-inscription btn-lg my-3" type="button" onclick="submitForm('alternative-payment-form')">Valider</button>
-    </div>
-</form> #}

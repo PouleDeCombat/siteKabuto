@@ -31,8 +31,9 @@ class ProductsController extends AbstractController
     #[Route('/{slug}', name: 'details')]
     public function details(Products $product): Response 
     {
+            
     $sizes = $product->getSize();
-    
+   
 
     return $this->render('products/details.html.twig', [
         'product' => $product,

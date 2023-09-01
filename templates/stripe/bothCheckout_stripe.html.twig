@@ -17,27 +17,50 @@
     <div class="row custom-cadre">
     <h1 class="text-white text-center main-title-inscription w-100">Finaliser l'achat des abonnements</h1>
 
-    <!-- Stripe Payment Form -->
+
     <div class="col-6">
-        <form id='checkout-form-both' method='post' action="{{ path('payment_stripe_both', {'orderId':order_id}) }}">
+        <form id='checkout-form-both' method='post' action="{{ path('payment_stripe_checkout') }}">
             <button 
                 class="btn btn-inscription btn-lg my-3"
                 type="submit"
                 style="width: 100%; padding: 7px;">Payer par carte bancaire {{ total }} € 
             </button>
+{#             
+                <button 
+                    class="btn btn-warning btn-lg my-3"
+                    type="button"
+                    style="width: 100%; padding: 7px;"
+                    id="payByCashOrCheckForBoth"
+                    >Payer en espèces/chèques
+                </button> #}
+            
         </form>
     </div>
 
-    <!-- Cart Summary -->
+ 
     <div class="col-6 mb-5">
         <fieldset class="ms-5 text-white d-flex flex-column">
             <h5 class="mb-3">Récapitulatif du Panier</h5>
-            <ul>
-                <li> {{ userName }} : {{ userAbonnement.categorie }} - {{ userAbonnement.discipline }} - {{ userAbonnement.prix }} € - {{ userAbonnement.durée }} </li>
-                {% for kidIndex, abonnement in kidsAbonnements %}
-                <li> {{ kidsNames[kidIndex] }} : {{ abonnement.categorie }} - {{ abonnement.discipline }} - {{ abonnement.prix }} € - {{ abonnement.durée }} </li>
-                {% endfor %}
-            </ul>
+     
+{% for order in userAbonnement %}
+    <ul>
+        {% for abonnement in order.getAbonnement() %}
+            <li>
+                {{ userName }} : {{ abonnement.categorie }} - {{ abonnement.discipline }} - {{ abonnement.prix }} € - {{ abonnement.durée }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endfor %}
+{% for kidName, abonnements in kidsAbonnementsWithPrices %}
+    <ul>
+        {% for abonnement in abonnements %}
+            <li>
+                {{ kidName }} : {{ abonnement.abonnement.categorie }} - {{ abonnement.abonnement.discipline }} - {{ abonnement.prix }} € - {{ abonnement.abonnement.durée }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endfor %}
+
             <strong>Total : {{ total }} €</strong>
         </fieldset>
     </div>
@@ -68,4 +91,5 @@
             });
         }
     </script>
+    
 {% endblock %}

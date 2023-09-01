@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Users;
 use App\Entity\Adhesions;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Adhesions>
@@ -38,6 +39,21 @@ class AdhesionsRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    
+    public function findActiveAdhesionsForUser(Users $user): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.user = :user')
+            ->andWhere('a.kids IS NULL')
+            ->andWhere('a.date_debut <= :now')
+            ->andWhere('a.date_fin >= :now')
+            ->setParameter('user', $user)
+            ->setParameter('now', new \DateTime())
+            ->getQuery()
+            ->getResult();
+    }
+    
 
 //    /**
 //     * @return Adhesions[] Returns an array of Adhesions objects

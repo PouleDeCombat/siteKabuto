@@ -31,14 +31,17 @@
                 type="submit"
                 style="width: 100%; padding: 7px;">Payer par carte bancaire {{ total }} € 
             </button>
-            <div class="col-6 mt-4">
+            
                 <button 
                     class="btn btn-warning btn-lg my-3"
                     type="button"
                     style="width: 100%; padding: 7px;"
-                    id="payByCashOrCheck"
-                    >Payer en espèces/chèques</button>
-            </div>
+                    id="payByCashOrCheckForKids"
+                    >Payer en espèces/chèques
+                </button>
+
+                <a href="{{ path('empty_cart_kids') }}" class="btn btn-danger btn-lg my-3" style="width: 100%; padding: 7px;">Vider le panier</a>
+            
         </form>
     </div>
 
@@ -47,10 +50,10 @@
         <fieldset class="ms-5 text-white d-flex flex-column">
             <h5 class="mb-3">Récapitulatif du Panier</h5>
             <ul>
-                {% for kidIndex, abonnement in selectedAbonnements %}
-                 <li> {{ kids[kidIndex].nom }} {{ kids[kidIndex].prenom }} : {{ abonnement.categorie }} - {{ abonnement.discipline }}
-                 </li>
-                {% endfor %}
+                {# {% for kidId, abonnement in selectedAbonnements %}
+   <li> {{ kids[kidId].nom }} {{ kids[kidId].prenom }} : {{ abonnement.categorie }}</li>
+{% endfor %} #}
+
             </ul>
             <strong>Total : {{ total }} €</strong>
         </fieldset>
@@ -82,5 +85,9 @@
             });
         }
     </script>
+    <script>
+    document.getElementById('payByCashOrCheckForKids').addEventListener('click', function() {
+    window.location.href = "{{ path('payment_kids_by_cash_or_check', {'orderId':order_id}) }}"; 
+});
+</script>
 {% endblock %}
-

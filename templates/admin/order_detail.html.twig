@@ -1,4 +1,4 @@
-{% extends 'usersBase.html.twig' %}
+{% extends 'adminBase.html.twig' %}
 
 {% block title %}Mise à jour de la commande{% endblock %}
 
@@ -42,6 +42,19 @@
             </td>
         </tr>
         {% endfor %}
+         {% for abonnement in order.getAbonnement() %}
+    <tr>
+        <td>Abonnement</td>
+        <td>{{ abonnement.getDiscipline() }}</td> {# Assuming Abonnements has a getName() method. Adjust if needed. #}
+        <td>{{ abonnement.getDateDebut()|date("Y-m-d") }}</td>
+        <td>{{ abonnement.getDateFin()|date("Y-m-d") }}</td>
+        <td>{{ abonnement.getPrix() }}</td>
+        <td>{{ abonnement.getDurée() }}</td>
+        <td>{{ order.isPayer() }}</td>
+        <td>{{ order.isProcessed() }}</td>
+        <!-- ... remaining columns, just like in the products loop above -->
+    </tr>
+    {% endfor %}
     </tbody>
 </table>
 
